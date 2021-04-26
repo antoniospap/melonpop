@@ -1,0 +1,20 @@
+{
+  "name": "game",
+  "version": "0.0.0",
+  "description": "",
+  "main": "bin/bootstrap.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "electron ./bin-debug/bootstrap.js",
+    "start": "electron ./bin/bootstrap.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "electron": "*",
+    "google-closure-compiler": "*",
+    "jsdoc": "*"
+  }
+}

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>game</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        
+        <!-- SOFTWARE DEVELOPMENT KIT -->
+        <script src="../lib/rune.js"></script>
+        
+        <!-- APPLICATION SOURCE CODE -->
+        <script src="../dist/game.js"></script>
+        
+        <!-- BOOTSTRAP -->
+        <script>
+            window.onload = function() {
+                var app = new game.system.Main();
+                app.start();
+            }
+        </script>
+    </head>
+</html>

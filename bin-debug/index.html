@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>game</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <!-- SOFTWARE DEVELOPMENT KIT -->
+    <script src="../lib/rune.js"></script>
+
+    <!-- APPLICATION SOURCE CODE -->
+    <script src="./../src/scope/Manifest.js"></script>
+    <script src="./../src/data/manifest/Resources.js"></script>
+
+    <script src="./../src/scene/game/Entity/Bullet.js"></script>
+    <script src="./../src/scene/game/Entity/Character.js"></script>
+
+    <script src="./../src/scene/game/Entity/Melons/Melon.js"></script>
+    <script src="./../src/scene/game/Entity/Melons/type/MelonL.js"></script>
+    <script src="./../src/scene/game/Entity/Melons/type/MelonM.js"></script>
+
+    <script src="./../src/scene/game/Game.js"></script>
+
+    <script src="./../src/system/Main.js"></script>
+    <script src="./../src/scope/Alias.js"></script>
+
+    <!-- BOOTSTRAP -->
+    <script>
+        window.onload = function() {
+            var app = new game.system.Main();
+            app.start();
+        }
+    </script>
+</head>
+
+</html>
