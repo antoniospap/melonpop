@@ -14,7 +14,9 @@
  *.Bullet state.
  */
 game.entity.Melon = function(x, y, width, height, color, texture) {
-    this.m_bounce = false;
+    this.m_bounceY = false;
+    this.m_bounceX = false;
+
     //--------------------------------------------------------------------------
     // Super call
     //--------------------------------------------------------------------------
@@ -41,6 +43,9 @@ game.entity.Melon.prototype.constructor = game.entity.Melon;
  */
 game.entity.Melon.prototype.init = function() {
     rune.display.Sprite.prototype.init.call(this);
+    this.scaleX = 4;
+    this.scaleY = 4;
+
 };
 
 /**
@@ -62,21 +67,31 @@ game.entity.Melon.prototype.dispose = function() {
     rune.display.Sprite.prototype.dispose.call(this);
 };
 game.entity.Melon.prototype.m_bounceMotion = function() {
-    if (this.m_bounce == false) {
-        this.y += 1
-        this.x += 0.3;
+    if (this.m_bounceY == false) {
+        this.y += 3
     } else {
-        this.y -= 1
-        this.x += 0.3;
+        this.y -= 3
     }
-    if (this.y == 140) {
-        this.m_bounce = true
+    if (this.m_bounceX == false){
+        this.x += 0.5;
+    } else {
+        this.x -= 0.5;
+
     }
-    if (this.y == 20) {
-        this.m_bounce = false
+
+    if (this.y == 530) { //avgränsar melonen inom Y-axlen
+        this.m_bounceY = true
+    } else if (this.y == 20) { //om den når toppen av skärmen
+        this.m_bounceY = false
     }
+
+    if (this.x == 600) { //avgränsar så att melonen inte studras utanför x-leden
+        console.log("MAX SCREEN");
+        this.m_bounceX = true;
+    } else if (this.x == -20) {
+        this.m_bounceX = false;
+    }
+
 };
 
-game.entity.Melon.prototype.m_onDie = function() {
-    console.log("yo123");
-};
+game.entity.Melon.prototype.m_onDie = function() {};

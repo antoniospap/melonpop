@@ -28,8 +28,8 @@ game.system.Main = function() {
         resources: game.data.Resources,
         useKeyboard: true,
         debug: true,
-        //screenResolutionX: 1280,
-        //screenResolutionY: 720
+        screenResolutionX: 1280, // <------------
+        screenResolutionY: 720 // <------------
     });
 };
 

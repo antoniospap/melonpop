@@ -64,15 +64,15 @@ game.entity.Character.prototype.dispose = function() {
 
 game.entity.Character.prototype.m_initPlayer = function() {
     this.m_player = new rune.display.Sprite( //add sprite
-        180, //x
-        150, //y
+        640, //x
+        530, //y
         13, //bredd på en sprite
         19, //höjd på en sprite
         "", //färg som bakrundsfärg, tom sträng för transparent #FF000 för röd färg
         "copsnrobbers_texture_joe" //namn på fil
     );
-    // this.m_player.scaleX = 4;
-    //this.m_player.scaleY = 4;
+    this.m_player.scaleX = 4;
+    this.m_player.scaleY = 4;
 
     this.m_player.animations.add(
         "idle", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
