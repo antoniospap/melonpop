@@ -44,8 +44,8 @@ game.scene.Game.prototype.constructor = game.scene.Game;
 game.scene.Game.prototype.init = function() {
     rune.scene.Scene.prototype.init.call(this);
     this.m_initBackground();
-    this.player = new game.entity.Character();
     this.melonL = new game.entity.MelonL();
+    this.player = new game.entity.Character(this.melonL);
     this.stage.addChild(this.player);
     this.stage.addChild(this.melonL);
 };
@@ -56,9 +56,9 @@ game.scene.Game.prototype.init = function() {
 game.scene.Game.prototype.update = function(step) {
     rune.scene.Scene.prototype.update.call(this, step);
 
-    if(this.player.m_player.intersects(this.melonL)){
-        console.log("PLAYER DEAD");
-    }
+    // if(this.player.m_player.intersects(this.melonL)){
+    //     console.log("PLAYER DEAD");
+    // }
 };
 
 /**

@@ -13,10 +13,11 @@
  *
  *.Character state.
  */
-game.entity.Character = function() {
+game.entity.Character = function(melonL) {
     this.m_player = null;
     this.m_bulletMove = false;
     this.bullet = null;
+    this.melon = melonL;
 
     //--------------------------------------------------------------------------
     // Super call
@@ -45,6 +46,7 @@ game.entity.Character.prototype.constructor = game.entity.Character;
 game.entity.Character.prototype.init = function() {
     rune.display.Sprite.prototype.init.call(this);
     this.m_initPlayer();
+    
 };
 
 /**
@@ -53,6 +55,8 @@ game.entity.Character.prototype.init = function() {
 game.entity.Character.prototype.update = function(step) {
     rune.display.Sprite.prototype.update.call(this, step);
     this.m_characterMovement();
+    this.m_checkHitbox()
+     
 };
 
 /**
@@ -90,22 +94,33 @@ game.entity.Character.prototype.m_initPlayer = function() {
 game.entity.Character.prototype.m_characterMovement = function() {
     //character movement when key pressed
     if (this.keyboard.pressed("D")) {
+        if (this.m_player.x != 1230) {
         this.m_player.x += 2;
+        console.log(this.m_player.x)
         this.m_player.animations.gotoAndPlay("walk");
         this.m_player.flippedX = false;
+        }
     } else if (this.keyboard.pressed("A")) {
+        if(this.m_player.x != 0) {
         this.m_player.x -= 2;
         this.m_player.animations.gotoAndPlay("walk");
         this.m_player.flippedX = true;
+        }
     } else {
         this.m_player.animations.gotoAndPlay("idle");
     }
 
     //initiates Bullets object
     if (this.keyboard.justPressed("space")) {
-        var bullet = new game.entity.Bullet(this.m_player.x, this.m_player.y);
+        var bullet = new game.entity.Bullet(this.m_player.x, this.m_player.y, this.melon);
         this.stage.addChild(bullet);
         this.m_bulletMove = true;
         this.bullets = bullet.m_bullets;
+    }
+    
+};
+game.entity.Character.prototype.m_checkHitbox = function() {
+    if(this.m_player.intersects(this.melon)){
+        console.log("PLAYER DEAD");
     }
 };

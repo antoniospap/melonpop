@@ -13,10 +13,11 @@
  *
  *.Bullet state.
  */
-game.entity.Bullet = function(playerX, playerY) {
+game.entity.Bullet = function(playerX, playerY, melon) {
     this.m_bullets = null;
     this.playerX = playerX;
     this.playerY = playerY;
+    this.melon = melon
 
     //--------------------------------------------------------------------------
     // Super call
@@ -53,6 +54,8 @@ game.entity.Bullet.prototype.init = function() {
 game.entity.Bullet.prototype.update = function(step) {
     rune.display.Sprite.prototype.update.call(this, step);
     this.m_bulletMotion();
+    this.m_checkHitbox();
+    
 };
 
 /**
@@ -76,4 +79,10 @@ game.entity.Bullet.prototype.m_initBullets = function() {
 
 game.entity.Bullet.prototype.m_bulletMotion = function() {
     this.m_bullets.y -= 5;
+};
+
+game.entity.Bullet.prototype.m_checkHitbox = function() {
+    if(this.m_bullets.intersects(this.melon)){
+        this.melon.m_onDie()
+    }
 };

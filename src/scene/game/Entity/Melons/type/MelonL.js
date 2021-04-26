@@ -39,8 +39,8 @@ game.entity.MelonL.prototype.constructor = game.entity.MelonL;
 
 
 game.entity.MelonL.prototype.m_onDie = function() {
-    console.log("MELON LARGE");
-    console.log();
+    console.log("MELON LARGExdsd");
+    // console.log();
     var centerX = this.x + this.width / 2;
     var centerY = this.y + this.height / 2;
     for (var i = 0; i < 2; i++) {
