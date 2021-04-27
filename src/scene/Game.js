@@ -44,6 +44,7 @@ game.scene.Game.prototype.constructor = game.scene.Game;
 game.scene.Game.prototype.init = function() {
     rune.scene.Scene.prototype.init.call(this);
     this.m_initBackground();
+    
     this.melonL = new game.entity.MelonL();
     this.player = new game.entity.Character(this.melonL);
     this.stage.addChild(this.player);
