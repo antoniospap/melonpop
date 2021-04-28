@@ -62,6 +62,7 @@ game.entity.Melon.prototype.dispose = function() {
 game.entity.Melon.prototype.m_bounceMotion = function() {
     if (this.m_bounceY == false) {
         this.y += 3
+
     } else {
         this.y -= 3
     }

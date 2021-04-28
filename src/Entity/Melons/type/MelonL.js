@@ -14,6 +14,8 @@
  *.Bullet state.
  */
 game.entity.MelonL = function() {
+    this.hitTest = true;
+
     //--------------------------------------------------------------------------
     // Super call
     //--------------------------------------------------------------------------
@@ -36,14 +38,20 @@ game.entity.MelonL.prototype.constructor = game.entity.MelonL;
 //------------------------------------------------------------------------------
 
 game.entity.MelonL.prototype.m_onDie = function() {
-    var centerX = this.x + this.width / 2;
-    var centerY = this.y + this.height / 2;
-    for (var i = 0; i < 2; i++) {
-        var melonM = new game.entity.MelonM(centerX, centerY);
-        this.parent.addChild(melonM);
 
-        if (i == 0) {
-            melonM.x -= 50;
+    if (this.hitTest) {
+        for (var i = 0; i < 2; i++) {
+            var melonM = new game.entity.MelonM(this.x, this.y);
+            this.parent.addChild(melonM);
+
+            if (i == 0) {
+                melonM.x -= 50;
+            }
+            if (i == 1) {
+                melonM.x += 50;
+            }
         }
-    }
+    this.hitTest = false;
+}
+
 };

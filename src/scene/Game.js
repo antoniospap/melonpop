@@ -57,9 +57,6 @@ game.scene.Game.prototype.init = function() {
 game.scene.Game.prototype.update = function(step) {
     rune.scene.Scene.prototype.update.call(this, step);
 
-    // if(this.player.m_player.intersects(this.melonL)){
-    //     console.log("PLAYER DEAD");
-    // }
 };
 
 /**
