@@ -82,10 +82,13 @@ game.entity.Bullet.prototype.m_bulletMotion = function() {
 };
 
 game.entity.Bullet.prototype.m_checkHitbox = function() {
-
-        if(this.m_bullets.intersects(this.melon)){
-            this.stage.removeChild(this.m_bullets);
-            this.melon.m_onDie();
+    var objects = this.stage.getChildren();
+    for (i = 0; i<objects.length; i++){
+        if (objects[i] instanceof game.entity.Melon){
+            if(this.m_bullets.intersects(objects[i])){
+                this.stage.removeChild(this.m_bullets, true);
+                objects[i].m_onDie();
+            }
         }
-
+    }
 };

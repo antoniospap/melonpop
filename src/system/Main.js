@@ -24,7 +24,7 @@ game.system.Main = function() {
     rune.system.Main.call(this, {
         id: "com.vectorpanic.template",
         name: "game",
-        scene: game.scene.Menu,
+        scene: game.scene.Game,
         resources: game.data.Resources,
         useKeyboard: true,
         debug: true,

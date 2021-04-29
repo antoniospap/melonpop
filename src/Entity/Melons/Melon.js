@@ -58,6 +58,7 @@ game.entity.Melon.prototype.update = function(step) {
  */
 game.entity.Melon.prototype.dispose = function() {
     rune.display.Sprite.prototype.dispose.call(this);
+    console.log("hejdå");
 };
 game.entity.Melon.prototype.m_bounceMotion = function() {
     if (this.m_bounceY == false) {

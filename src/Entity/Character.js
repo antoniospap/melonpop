@@ -116,7 +116,8 @@ game.entity.Character.prototype.m_characterMovement = function() {
     
 };
 game.entity.Character.prototype.m_checkHitbox = function() {
-    if(this.m_player.intersects(this.melon)){
+    /*if(this.m_player.intersects(this.melon)){
         console.log("PLAYER DEAD");
     }
+    */
 };

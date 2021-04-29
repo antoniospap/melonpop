@@ -53,5 +53,5 @@ game.entity.MelonL.prototype.m_onDie = function() {
         }
     this.hitTest = false;
 }
-
+this.parent.removeChild(this, true);
 };
