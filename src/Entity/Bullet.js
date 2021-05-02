@@ -14,10 +14,8 @@
  *.Bullet state.
  */
 game.entity.Bullet = function(playerX, playerY, melon) {
-    this.m_bullets = null;
     this.playerX = playerX;
     this.playerY = playerY;
-    this.melon = melon
 
     //--------------------------------------------------------------------------
     // Super call
@@ -26,7 +24,7 @@ game.entity.Bullet = function(playerX, playerY, melon) {
     /**
      * ...
      */
-    rune.display.Sprite.call(this);
+    rune.display.Sprite.call(this, this.playerX, this.playerY, 10, 10, "", "testbull");
 };
 
 //------------------------------------------------------------------------------
@@ -45,7 +43,6 @@ game.entity.Bullet.prototype.constructor = game.entity.Bullet;
  */
 game.entity.Bullet.prototype.init = function() {
     rune.display.Sprite.prototype.init.call(this);
-    this.m_initBullets();
 };
 
 /**
@@ -54,8 +51,8 @@ game.entity.Bullet.prototype.init = function() {
 game.entity.Bullet.prototype.update = function(step) {
     rune.display.Sprite.prototype.update.call(this, step);
     this.m_bulletMotion();
-    this.m_checkHitbox(step);
-    
+    this.m_checkHitbox();
+
 };
 
 /**
@@ -63,31 +60,20 @@ game.entity.Bullet.prototype.update = function(step) {
  */
 game.entity.Bullet.prototype.dispose = function() {
     rune.display.Sprite.prototype.dispose.call(this);
+};
 
-};
-game.entity.Bullet.prototype.m_initBullets = function() {
-    this.m_bullets = new rune.display.Sprite(
-        this.playerX,
-        this.playerY,
-        10,
-        10,
-        "",
-        "testbull"
-    );
-    this.stage.addChild(this.m_bullets);
-};
 
 game.entity.Bullet.prototype.m_bulletMotion = function() {
-    this.m_bullets.y -= 5;
+    this.y -= 5;
 };
 
 game.entity.Bullet.prototype.m_checkHitbox = function() {
     var objects = this.stage.getChildren();
-    for (i = 0; i<objects.length; i++){
-        if (objects[i] instanceof game.entity.Melon){
-            if(this.m_bullets.intersects(objects[i])){
-                this.stage.removeChild(this.m_bullets, true);
-                objects[i].m_onDie();
+    for (i = 0; i < objects.length; i++) {
+        if (objects[i] instanceof game.entity.Melon) {
+            if (this.intersects(objects[i])) {
+                this.stage.removeChild(this, true);
+                objects[i].m_onDie(objects);
             }
         }
     }

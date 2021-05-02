@@ -6,42 +6,39 @@
  * Creates a new object.
  *
  * @constructor
- * @extends rune.scene.Scene
+ * @extends game.wave.Wave
  *
  * @class
  * @classdesc
- *
- *.Bullet state.
+ * 
+ * Wave 002.
  */
-game.entity.MelonS = function(x = -20, y = 50) {
+game.wave.Wave02 = function() {
 
     //--------------------------------------------------------------------------
-    // Super call-
-    //-------------------------------------------------------------------------
+    // Super call
+    //--------------------------------------------------------------------------
 
     /**
      * ...
      */
-    game.entity.Melon.call(this, x, y, 40, 40, "", "melonS");
+    game.wave.Wave.call(this);
 };
 
 //------------------------------------------------------------------------------
 // Inheritance
 //------------------------------------------------------------------------------
 
-game.entity.MelonS.prototype = Object.create(game.entity.Melon.prototype);
-game.entity.MelonS.prototype.constructor = game.entity.MelonS;
+game.wave.Wave02.prototype = Object.create(game.wave.Wave.prototype);
+game.wave.Wave02.prototype.constructor = game.wave.Wave02;
 
 //------------------------------------------------------------------------------
-// Override public prototype methods (ENGINE)
+// Override protected prototype methods
 //------------------------------------------------------------------------------
 
-
-
-
-game.entity.MelonS.prototype.m_onDie = function(obj) {
-    this.parent.removeChild(this, true);
-    console.log(obj);
-    // for (i = 0; i < obj.length; i++) {
-    //}
+/**
+ * @inheritDoc
+ */
+game.wave.Wave02.prototype.m_start = function() {
+    console.log("WAVE02");
 };

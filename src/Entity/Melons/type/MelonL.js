@@ -38,7 +38,6 @@ game.entity.MelonL.prototype.constructor = game.entity.MelonL;
 //------------------------------------------------------------------------------
 
 game.entity.MelonL.prototype.m_onDie = function() {
-
     if (this.hitTest) {
         for (var i = 0; i < 2; i++) {
             var melonM = new game.entity.MelonM(this.x, this.y);
@@ -51,7 +50,7 @@ game.entity.MelonL.prototype.m_onDie = function() {
                 melonM.x += 50;
             }
         }
-    this.hitTest = false;
-}
-this.parent.removeChild(this, true);
+        this.hitTest = false;
+    }
+    this.parent.removeChild(this, true);
 };

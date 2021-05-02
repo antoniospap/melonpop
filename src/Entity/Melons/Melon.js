@@ -58,7 +58,6 @@ game.entity.Melon.prototype.update = function(step) {
  */
 game.entity.Melon.prototype.dispose = function() {
     rune.display.Sprite.prototype.dispose.call(this);
-    console.log("hejdå");
 };
 game.entity.Melon.prototype.m_bounceMotion = function() {
     if (this.m_bounceY == false) {
@@ -67,15 +66,15 @@ game.entity.Melon.prototype.m_bounceMotion = function() {
     } else {
         this.y -= 3
     }
-    if (this.m_bounceX == false){
+    if (this.m_bounceX == false) {
         this.x += 0.5;
     } else {
         this.x -= 0.5;
     }
 
-    if (this.y == 530) { //avgränsar melonen inom Y-axlen
+    if (this.y >= 530) { //avgränsar melonen inom Y-axlen, botten
         this.m_bounceY = true
-    } else if (this.y == 20) { //om den når toppen av skärmen
+    } else if (this.y <= 20) { //om den når toppen av skärmen
         this.m_bounceY = false
     }
 

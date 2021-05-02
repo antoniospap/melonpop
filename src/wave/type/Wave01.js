@@ -6,42 +6,46 @@
  * Creates a new object.
  *
  * @constructor
- * @extends rune.scene.Scene
+ * @extends game.wave.Wave
  *
  * @class
  * @classdesc
- *
- *.Bullet state.
+ * 
+ * Wave 002.
  */
-game.entity.MelonS = function(x = -20, y = 50) {
-
+game.wave.Wave01 = function(stage) {
+    this.stage = stage;
+    this.largeMelon = [];
     //--------------------------------------------------------------------------
-    // Super call-
-    //-------------------------------------------------------------------------
+    // Super call
+    //--------------------------------------------------------------------------
 
     /**
      * ...
      */
-    game.entity.Melon.call(this, x, y, 40, 40, "", "melonS");
+    game.wave.Wave.call(this);
 };
 
 //------------------------------------------------------------------------------
 // Inheritance
 //------------------------------------------------------------------------------
 
-game.entity.MelonS.prototype = Object.create(game.entity.Melon.prototype);
-game.entity.MelonS.prototype.constructor = game.entity.MelonS;
+game.wave.Wave01.prototype = Object.create(game.wave.Wave.prototype);
+game.wave.Wave01.prototype.constructor = game.wave.Wave01;
 
 //------------------------------------------------------------------------------
-// Override public prototype methods (ENGINE)
+// Override protected prototype methods
 //------------------------------------------------------------------------------
 
+/**
+ * @inheritDoc
+ */
+game.wave.Wave01.prototype.m_getMelons = function() {
+    for (i = 0; i < 2; i++) {
+        var l = new game.entity.MelonL();
+        var m = new game.entity.MelonM();
+        var s = new game.entity.MelonS();
 
-
-
-game.entity.MelonS.prototype.m_onDie = function(obj) {
-    this.parent.removeChild(this, true);
-    console.log(obj);
-    // for (i = 0; i < obj.length; i++) {
-    //}
+        this.largeMelon.push(l, m, s);
+    }
 };

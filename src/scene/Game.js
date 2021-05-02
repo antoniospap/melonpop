@@ -44,10 +44,11 @@ game.scene.Game.prototype.constructor = game.scene.Game;
 game.scene.Game.prototype.init = function() {
     rune.scene.Scene.prototype.init.call(this);
     this.m_initBackground()
-    
+
     this.player = new game.entity.Character();
     this.stage.addChild(this.player);
-    this.stage.addChild(new game.entity.MelonL());
+    //this.stage.addChild(new game.entity.MelonL());
+    var wave01 = new game.wave.Wave01(this.stage);
 };
 
 /**

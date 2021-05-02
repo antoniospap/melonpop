@@ -52,6 +52,15 @@ var game = function() {
      */
     m_this.entity = {};
 
+    /**
+     * ...
+     *
+     * @namespace data
+     * @memberof game
+     * @since 1.0
+     */
+    m_this.wave = {};
+
 
     /**
      * ...
