@@ -13,8 +13,13 @@
  *
  *.Bullet state.
  */
-game.entity.MelonM = function(x = -20, y = 50) {
+ game.entity.MelonM = function(x, y) {
     this.hitTest = true;
+    this.melonSpeedY = 2.2;
+    this.melonSpeedX = 0.6;
+
+    this.melonHeightBounce = 100;
+
     //--------------------------------------------------------------------------
     // Super call
     //--------------------------------------------------------------------------
@@ -52,6 +57,7 @@ game.entity.MelonM.prototype.m_onDie = function() {
             }
         }
         this.hitTest = false;
-    }
+    } 
     this.parent.removeChild(this, true);
+
 };

@@ -13,7 +13,7 @@
  *
  *.Bullet state.
  */
-game.entity.MelonS = function(x = -20, y = 50) {
+game.entity.MelonS = function(x, y) {
 
     //--------------------------------------------------------------------------
     // Super call-
