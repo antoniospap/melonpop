@@ -12,40 +12,51 @@
  * 
  * Represents a wave of melons.
  */
-game.wave.Wave = function() {
-
+game.wave.Wave = function(stage) {
+    this.stage = stage;
+    this.delay = 2000;
+    this.start = false;
     //--------------------------------------------------------------------------
     // Private properties
     //--------------------------------------------------------------------------
 
-    this.largeMelon = [];
+    this.melons = [];
+   // this.activeMelon = [];
+
 
     //--------------------------------------------------------------------------
     // Constructor call
     //--------------------------------------------------------------------------
-    this.m_start();
+    this.m_constructor();
 };
 //------------------------------------------------------------------------------
 // Public prototype methods (API)
 //------------------------------------------------------------------------------
 game.wave.Wave.prototype.update = function(step) {
-    console.log("yo");
+   this.delay -= step;
+   if (this.delay <= 0){
+       this.delay = 2000;
+       this.addMelon();
+   }
+};
+game.wave.Wave.prototype.addMelon = function() {
+    for (var i = 0; i< this.melons.length; i++){
+        if (this.melons[i].parent == null && this.melons[i].active == true){
+            this.stage.addChild(this.melons[i]);
+            this.start = true;
+            break;
+        }
+    }
 };
 
-game.wave.Wave.prototype.m_start = function() {
-    this.m_getMelons();
-    var x = 0;
-    var self = this;
-    var id = setInterval(function() {
-        self.stage.addChild(self.largeMelon[x]);
-        x++;
-        if (x === self.largeMelon.length) {
-            clearInterval(id);
-            self.largeMelon = [];
-            self.m_nextWave();
+game.wave.Wave.prototype.m_constructor = function() {};
+
+game.wave.Wave.prototype.checkWave = function() {
+    var numLeft = 0;
+    for (i = 0; i < this.stage.numChildren; i++) {
+        if (this.stage.getChildAt(i) instanceof game.entity.Melon) {
+            numLeft++;
         }
-    }, 2000)
-};
-game.wave.Wave.prototype.m_nextWave = function() {
-    var objects = this.stage.getChildren();
+     }
+     return (numLeft == 0 && this.start == true) ? true : false;
 };

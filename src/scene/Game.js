@@ -16,6 +16,7 @@
 game.scene.Game = function() {
     this.melonL = null;
     this.player = null;
+    this.wave;
 
     //--------------------------------------------------------------------------
     // Super call
@@ -47,8 +48,7 @@ game.scene.Game.prototype.init = function() {
 
     this.player = new game.entity.Character();
     this.stage.addChild(this.player);
-    //this.stage.addChild(new game.entity.MelonL());
-    var wave01 = new game.wave.Wave01(this.stage);
+    this.wave = new game.wave.Wave01(this.stage);
 };
 
 /**
@@ -56,7 +56,11 @@ game.scene.Game.prototype.init = function() {
  */
 game.scene.Game.prototype.update = function(step) {
     rune.scene.Scene.prototype.update.call(this, step);
-
+    this.wave.update(step);
+    
+    if (this.wave.checkWave()){
+        console.log("WAVE DONE");
+    }
 };
 
 /**

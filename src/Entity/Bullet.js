@@ -73,7 +73,9 @@ game.entity.Bullet.prototype.m_checkHitbox = function() {
         if (objects[i] instanceof game.entity.Melon) {
             if (this.intersects(objects[i])) {
                 this.stage.removeChild(this, true);
-                objects[i].m_onDie(objects);
+                if (objects[i] != null){
+                    objects[i].m_onDie();
+                }
             }
         }
     }

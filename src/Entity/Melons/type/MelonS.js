@@ -14,7 +14,13 @@
  *.Bullet state.
  */
 game.entity.MelonS = function(x, y) {
+    this.melonSpeedY = 2.4;
+    this.melonSpeedX = 0.7;
 
+    this.melonHeightBounce = 300;
+
+    this.scaleImgX = 1;
+    this.scaleImgY = 1;
     //--------------------------------------------------------------------------
     // Super call-
     //-------------------------------------------------------------------------
@@ -40,8 +46,5 @@ game.entity.MelonS.prototype.constructor = game.entity.MelonS;
 
 
 game.entity.MelonS.prototype.m_onDie = function(obj) {
-    this.parent.removeChild(this, true);
-    console.log(obj);
-    // for (i = 0; i < obj.length; i++) {
-    //}
+    game.entity.Melon.prototype.m_onDie.call(this);
 };

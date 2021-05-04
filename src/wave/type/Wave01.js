@@ -15,7 +15,7 @@
  */
 game.wave.Wave01 = function(stage) {
     this.stage = stage;
-    this.largeMelon = [];
+    this.melons = [];
     //--------------------------------------------------------------------------
     // Super call
     //--------------------------------------------------------------------------
@@ -23,7 +23,7 @@ game.wave.Wave01 = function(stage) {
     /**
      * ...
      */
-    game.wave.Wave.call(this);
+    game.wave.Wave.call(this, stage);
 };
 
 //------------------------------------------------------------------------------
@@ -40,12 +40,12 @@ game.wave.Wave01.prototype.constructor = game.wave.Wave01;
 /**
  * @inheritDoc
  */
-game.wave.Wave01.prototype.m_getMelons = function() {
+game.wave.Wave01.prototype.m_constructor = function() {
     for (i = 0; i < 2; i++) {
         var l = new game.entity.MelonL();
         var m = new game.entity.MelonM();
         var s = new game.entity.MelonS();
 
-        this.largeMelon.push(l, m, s);
+        this.melons.push(l, m, s);
     }
 };

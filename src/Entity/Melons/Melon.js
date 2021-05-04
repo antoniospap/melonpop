@@ -21,6 +21,9 @@
 
     this.melonHeightBounce;
 
+    this.scaleImgX;
+    this.scaleImgY;
+
     //--------------------------------------------------------------------------
     // Super call
     //--------------------------------------------------------------------------
@@ -47,6 +50,9 @@ game.entity.Melon.prototype.constructor = game.entity.Melon;
  */
 game.entity.Melon.prototype.init = function() {
     rune.display.Sprite.prototype.init.call(this);
+    this.scaleX = this.scaleImgX;
+    this.scaleY = this.scaleImgY;
+
 };
 
 /**
@@ -54,7 +60,6 @@ game.entity.Melon.prototype.init = function() {
  */
 game.entity.Melon.prototype.update = function(step) {
     rune.display.Sprite.prototype.update.call(this, step);
-    console.log(this);
     this.m_bounceMotion();
     this.m_windowLimit();
 };
@@ -93,4 +98,7 @@ game.entity.Melon.prototype.m_windowLimit = function() {
     }
 };
 
-game.entity.Melon.prototype.m_onDie = function() {};
+game.entity.Melon.prototype.m_onDie = function() {
+    this.active = false;
+    this.parent.removeChild(this, false);
+};

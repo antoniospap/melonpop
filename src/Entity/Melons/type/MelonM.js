@@ -20,6 +20,9 @@
 
     this.melonHeightBounce = 100;
 
+    this.scaleImgX = 2;
+    this.scaleImgY = 2;
+
     //--------------------------------------------------------------------------
     // Super call
     //--------------------------------------------------------------------------
@@ -43,7 +46,6 @@ game.entity.MelonM.prototype.constructor = game.entity.MelonM;
 
 
 
-
 game.entity.MelonM.prototype.m_onDie = function() {
     if (this.hitTest) {
         for (var i = 0; i < 2; i++) {
@@ -58,6 +60,5 @@ game.entity.MelonM.prototype.m_onDie = function() {
         }
         this.hitTest = false;
     } 
-    this.parent.removeChild(this, true);
-
+    game.entity.Melon.prototype.m_onDie.call(this);
 };
