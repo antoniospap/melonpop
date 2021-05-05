@@ -17,7 +17,10 @@ game.entity.MelonS = function(x, y) {
     this.melonSpeedY = 2.4;
     this.melonSpeedX = 0.7;
 
-    this.melonHeightBounce = 300;
+    this.melonHeightBounce = 400;
+
+    this.melonBottomBounce = 530;
+
 
     //--------------------------------------------------------------------------
     // Super call-

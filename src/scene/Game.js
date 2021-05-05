@@ -50,7 +50,6 @@ game.scene.Game.prototype.init = function() {
     this.player = new game.entity.Character();
     this.stage.addChild(this.player);
     this.wave = new game.wave.Wave01(this.stage);
-    console.log(this.wave);
 };
 
 /**
@@ -61,7 +60,7 @@ game.scene.Game.prototype.update = function(step) {
     this.wave.update(step);
     
     if (this.wave.checkWave()){
-        console.log("NO MORE MELONS");
+        this.wave = new game.wave.Wave02(this.stage);
     }
 };
 

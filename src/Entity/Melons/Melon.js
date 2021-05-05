@@ -20,6 +20,8 @@
     this.melonSpeedX;
 
     this.melonHeightBounce;
+    this.melonBottomBounce;
+
     //--------------------------------------------------------------------------
     // Super call
     //--------------------------------------------------------------------------
@@ -46,7 +48,6 @@ game.entity.Melon.prototype.constructor = game.entity.Melon;
  */
 game.entity.Melon.prototype.init = function() {
     rune.display.Sprite.prototype.init.call(this);
-    this.initHitbox();
 };
 
 /**
@@ -80,7 +81,7 @@ game.entity.Melon.prototype.m_bounceMotion = function() {
 };
 
 game.entity.Melon.prototype.m_windowLimit = function(step) {
-    if (this.y >= 530) { //avgränsar melonen inom Y-axlen, botten
+    if (this.y >= this.melonBottomBounce) { //avgränsar melonen inom Y-axlen, botten
         this.m_bounceY = true;
     } else if (this.y <= this.melonHeightBounce) { //om den når toppen av skärmen
         this.m_bounceY = false
