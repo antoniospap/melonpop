@@ -20,10 +20,6 @@
     this.melonSpeedX;
 
     this.melonHeightBounce;
-
-    this.scaleImgX;
-    this.scaleImgY;
-
     //--------------------------------------------------------------------------
     // Super call
     //--------------------------------------------------------------------------
@@ -50,9 +46,7 @@ game.entity.Melon.prototype.constructor = game.entity.Melon;
  */
 game.entity.Melon.prototype.init = function() {
     rune.display.Sprite.prototype.init.call(this);
-    this.scaleX = this.scaleImgX;
-    this.scaleY = this.scaleImgY;
-
+    this.initHitbox();
 };
 
 /**
@@ -61,8 +55,8 @@ game.entity.Melon.prototype.init = function() {
 game.entity.Melon.prototype.update = function(step) {
     rune.display.Sprite.prototype.update.call(this, step);
     this.m_bounceMotion();
-    this.m_windowLimit();
-    this.rotation += 1
+    this.m_windowLimit(step);
+    this.rotation += 2
 };
 
 /**
@@ -85,7 +79,7 @@ game.entity.Melon.prototype.m_bounceMotion = function() {
     }
 };
 
-game.entity.Melon.prototype.m_windowLimit = function() {
+game.entity.Melon.prototype.m_windowLimit = function(step) {
     if (this.y >= 530) { //avgränsar melonen inom Y-axlen, botten
         this.m_bounceY = true;
     } else if (this.y <= this.melonHeightBounce) { //om den når toppen av skärmen
@@ -94,7 +88,6 @@ game.entity.Melon.prototype.m_windowLimit = function() {
 
     if (this.x >= 1230) { //avgränsar så att melonen inte studras utanför x-leden, höger
         this.m_bounceX = true;
-        console.log('hejj')
         // this.rotation -= 40
     } else if (this.x <= -20) { //vänster
         this.m_bounceX = false;
@@ -105,3 +98,4 @@ game.entity.Melon.prototype.m_onDie = function() {
     this.active = false;
     this.parent.removeChild(this, false);
 };
+

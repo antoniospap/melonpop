@@ -17,6 +17,8 @@ game.entity.Character = function(melonL) {
     this.m_player = null;
     this.bullet = null;
     this.melon = melonL;
+    this.bulletDelay = 0;
+
 
     //--------------------------------------------------------------------------
     // Super call
@@ -54,6 +56,7 @@ game.entity.Character.prototype.init = function() {
 game.entity.Character.prototype.update = function(step) {
     rune.display.Sprite.prototype.update.call(this, step);
     this.m_characterMovement();
+    this.characterBullet(step);
     this.m_checkHitbox()
      
 };
@@ -90,7 +93,7 @@ game.entity.Character.prototype.m_initPlayer = function() {
     this.stage.addChild(this.m_player);
 };
 
-game.entity.Character.prototype.m_characterMovement = function() {
+game.entity.Character.prototype.m_characterMovement = function(step) {
     //character movement when key pressed
     if (this.keyboard.pressed("D")) {
         if (this.m_player.x <= 1230) {
@@ -107,17 +110,27 @@ game.entity.Character.prototype.m_characterMovement = function() {
     } else {
         this.m_player.animations.gotoAndPlay("idle");
     }
-
-    //initiates Bullets object
-    if (this.keyboard.justPressed("space")) {
-        var bullet = new game.entity.Bullet(this.m_player.x, this.m_player.y, this.melon);
-        this.stage.addChild(bullet);
-    }
-    
 };
+
+game.entity.Character.prototype.characterBullet = function(step) {
+    //initiates Bullets object
+    this.bulletDelay += step;
+    if (this.keyboard.justPressed("space")) {
+        if (this.bulletDelay >= 1000){ //skjuter ett skot per 1000 uppdateringsfrekvenser.
+            var bullet = new game.entity.Bullet(this.m_player.x, this.m_player.y);
+            this.stage.addChild(bullet);
+            this.bulletDelay = 0;
+        }
+    }  
+};
+
 game.entity.Character.prototype.m_checkHitbox = function() {
-    /*if(this.m_player.intersects(this.melon)){
-        console.log("PLAYER DEAD");
+    var objects = this.stage.getChildren();
+    for (i = 0; i < objects.length; i++) {
+        if (objects[i] instanceof game.entity.Melon) {
+            if (this.m_player.intersects(objects[i])) {
+                this.application.scenes.load([new game.scene.Menu()]);
+            }
+        }
     }
-    */
 };

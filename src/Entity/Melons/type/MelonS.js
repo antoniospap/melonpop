@@ -19,8 +19,6 @@ game.entity.MelonS = function(x, y) {
 
     this.melonHeightBounce = 300;
 
-    this.scaleImgX = 1;
-    this.scaleImgY = 1;
     //--------------------------------------------------------------------------
     // Super call-
     //-------------------------------------------------------------------------
@@ -45,6 +43,10 @@ game.entity.MelonS.prototype.constructor = game.entity.MelonS;
 
 
 
-game.entity.MelonS.prototype.m_onDie = function(obj) {
+game.entity.MelonS.prototype.m_onDie = function() {
     game.entity.Melon.prototype.m_onDie.call(this);
+};
+
+game.entity.MelonS.prototype.initHitbox = function() {
+    this.hitbox.set(50,50,50,50);
 };

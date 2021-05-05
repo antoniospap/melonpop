@@ -17,6 +17,7 @@ game.scene.Game = function() {
     this.melonL = null;
     this.player = null;
     this.wave;
+    this.waveCounter = true;
 
     //--------------------------------------------------------------------------
     // Super call
@@ -49,6 +50,7 @@ game.scene.Game.prototype.init = function() {
     this.player = new game.entity.Character();
     this.stage.addChild(this.player);
     this.wave = new game.wave.Wave01(this.stage);
+    console.log(this.wave);
 };
 
 /**
@@ -59,7 +61,7 @@ game.scene.Game.prototype.update = function(step) {
     this.wave.update(step);
     
     if (this.wave.checkWave()){
-        console.log("WAVE DONE");
+        console.log("NO MORE MELONS");
     }
 };
 

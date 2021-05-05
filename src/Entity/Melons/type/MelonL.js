@@ -20,10 +20,6 @@
 
     this.melonHeightBounce = 20;
 
-    
-    this.scaleImgX = 1;
-    this.scaleImgY = 1;
-
     //--------------------------------------------------------------------------
     // Super call
     //--------------------------------------------------------------------------
@@ -61,4 +57,8 @@ game.entity.MelonL.prototype.m_onDie = function() {
     this.hitTest = false;
 }
 game.entity.Melon.prototype.m_onDie.call(this);
+};
+
+game.entity.MelonL.prototype.initHitbox = function() {
+    console.log("INITHITBOX");
 };
