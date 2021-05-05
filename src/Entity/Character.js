@@ -72,24 +72,24 @@ game.entity.Character.prototype.m_initPlayer = function() {
     this.m_player = new rune.display.Sprite( //add sprite
         640, //x
         530, //y
-        13, //bredd på en sprite
-        19, //höjd på en sprite
+        52, //bredd på en sprite
+        76, //höjd på en sprite
         "", //färg som bakrundsfärg, tom sträng för transparent #FF000 för röd färg
-        "copsnrobbers_texture_joe" //namn på fil
+        "gamesprite2" //namn på fil
     );
-    this.m_player.scaleX = 4;
-    this.m_player.scaleY = 4;
+    this.m_player.scaleX = 1;
+    this.m_player.scaleY = 1;
 
-    this.m_player.animations.add(
-        "idle", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-        6,
-        true
-    ); //6 för hur många frames per second
-    this.m_player.animations.add(
-        "walk", [11, 12, 13, 14, 15, 16, 17, 18],
-        8,
-        true
-    );
+    // this.m_player.animations.add(
+    //     "idle", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    //     6,
+    //     true
+    // ); //6 för hur många frames per second
+    // this.m_player.animations.add(
+    //     "walk", [11, 12, 13, 14, 15, 16, 17, 18],
+    //     8,
+    //     true
+    // );
     this.stage.addChild(this.m_player);
 };
 
