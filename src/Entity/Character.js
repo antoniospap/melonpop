@@ -117,6 +117,8 @@ game.entity.Character.prototype.characterBullet = function(step) {
     this.bulletDelay += step;
     if (this.keyboard.justPressed("space")) {
         if (this.bulletDelay >= 1000){ //skjuter ett skot per 1000 uppdateringsfrekvenser.
+            var sound = this.application.sounds.sound.get("throw")
+            sound.play()
             var bullet = new game.entity.Bullet(this.m_player.x, this.m_player.y);
             this.stage.addChild(bullet);
             this.bulletDelay = 0;

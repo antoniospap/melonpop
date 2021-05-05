@@ -72,6 +72,8 @@ game.entity.Bullet.prototype.m_checkHitbox = function() {
     for (i = 0; i < objects.length; i++) {
         if (objects[i] instanceof game.entity.Melon) {
             if (this.intersects(objects[i])) {
+                var sound = this.application.sounds.sound.get("hit")
+                sound.play()
                 this.stage.removeChild(this, true);
                 if (objects[i] != null){
                     objects[i].m_onDie();
