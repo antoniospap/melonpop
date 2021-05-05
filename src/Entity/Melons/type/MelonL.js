@@ -21,8 +21,8 @@
     this.melonHeightBounce = 20;
 
     
-    this.scaleImgX = 4;
-    this.scaleImgY = 4;
+    this.scaleImgX = 1;
+    this.scaleImgY = 1;
 
     //--------------------------------------------------------------------------
     // Super call
@@ -31,7 +31,7 @@
     /**
      * ...
      */
-    game.entity.Melon.call(this, -20, 50, 40, 40, "", "melonL");
+    game.entity.Melon.call(this, -20, 50, 160, 160, "", "MelonLidle");
 };
 
 //------------------------------------------------------------------------------

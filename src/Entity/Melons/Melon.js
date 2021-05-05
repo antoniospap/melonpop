@@ -62,6 +62,7 @@ game.entity.Melon.prototype.update = function(step) {
     rune.display.Sprite.prototype.update.call(this, step);
     this.m_bounceMotion();
     this.m_windowLimit();
+    this.rotation += 1
 };
 
 /**
@@ -93,6 +94,8 @@ game.entity.Melon.prototype.m_windowLimit = function() {
 
     if (this.x >= 1230) { //avgränsar så att melonen inte studras utanför x-leden, höger
         this.m_bounceX = true;
+        console.log('hejj')
+        // this.rotation -= 40
     } else if (this.x <= -20) { //vänster
         this.m_bounceX = false;
     }
