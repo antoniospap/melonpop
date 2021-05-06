@@ -29,14 +29,14 @@
     /**
      * ...
      */
-    rune.display.Sprite.call(this, x, y, width, height, color, texture);
+    rune.physics.Body.call(this, x, y, width, height, color, texture);
 };
 
 //------------------------------------------------------------------------------
 // Inheritance
 //------------------------------------------------------------------------------
 
-game.entity.Melon.prototype = Object.create(rune.display.Sprite.prototype);
+game.entity.Melon.prototype = Object.create(rune.physics.Body.prototype);
 game.entity.Melon.prototype.constructor = game.entity.Melon;
 
 //------------------------------------------------------------------------------
@@ -47,24 +47,25 @@ game.entity.Melon.prototype.constructor = game.entity.Melon;
  * @inheritDoc
  */
 game.entity.Melon.prototype.init = function() {
-    rune.display.Sprite.prototype.init.call(this);
+    rune.physics.Body.prototype.init.call(this);
+    this.initHitbox();
 };
 
 /**
  * @inheritDoc
  */
 game.entity.Melon.prototype.update = function(step) {
-    rune.display.Sprite.prototype.update.call(this, step);
+    rune.physics.Body.prototype.update.call(this, step);
     this.m_bounceMotion();
     this.m_windowLimit(step);
-    this.rotation += 2
+    this.rotation += 2;
 };
 
 /**
  * @inheritDoc
  */
 game.entity.Melon.prototype.dispose = function() {
-    rune.display.Sprite.prototype.dispose.call(this);
+    rune.physics.Body.prototype.dispose.call(this);
 };
 game.entity.Melon.prototype.m_bounceMotion = function() {
     if (this.m_bounceY == false) {
@@ -86,7 +87,6 @@ game.entity.Melon.prototype.m_windowLimit = function(step) {
     } else if (this.y <= this.melonHeightBounce) { //om den når toppen av skärmen
         this.m_bounceY = false
     }
-
     if (this.x >= 1230) { //avgränsar så att melonen inte studras utanför x-leden, höger
         this.m_bounceX = true;
         // this.rotation -= 40
@@ -98,5 +98,8 @@ game.entity.Melon.prototype.m_windowLimit = function(step) {
 game.entity.Melon.prototype.m_onDie = function() {
     this.active = false;
     this.parent.removeChild(this, false);
+};
+
+game.entity.Melon.prototype.initHitbox = function() {
 };
 

@@ -43,6 +43,11 @@ game.entity.MelonL.prototype.constructor = game.entity.MelonL;
 // Override public prototype methods (ENGINE)
 //------------------------------------------------------------------------------
 
+game.entity.MelonL.prototype.init = function() {
+   game.entity.Melon.prototype.init.call(this);
+   this.hitbox.set(20,20,120,120);
+};
+
 game.entity.MelonL.prototype.m_onDie = function() {
     if (this.hitTest) {
         for (var i = 0; i < 2; i++) {
@@ -50,6 +55,7 @@ game.entity.MelonL.prototype.m_onDie = function() {
 
             if (i == 0) {
                 melonM.x -= 50;
+               // melonM.velocity.x -= 1;
             }
             if (i == 1) {
                 melonM.x += 50;
@@ -59,8 +65,4 @@ game.entity.MelonL.prototype.m_onDie = function() {
     this.hitTest = false;
 }
 game.entity.Melon.prototype.m_onDie.call(this);
-};
-
-game.entity.MelonL.prototype.initHitbox = function() {
-    console.log("INITHITBOX");
 };

@@ -44,6 +44,10 @@ game.entity.MelonM.prototype.constructor = game.entity.MelonM;
 // Override public prototype methods (ENGINE)
 //------------------------------------------------------------------------------
 
+game.entity.MelonM.prototype.init = function() {
+    game.entity.Melon.prototype.init.call(this);
+    this.hitbox.set(10,10,60,60);
+ };
 
 
 game.entity.MelonM.prototype.m_onDie = function() {

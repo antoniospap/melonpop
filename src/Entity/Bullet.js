@@ -69,7 +69,7 @@ game.entity.Bullet.prototype.m_bulletMotion = function() {
 
 game.entity.Bullet.prototype.m_checkHitbox = function() {
     var objects = this.stage.getChildren();
-    for (i = 0; i < objects.length; i++) {
+    for (var i = 0; i < objects.length; i++) {
         if (objects[i] instanceof game.entity.Melon) {
             if (this.intersects(objects[i])) {
                 var sound = this.application.sounds.sound.get("hit")

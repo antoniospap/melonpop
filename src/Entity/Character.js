@@ -14,11 +14,9 @@
  *.Character state.
  */
 game.entity.Character = function(melonL) {
-    this.m_player = null;
     this.bullet = null;
     this.melon = melonL;
     this.bulletDelay = 0;
-
 
     //--------------------------------------------------------------------------
     // Super call
@@ -27,7 +25,7 @@ game.entity.Character = function(melonL) {
     /**
      * ...
      */
-    rune.display.Sprite.call(this);
+    rune.display.Sprite.call(this, 640, 530, 52, 76, "", "gamesprite2");
 };
 
 //------------------------------------------------------------------------------
@@ -46,8 +44,8 @@ game.entity.Character.prototype.constructor = game.entity.Character;
  */
 game.entity.Character.prototype.init = function() {
     rune.display.Sprite.prototype.init.call(this);
-    this.m_initPlayer();
-    
+    this.playerAnimation();
+    this.hitbox.set(5,5,42,70);
 };
 
 /**
@@ -57,8 +55,7 @@ game.entity.Character.prototype.update = function(step) {
     rune.display.Sprite.prototype.update.call(this, step);
     this.m_characterMovement();
     this.characterBullet(step);
-    this.m_checkHitbox()
-     
+    this.m_checkHitbox();   
 };
 
 /**
@@ -68,47 +65,36 @@ game.entity.Character.prototype.dispose = function() {
     rune.display.Sprite.prototype.dispose.call(this);
 };
 
-game.entity.Character.prototype.m_initPlayer = function() {
-    this.m_player = new rune.display.Sprite( //add sprite
-        640, //x
-        530, //y
-        52, //bredd på en sprite
-        76, //höjd på en sprite
-        "", //färg som bakrundsfärg, tom sträng för transparent #FF000 för röd färg
-        "gamesprite2" //namn på fil
-    );
-    this.m_player.scaleX = 1;
-    this.m_player.scaleY = 1;
-
-    // this.m_player.animations.add(
+game.entity.Character.prototype.playerAnimation = function() {
+    // this.animations.add(
     //     "idle", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     //     6,
     //     true
     // ); //6 för hur många frames per second
-    // this.m_player.animations.add(
+
+    // this.animations.add(
     //     "walk", [11, 12, 13, 14, 15, 16, 17, 18],
     //     8,
     //     true
     // );
-    this.stage.addChild(this.m_player);
 };
 
 game.entity.Character.prototype.m_characterMovement = function(step) {
     //character movement when key pressed
     if (this.keyboard.pressed("D")) {
-        if (this.m_player.x <= 1230) {
-        this.m_player.x += 4;
-        this.m_player.animations.gotoAndPlay("walk");
-        this.m_player.flippedX = false;
+        if (this.x <= 1230) {
+        this.x += 4;
+        this.animations.gotoAndPlay("walk");
+        this.flippedX = false;
         }
     } else if (this.keyboard.pressed("A")) {
-        if(this.m_player.x != 0) {
-        this.m_player.x -= 4;
-        this.m_player.animations.gotoAndPlay("walk");
-        this.m_player.flippedX = true;
+        if(this.x != 0) {
+        this.x -= 4;
+        this.animations.gotoAndPlay("walk");
+        this.flippedX = true;
         }
     } else {
-        this.m_player.animations.gotoAndPlay("idle");
+        this.animations.gotoAndPlay("idle");
     }
 };
 
@@ -116,10 +102,10 @@ game.entity.Character.prototype.characterBullet = function(step) {
     //initiates Bullets object
     this.bulletDelay += step;
     if (this.keyboard.justPressed("space")) {
-        if (this.bulletDelay >= 1000){ //skjuter ett skot per 1000 uppdateringsfrekvenser.
+        if (this.bulletDelay >= 700){ //skjuter ett skot per 1000 uppdateringsfrekvenser.
             var sound = this.application.sounds.sound.get("throw")
             sound.play()
-            var bullet = new game.entity.Bullet(this.m_player.x + 20, this.m_player.y);
+            var bullet = new game.entity.Bullet(this.x + 20, this.y);
             this.stage.addChild(bullet);
             this.bulletDelay = 0;
         }
@@ -130,7 +116,7 @@ game.entity.Character.prototype.m_checkHitbox = function() {
     var objects = this.stage.getChildren();
     for (i = 0; i < objects.length; i++) {
         if (objects[i] instanceof game.entity.Melon) {
-            if (this.m_player.intersects(objects[i])) {
+            if (this.hitTestObject(objects[i])){
                 this.application.scenes.load([new game.scene.Menu()]);
             }
         }

@@ -17,7 +17,7 @@ game.scene.Game = function() {
     this.melonL = null;
     this.player = null;
     this.wave;
-    this.waveCounter = true;
+    this.waveCounter = 0;
 
     //--------------------------------------------------------------------------
     // Super call
@@ -50,6 +50,9 @@ game.scene.Game.prototype.init = function() {
     this.player = new game.entity.Character();
     this.stage.addChild(this.player);
     this.wave = new game.wave.Wave01(this.stage);
+    this.waveCounter = 1;
+
+    this.cameras.getCamera(0).debug = true;
 };
 
 /**
@@ -61,6 +64,7 @@ game.scene.Game.prototype.update = function(step) {
     
     if (this.wave.checkWave()){
         this.wave = new game.wave.Wave02(this.stage);
+        this.waveCounter++;
     }
 };
 

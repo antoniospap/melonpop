@@ -41,11 +41,11 @@ game.wave.Wave01.prototype.constructor = game.wave.Wave01;
  * @inheritDoc
  */
 game.wave.Wave01.prototype.m_constructor = function() {
-    for (i = 0; i < 2; i++) {
-        //var l = new game.entity.MelonL();
+    for (var i = 0; i < 2; i++) {
+        var l = new game.entity.MelonL();
         var m = new game.entity.MelonM();
         var s = new game.entity.MelonS();
 
-        this.melons.push(m, s);
+        this.melons.push(m,s);
     }
 };
