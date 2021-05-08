@@ -64,12 +64,12 @@ game.scene.Game.prototype.init = function() {
  */
 game.scene.Game.prototype.update = function(step) {
     rune.scene.Scene.prototype.update.call(this, step);
-    // this.wave.update(step);
+    this.wave.update(step);
     
-    // if (this.wave.checkWave()){
-    //     this.wave = new game.wave.Wave02(this.stage);
-    //     this.waveCounter++;
-    // }
+    if (this.wave.checkWave()){
+        this.wave = new game.wave.Wave02(this.stage);
+        this.waveCounter++;
+    }
 
     this.m_cloudMotion()
 };
