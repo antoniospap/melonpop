@@ -21,6 +21,7 @@ game.scene.Game = function() {
     this.m_cloudOne;
     this.m_cloudTwo;
     this.m_cloudThree;
+    this.bulletPowerup;
 
     //--------------------------------------------------------------------------
     // Super call
@@ -48,6 +49,7 @@ game.scene.Game.prototype.constructor = game.scene.Game;
  */
 game.scene.Game.prototype.init = function() {
     rune.scene.Scene.prototype.init.call(this);
+
     this.m_initBackground()
     this.m_initClouds()
 
@@ -56,6 +58,8 @@ game.scene.Game.prototype.init = function() {
     this.wave = new game.wave.Wave01(this.stage);
     this.waveCounter = 1;
 
+    this.shieldPowerup = new game.entity.Powerups();
+    this.stage.addChild(this.shieldPowerup);
     this.cameras.getCamera(0).debug = true;
 };
 
@@ -65,13 +69,17 @@ game.scene.Game.prototype.init = function() {
 game.scene.Game.prototype.update = function(step) {
     rune.scene.Scene.prototype.update.call(this, step);
     this.wave.update(step);
-    
-    if (this.wave.checkWave()){
+
+    if (this.wave.checkWave()) {
         this.wave = new game.wave.Wave02(this.stage);
         this.waveCounter++;
     }
 
     this.m_cloudMotion()
+
+    if (this.player.intersects(this.shieldPowerup.shield)) {
+        this.shieldPowerup.getShield();
+    }
 };
 
 /**
@@ -106,7 +114,7 @@ game.scene.Game.prototype.m_initClouds = function() {
 
     this.m_cloudTwo = new rune.display.Graphic(
         500,
-        90,
+        250,
         300,
         115,
         "",
@@ -115,8 +123,8 @@ game.scene.Game.prototype.m_initClouds = function() {
     this.stage.addChild(this.m_cloudTwo);
 
     this.m_cloudThree = new rune.display.Graphic(
-        850,
-        90,
+        830,
+        130,
         300,
         115,
         "",
@@ -126,17 +134,17 @@ game.scene.Game.prototype.m_initClouds = function() {
 };
 
 game.scene.Game.prototype.m_cloudMotion = function() {
-    this.m_cloudOne.x +=  2
-    this.m_cloudTwo.x += 2 
-    this.m_cloudThree.x += 2 
-    console.log(this.m_cloudOne.x)
-    if(this.m_cloudOne.x >= 1270) {
-        this.m_cloudOne.x = -290
+    this.m_cloudOne.x -= 0.13
+    this.m_cloudTwo.x -= 0.07
+    this.m_cloudThree.x -= 0.10
+
+    if (this.m_cloudOne.x <= -290) {
+        this.m_cloudOne.x = 1300
     }
-    if(this.m_cloudTwo.x >= 1270) {
-        this.m_cloudTwo.x = -290
+    if (this.m_cloudTwo.x <= -290) {
+        this.m_cloudTwo.x = 1300
     }
-    if(this.m_cloudThree.x >= 1270) {
-        this.m_cloudThree.x = -290
+    if (this.m_cloudThree.x <= -290) {
+        this.m_cloudThree.x = 1300
     }
 };

@@ -45,7 +45,7 @@ game.entity.Character.prototype.constructor = game.entity.Character;
 game.entity.Character.prototype.init = function() {
     rune.display.Sprite.prototype.init.call(this);
     this.playerAnimation();
-    this.hitbox.set(5,5,42,70);
+    this.hitbox.set(5, 5, 42, 70);
 };
 
 /**
@@ -55,7 +55,7 @@ game.entity.Character.prototype.update = function(step) {
     rune.display.Sprite.prototype.update.call(this, step);
     this.m_characterMovement();
     this.characterBullet(step);
-    this.m_checkHitbox();   
+    this.m_checkHitbox();
 };
 
 /**
@@ -83,15 +83,15 @@ game.entity.Character.prototype.m_characterMovement = function(step) {
     //character movement when key pressed
     if (this.keyboard.pressed("D")) {
         if (this.x <= 1230) {
-        this.x += 4;
-        this.animations.gotoAndPlay("walk");
-        this.flippedX = false;
+            this.x += 4;
+            this.animations.gotoAndPlay("walk");
+            this.flippedX = false;
         }
     } else if (this.keyboard.pressed("A")) {
-        if(this.x != 0) {
-        this.x -= 4;
-        this.animations.gotoAndPlay("walk");
-        this.flippedX = true;
+        if (this.x != 0) {
+            this.x -= 4;
+            this.animations.gotoAndPlay("walk");
+            this.flippedX = true;
         }
     } else {
         this.animations.gotoAndPlay("idle");
@@ -102,21 +102,21 @@ game.entity.Character.prototype.characterBullet = function(step) {
     //initiates Bullets object
     this.bulletDelay += step;
     if (this.keyboard.justPressed("space")) {
-        if (this.bulletDelay >= 700){ //skjuter ett skot per 1000 uppdateringsfrekvenser.
+        if (this.bulletDelay >= 700) { //skjuter ett skot per 700 uppdateringsfrekvenser.
             var sound = this.application.sounds.sound.get("throw")
             sound.play()
             var bullet = new game.entity.Bullet(this.x + 20, this.y);
             this.stage.addChild(bullet);
             this.bulletDelay = 0;
         }
-    }  
+    }
 };
 
 game.entity.Character.prototype.m_checkHitbox = function() {
     var objects = this.stage.getChildren();
     for (i = 0; i < objects.length; i++) {
         if (objects[i] instanceof game.entity.Melon) {
-            if (this.hitTestObject(objects[i])){
+            if (this.hitTestObject(objects[i])) {
                 this.application.scenes.load([new game.scene.Menu()]);
             }
         }
