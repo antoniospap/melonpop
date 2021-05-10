@@ -100,6 +100,9 @@ game.entity.Melon.prototype.m_onDie = function() {
     this.parent.removeChild(this, false);
 };
 
+
 game.entity.Melon.prototype.initHitbox = function() {
 };
 
+game.entity.Melon.prototype.melonAnimation = function() {
+};

@@ -14,8 +14,8 @@
  *.Bullet state.
  */
 game.entity.Powerups = function() {
+    this.shieldDrop;
     this.shield;
-
     //--------------------------------------------------------------------------
     // Super call
     //--------------------------------------------------------------------------
@@ -50,8 +50,8 @@ game.entity.Powerups.prototype.init = function() {
  */
 game.entity.Powerups.prototype.update = function(step) {
     rune.display.Sprite.prototype.update.call(this, step);
-    if (this.shield != null) {
-        this.shield.y += 1;
+    if (this.shieldDrop != null) {
+        this.shieldDrop.y += 2;
     }
 };
 
@@ -63,18 +63,11 @@ game.entity.Powerups.prototype.dispose = function() {
 };
 
 game.entity.Powerups.prototype.initShield = function() {
-    this.shield = new rune.display.Graphic(
-        300,
-        0,
-        60,
-        60,
-        "",
-        "extrabullet"
-    );
-    this.stage.addChild(this.shield);
+    this.shieldDrop = new rune.display.Graphic(300,0,60,60,"","extrabullet");
+    this.stage.addChild(this.shieldDrop);
 };
-game.entity.Powerups.prototype.getShield = function() {
-    if (this.shield.stage != null) {
-        this.shield.stage.removeChild(this.shield, true);
+game.entity.Powerups.prototype.catchShield = function() {
+    if (this.shieldDrop.stage != null) {
+        this.shieldDrop.stage.removeChild(this);
     }
 };

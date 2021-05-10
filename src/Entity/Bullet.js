@@ -51,7 +51,7 @@ game.entity.Bullet.prototype.init = function() {
 game.entity.Bullet.prototype.update = function(step) {
     rune.display.Sprite.prototype.update.call(this, step);
     this.m_bulletMotion();
-    this.m_checkHitbox();
+    this.m_checkHitbox(step);
 
 };
 
@@ -67,17 +67,20 @@ game.entity.Bullet.prototype.m_bulletMotion = function() {
     this.y -= 5;
 };
 
-game.entity.Bullet.prototype.m_checkHitbox = function() {
+game.entity.Bullet.prototype.m_checkHitbox = function(step) {
     var objects = this.stage.getChildren();
+    var self = this;
     for (var i = 0; i < objects.length; i++) {
         if (objects[i] instanceof game.entity.Melon) {
             if (this.intersects(objects[i])) {
-                var sound = this.application.sounds.sound.get("hit")
-                sound.play()
-                this.stage.removeChild(this, true);
+                //var sound = this.application.sounds.sound.get("hit")
+                //sound.play();
+                objects[i].melonAnimation();
+
                 if (objects[i] != null){
                     objects[i].m_onDie();
-                }
+                }                
+                this.stage.removeChild(this, true); 
             }
         }
     }

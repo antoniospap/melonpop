@@ -58,3 +58,7 @@ game.wave.Wave.prototype.checkWave = function() {
      }
      return (numLeft == 0 && this.start == true) ? true : false;
 };
+
+game.wave.Wave.prototype.score = function() {
+    
+};

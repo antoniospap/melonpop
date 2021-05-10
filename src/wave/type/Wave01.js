@@ -46,6 +46,6 @@ game.wave.Wave01.prototype.m_constructor = function() {
         var m = new game.entity.MelonM();
         var s = new game.entity.MelonS();
 
-        this.melons.push(m,s);
+        this.melons.push(m);
     }
 };

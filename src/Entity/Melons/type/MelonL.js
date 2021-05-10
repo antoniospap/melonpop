@@ -55,7 +55,7 @@ game.entity.MelonL.prototype.m_onDie = function() {
 
             if (i == 0) {
                 melonM.x -= 50;
-               // melonM.velocity.x -= 1;
+                //melonM.velocity.x -= 1;
             }
             if (i == 1) {
                 melonM.x += 50;

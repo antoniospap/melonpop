@@ -13,10 +13,10 @@
  *
  *.Character state.
  */
-game.entity.Character = function(melonL) {
+game.entity.Character = function(x,y,texture) {
     this.bullet = null;
-    this.melon = melonL;
     this.bulletDelay = 0;
+    this.currentSprite = texture;
 
     //--------------------------------------------------------------------------
     // Super call
@@ -25,7 +25,7 @@ game.entity.Character = function(melonL) {
     /**
      * ...
      */
-    rune.display.Sprite.call(this, 640, 530, 52, 76, "", "gamesprite2");
+    rune.display.Sprite.call(this, x, y, 52, 76, "", this.currentSprite);
 };
 
 //------------------------------------------------------------------------------
@@ -103,8 +103,8 @@ game.entity.Character.prototype.characterBullet = function(step) {
     this.bulletDelay += step;
     if (this.keyboard.justPressed("space")) {
         if (this.bulletDelay >= 700) { //skjuter ett skot per 700 uppdateringsfrekvenser.
-            var sound = this.application.sounds.sound.get("throw")
-            sound.play()
+           // var sound = this.application.sounds.sound.get("throw")
+           // sound.play()
             var bullet = new game.entity.Bullet(this.x + 20, this.y);
             this.stage.addChild(bullet);
             this.bulletDelay = 0;
@@ -116,7 +116,10 @@ game.entity.Character.prototype.m_checkHitbox = function() {
     var objects = this.stage.getChildren();
     for (i = 0; i < objects.length; i++) {
         if (objects[i] instanceof game.entity.Melon) {
-            if (this.hitTestObject(objects[i])) {
+            if (this.hitTestObject(objects[i]) && this.currentSprite == "gamespriteshield") {
+                console.log("GOT ARMOR");
+            } else if (this.hitTestObject(objects[i]) && this.currentSprite == "gamesprite2"){
+                console.log("NO ARMOR");
                 this.application.scenes.load([new game.scene.Menu()]);
             }
         }
