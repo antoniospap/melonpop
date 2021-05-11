@@ -66,8 +66,3 @@ game.entity.Powerups.prototype.initShield = function() {
     this.shieldDrop = new rune.display.Graphic(300,0,60,60,"","extrabullet");
     this.stage.addChild(this.shieldDrop);
 };
-game.entity.Powerups.prototype.catchShield = function() {
-    if (this.shieldDrop.stage != null) {
-        this.shieldDrop.stage.removeChild(this);
-    }
-};

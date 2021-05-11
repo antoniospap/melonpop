@@ -22,6 +22,9 @@
     this.melonHeightBounce;
     this.melonBottomBounce;
 
+    this.score = 0;
+    this.timers;
+
     //--------------------------------------------------------------------------
     // Super call
     //--------------------------------------------------------------------------
@@ -49,6 +52,9 @@ game.entity.Melon.prototype.constructor = game.entity.Melon;
 game.entity.Melon.prototype.init = function() {
     rune.physics.Body.prototype.init.call(this);
     this.initHitbox();
+    this.autoMove = false;
+    this.timers = new rune.timer.Timers();    
+
 };
 
 /**
@@ -59,6 +65,7 @@ game.entity.Melon.prototype.update = function(step) {
     this.m_bounceMotion();
     this.m_windowLimit(step);
     this.rotation += 2;
+    this.timers.update(step);
 };
 
 /**
@@ -87,9 +94,9 @@ game.entity.Melon.prototype.m_windowLimit = function(step) {
     } else if (this.y <= this.melonHeightBounce) { //om den når toppen av skärmen
         this.m_bounceY = false
     }
+
     if (this.x >= 1230) { //avgränsar så att melonen inte studras utanför x-leden, höger
         this.m_bounceX = true;
-        // this.rotation -= 40
     } else if (this.x <= -20) { //vänster
         this.m_bounceX = false;
     }
@@ -98,6 +105,7 @@ game.entity.Melon.prototype.m_windowLimit = function(step) {
 game.entity.Melon.prototype.m_onDie = function() {
     this.active = false;
     this.parent.removeChild(this, false);
+    this.application.scenes.selected.score.value += this.score;
 };
 
 
@@ -105,4 +113,18 @@ game.entity.Melon.prototype.initHitbox = function() {
 };
 
 game.entity.Melon.prototype.melonAnimation = function() {
+    this.timers.create({
+        duration: 500,
+        scope: this,
+        onComplete: function() {
+            this.m_onDie();
+        }
+    });
+
+     this.animations.add(
+         "split", [1, 2, 3, 4, 5,6,7,8],
+         20,
+         false
+     );
+     this.animations.gotoAndPlay("split");
 };

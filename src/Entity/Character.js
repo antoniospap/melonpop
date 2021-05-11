@@ -120,7 +120,9 @@ game.entity.Character.prototype.m_checkHitbox = function() {
                 console.log("GOT ARMOR");
             } else if (this.hitTestObject(objects[i]) && this.currentSprite == "gamesprite2"){
                 console.log("NO ARMOR");
-                this.application.scenes.load([new game.scene.Menu()]);
+                if (objects[i].animations.current == null){
+                    this.application.scenes.load([new game.scene.Menu()]);
+                }
             }
         }
     }

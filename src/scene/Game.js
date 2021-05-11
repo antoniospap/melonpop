@@ -23,6 +23,7 @@ game.scene.Game = function() {
     this.m_cloudTwo;
     this.m_cloudThree;
     this.bulletPowerup;
+    this.score = 0;
 
     //--------------------------------------------------------------------------
     // Super call
@@ -65,8 +66,7 @@ game.scene.Game.prototype.init = function() {
 
     this.cameras.getCamera(0).debug = true;
 
-    //this.score()
-
+    this.score2()
 };
 
 /**
@@ -75,7 +75,6 @@ game.scene.Game.prototype.init = function() {
 game.scene.Game.prototype.update = function(step) {
     rune.scene.Scene.prototype.update.call(this, step);
     this.wave.update(step);
-
     if (this.wave.checkWave()) {
         this.wave = new game.wave.Wave02(this.stage);
         this.waveCounter++;
@@ -84,10 +83,12 @@ game.scene.Game.prototype.update = function(step) {
     this.m_cloudMotion()
 
     if (this.player.hitTestObject(this.powerup.shieldDrop)) {
-        this.powerup.catchShield();
-        this.stage.removeChild(this.player);
+        this.stage.removeChild(this.powerup.shieldDrop);
         this.playerShield = new game.entity.Character(this.player.x, this.player.y,"gamespriteshield");
         this.stage.addChild(this.playerShield);
+        this.stage.removeChild(this.player);
+        console.log("yo");
+
     }
 };
 
@@ -130,13 +131,14 @@ game.scene.Game.prototype.m_cloudMotion = function() {
     }
 };
 
-game.scene.Game.prototype.score = function() {
-    var score = new rune.ui.Counter(5,10,10,"",3);
-    score.y = 650;
-    score.x = 50;
-    score.scaleX = 3;
-    score.scaleY = 3;
+game.scene.Game.prototype.score2 = function() {
+    this.score = new rune.ui.Counter(5,10,10,"",3);
+    this.score.y = 630;
+    this.score.x = 50;
+    this.score.scaleX = 3;
+    this.score.scaleY = 3;
+    
 
-    this.stage.addChild(score);
-    console.log(score);
+    this.stage.addChild(this.score);
+    console.log(this.score);
 };

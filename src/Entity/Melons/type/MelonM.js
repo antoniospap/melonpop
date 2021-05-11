@@ -22,6 +22,7 @@
 
     this.melonBottomBounce = 520;
 
+    this.timers;
 
     //--------------------------------------------------------------------------
     // Super call
@@ -46,12 +47,17 @@ game.entity.MelonM.prototype.constructor = game.entity.MelonM;
 
 game.entity.MelonM.prototype.init = function() {
     game.entity.Melon.prototype.init.call(this);
-    this.hitbox.set(10,10,60,60);     
+    this.hitbox.set(35,10,60,65); 
+    this.score += 1;
+ };
+
+ game.entity.MelonM.prototype.update = function(step) {
+    game.entity.Melon.prototype.update.call(this, step);
+    this.timers.update(step);
  };
 
 
-game.entity.MelonM.prototype.m_onDie = function() {
-    console.log("DIE");
+game.entity.MelonM.prototype.m_onDie = function() {    
     if (this.hitTest) {
         for (var i = 0; i < 2; i++) {
             var smallMelon = new game.entity.MelonS(this.x, this.y);
@@ -59,26 +65,15 @@ game.entity.MelonM.prototype.m_onDie = function() {
             if (i == 0) {
                 smallMelon.x -= 50;
                 smallMelon.velocity.x -= 1;
-                console.log(smallMelon.x);
-
+                console.log(this.m_bounceX);
             }
             if (i == 1) {
                 smallMelon.x += 50;
                 smallMelon.velocity.x += 2;
-
             }
         }
         this.hitTest = false;
     }
     game.entity.Melon.prototype.m_onDie.call(this);
 };
-game.entity.MelonM.prototype.melonAnimation = function() {
-    game.entity.Melon.prototype.melonAnimation.call(this);
 
-     this.animations.add(
-         "split", [1, 2, 3, 4, 5,6,7,8],
-         20,
-         false
-     );
-     this.animations.gotoAndPlay("split");
-};
