@@ -13,7 +13,7 @@
  *
  *.Bullet state.
  */
- game.entity.Melon = function(x, y, width, height, color, texture) {
+game.entity.Melon = function(x, y, width, height, color, texture) {
     this.m_bounceY = false;
     this.m_bounceX = false;
     this.melonSpeedY;
@@ -52,8 +52,8 @@ game.entity.Melon.prototype.constructor = game.entity.Melon;
 game.entity.Melon.prototype.init = function() {
     rune.physics.Body.prototype.init.call(this);
     this.initHitbox();
-    this.autoMove = false;
-    this.timers = new rune.timer.Timers();    
+    //this.autoMove = false;
+    this.timers = new rune.timer.Timers();
 
 };
 
@@ -81,7 +81,7 @@ game.entity.Melon.prototype.m_bounceMotion = function() {
         this.y -= this.melonSpeedY;
     }
 
-    if (this.m_bounceX == false){
+    if (this.m_bounceX == false) {
         this.x += this.melonSpeedX;
     } else {
         this.x -= this.melonSpeedX;
@@ -94,7 +94,6 @@ game.entity.Melon.prototype.m_windowLimit = function(step) {
     } else if (this.y <= this.melonHeightBounce) { //om den når toppen av skärmen
         this.m_bounceY = false
     }
-
     if (this.x >= 1230) { //avgränsar så att melonen inte studras utanför x-leden, höger
         this.m_bounceX = true;
     } else if (this.x <= -20) { //vänster
@@ -109,8 +108,7 @@ game.entity.Melon.prototype.m_onDie = function() {
 };
 
 
-game.entity.Melon.prototype.initHitbox = function() {
-};
+game.entity.Melon.prototype.initHitbox = function() {};
 
 game.entity.Melon.prototype.melonAnimation = function() {
     this.timers.create({
@@ -121,10 +119,10 @@ game.entity.Melon.prototype.melonAnimation = function() {
         }
     });
 
-     this.animations.add(
-         "split", [1, 2, 3, 4, 5,6,7,8],
-         20,
-         false
-     );
-     this.animations.gotoAndPlay("split");
+    this.animations.add(
+        "split", [1, 2, 3, 4, 5, 6, 7, 8],
+        20,
+        false
+    );
+    this.animations.gotoAndPlay("split");
 };

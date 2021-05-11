@@ -55,13 +55,13 @@ game.scene.Game.prototype.init = function() {
     this.m_initBackground()
     this.m_initClouds()
 
-    this.player = new game.entity.Character(640,530,"gamesprite2");
+    this.player = new game.entity.Character(640, 530, "gamesprite2");
     this.stage.addChild(this.player);
 
     this.wave = new game.wave.Wave01(this.stage);
     this.waveCounter = 1;
 
-    this.powerup = new game.entity.Powerups();
+    this.powerup = new game.entity.Powerups(this);
     this.stage.addChild(this.powerup);
 
     this.cameras.getCamera(0).debug = true;
@@ -82,14 +82,13 @@ game.scene.Game.prototype.update = function(step) {
 
     this.m_cloudMotion()
 
-    if (this.player.hitTestObject(this.powerup.shieldDrop)) {
-        this.stage.removeChild(this.powerup.shieldDrop);
-        this.playerShield = new game.entity.Character(this.player.x, this.player.y,"gamespriteshield");
-        this.stage.addChild(this.playerShield);
-        this.stage.removeChild(this.player);
-        console.log("yo");
-
-    }
+    /* if (this.player.hitTestObject(this.powerup.shieldDrop)) {
+         this.stage.removeChild(this.powerup.shieldDrop);
+         this.playerShield = new game.entity.Character(this.player.x, this.player.y, "gamespriteshield");
+         this.stage.addChild(this.playerShield);
+         this.stage.removeChild(this.player);
+         console.log("yo");
+     } */
 };
 
 /**
@@ -100,18 +99,18 @@ game.scene.Game.prototype.dispose = function() {
 };
 
 game.scene.Game.prototype.m_initBackground = function() {
-    this.m_bkgd = new rune.display.Graphic(0,0,1280,720,"#FF00FF","cleanBkrgd");
+    this.m_bkgd = new rune.display.Graphic(0, 0, 1280, 720, "#FF00FF", "cleanBkrgd");
     this.stage.addChild(this.m_bkgd);
 };
 
 game.scene.Game.prototype.m_initClouds = function() {
-    this.m_cloudOne = new rune.display.Graphic(20,80,300,115,"","cloud1");
+    this.m_cloudOne = new rune.display.Graphic(20, 80, 300, 115, "", "cloud1");
     this.stage.addChild(this.m_cloudOne);
 
-    this.m_cloudTwo = new rune.display.Graphic(500,250,300,115, "","cloud2");
+    this.m_cloudTwo = new rune.display.Graphic(500, 250, 300, 115, "", "cloud2");
     this.stage.addChild(this.m_cloudTwo);
 
-    this.m_cloudThree = new rune.display.Graphic(830, 130,300,115,"","cloud3");
+    this.m_cloudThree = new rune.display.Graphic(830, 130, 300, 115, "", "cloud3");
     this.stage.addChild(this.m_cloudThree);
 };
 
@@ -132,13 +131,10 @@ game.scene.Game.prototype.m_cloudMotion = function() {
 };
 
 game.scene.Game.prototype.score2 = function() {
-    this.score = new rune.ui.Counter(5,10,10,"",3);
+    this.score = new rune.ui.Counter(5, 10, 10, "", 3);
     this.score.y = 630;
     this.score.x = 50;
     this.score.scaleX = 3;
     this.score.scaleY = 3;
-    
-
     this.stage.addChild(this.score);
-    console.log(this.score);
 };
