@@ -13,9 +13,8 @@
  *
  *.Bullet state.
  */
-game.entity.ExtraBullet = function() {
-
-
+game.entity.Shield = function(stage) {
+    this.game = stage;
     //--------------------------------------------------------------------------
     // Super call
     //--------------------------------------------------------------------------
@@ -23,22 +22,26 @@ game.entity.ExtraBullet = function() {
     /**
      * ...
      */
-    game.entity.Powerups.call(this, 300, 300, 284, 204, "", "extrabullet");
+    game.entity.Powerups.call(this, 300, 300, 60, 60, "", "extrabullet", stage);
 };
 
 //------------------------------------------------------------------------------
 // Inheritance
 //------------------------------------------------------------------------------
 
-game.entity.ExtraBullet.prototype = Object.create(game.entity.Powerups.prototype);
-game.entity.ExtraBullet.prototype.constructor = game.entity.ExtraBullet;
+game.entity.Shield.prototype = Object.create(game.entity.Powerups.prototype);
+game.entity.Shield.prototype.constructor = game.entity.Shield;
 
 //------------------------------------------------------------------------------
 // Override public prototype methods (ENGINE)
 //------------------------------------------------------------------------------
 
-game.entity.ExtraBullet.prototype.init = function() {
+game.entity.Shield.prototype.init = function() {
     game.entity.Powerups.prototype.init.call(this);
-    var objects = this.stage.getChildren();
-    console.log(objects);
 };
+
+game.entity.Shield.prototype.update = function(step) {
+    game.entity.Powerups.prototype.update.call(this,step);
+};
+
+

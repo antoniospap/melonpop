@@ -55,14 +55,15 @@ game.scene.Game.prototype.init = function() {
     this.m_initBackground()
     this.m_initClouds()
 
-    this.player = new game.entity.Character(640, 530, "gamesprite2");
+    this.player = new game.entity.Character();
     this.stage.addChild(this.player);
 
     this.wave = new game.wave.Wave01(this.stage);
     this.waveCounter = 1;
 
-    this.powerup = new game.entity.Powerups(this);
+    this.powerup = new game.entity.Shield(this);
     this.stage.addChild(this.powerup);
+    console.log(this.stage);
 
     this.cameras.getCamera(0).debug = true;
 
@@ -81,14 +82,6 @@ game.scene.Game.prototype.update = function(step) {
     }
 
     this.m_cloudMotion()
-
-    /* if (this.player.hitTestObject(this.powerup.shieldDrop)) {
-         this.stage.removeChild(this.powerup.shieldDrop);
-         this.playerShield = new game.entity.Character(this.player.x, this.player.y, "gamespriteshield");
-         this.stage.addChild(this.playerShield);
-         this.stage.removeChild(this.player);
-         console.log("yo");
-     } */
 };
 
 /**

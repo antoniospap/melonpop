@@ -13,10 +13,9 @@
  *
  *.Character state.
  */
-game.entity.Character = function(x,y,texture) {
+game.entity.Character = function() {
     this.bullet = null;
     this.bulletDelay = 0;
-    this.currentSprite = texture;
 
     //--------------------------------------------------------------------------
     // Super call
@@ -25,7 +24,7 @@ game.entity.Character = function(x,y,texture) {
     /**
      * ...
      */
-    rune.display.Sprite.call(this, x, y, 52, 76, "", this.currentSprite);
+    rune.display.Sprite.call(this, 530, 530, 52, 76, "", "gamesprite2");
 };
 
 //------------------------------------------------------------------------------
