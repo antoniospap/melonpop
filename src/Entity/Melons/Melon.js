@@ -52,7 +52,6 @@ game.entity.Melon.prototype.constructor = game.entity.Melon;
 game.entity.Melon.prototype.init = function() {
     rune.physics.Body.prototype.init.call(this);
     this.initHitbox();
-    //this.autoMove = false;
     this.timers = new rune.timer.Timers();
 
 };
@@ -114,7 +113,7 @@ game.entity.Melon.prototype.initHitbox = function() {};
 
 game.entity.Melon.prototype.melonAnimation = function() {
     this.timers.create({
-        duration: 700,
+        duration: 500,
         scope: this,
         onComplete: function() {
             this.m_onDie();

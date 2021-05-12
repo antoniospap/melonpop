@@ -61,13 +61,14 @@ game.scene.Game.prototype.init = function() {
 
     this.wave = new game.wave.Wave01(this.stage);
     this.waveCounter = 1;
+    this.initWaveDesc(this.waveCounter);
 
     this.powerup = new game.entity.Shield(this);
     this.stage.addChild(this.powerup);
 
     this.cameras.getCamera(0).debug = true;
 
-    this.score2()
+    this.initScore();
 };
 
 /**
@@ -77,12 +78,12 @@ game.scene.Game.prototype.update = function(step) {
     rune.scene.Scene.prototype.update.call(this, step);
     this.wave.update(step);
     if (this.wave.checkWave()) {
+        console.log("CHECKWAVE");
         this.wave = new game.wave.Wave02(this.stage);
         this.waveCounter++;
+        this.initWaveDesc(this.waveCounter);
     }
-    this.m_cloudMotion()
-
-
+    this.m_cloudMotion();
 };
 
 /**
@@ -124,11 +125,20 @@ game.scene.Game.prototype.m_cloudMotion = function() {
     }
 };
 
-game.scene.Game.prototype.score2 = function() {
+game.scene.Game.prototype.initScore = function() {
     this.score = new rune.ui.Counter(5, 10, 10, "", 3);
     this.score.y = 630;
     this.score.x = 50;
     this.score.scaleX = 3;
     this.score.scaleY = 3;
     this.stage.addChild(this.score);
+};
+
+game.scene.Game.prototype.initWaveDesc = function(waveCounter) {
+    waveDesc =  new rune.text.BitmapField(`Wave ${waveCounter}`);
+    waveDesc.centerX = this.application.screen.centerX;
+    waveDesc.y = 630;
+    waveDesc.scaleX = 4;
+    waveDesc.scaleY = 4;
+    this.stage.addChild(waveDesc);
 };

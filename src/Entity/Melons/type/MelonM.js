@@ -31,7 +31,7 @@ game.entity.MelonM = function(x, y) {
     /**
      * ...
      */
-    game.entity.Melon.call(this, x, y, 130, 82, "", "melontest");
+    game.entity.Melon.call(this, x, y, 130, 82, "", "melonM");
 };
 
 //------------------------------------------------------------------------------

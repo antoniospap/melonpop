@@ -29,7 +29,7 @@
     /**
      * ...
      */
-    game.entity.Melon.call(this, -20, 50, 160, 160, "", "MelonLidle");
+    game.entity.Melon.call(this, -20, 50, 227.5, 122, "", "melonL");
 };
 
 //------------------------------------------------------------------------------
@@ -45,7 +45,7 @@ game.entity.MelonL.prototype.constructor = game.entity.MelonL;
 
 game.entity.MelonL.prototype.init = function() {
    game.entity.Melon.prototype.init.call(this);
-   this.hitbox.set(20,20,120,120);
+   this.hitbox.set(60,10,100,100);
 };
 
 game.entity.MelonL.prototype.m_onDie = function() {
@@ -55,7 +55,7 @@ game.entity.MelonL.prototype.m_onDie = function() {
 
             if (i == 0) {
                 melonM.x -= 50;
-                //melonM.velocity.x -= 1;
+                melonM.velocity.x -= 1;
             }
             if (i == 1) {
                 melonM.x += 50;

@@ -17,6 +17,8 @@ game.entity.Character = function() {
     this.bullet = null;
     this.bulletDelay = 0;
     this.gotShield = false;
+    this.timers;
+
 
     //--------------------------------------------------------------------------
     // Super call
@@ -25,7 +27,7 @@ game.entity.Character = function() {
     /**
      * ...
      */
-    rune.display.Sprite.call(this, 530, 530, 52, 76, "", "gamesprite2");
+    rune.display.Sprite.call(this, this.application.screen.centerX, 530, 52, 76, "", "gamesprite2");
 };
 
 //------------------------------------------------------------------------------
@@ -46,7 +48,7 @@ game.entity.Character.prototype.init = function() {
     rune.display.Sprite.prototype.init.call(this);
     this.playerAnimation();
     this.hitbox.set(5, 5, 42, 70);
-
+    this.timers = new rune.timer.Timers();
 };
 
 /**
@@ -55,10 +57,10 @@ game.entity.Character.prototype.init = function() {
 game.entity.Character.prototype.update = function(step) {
     rune.display.Sprite.prototype.update.call(this, step);
     this.m_characterMovement();
-    this.m_checkHitboxShield();
     this.characterBullet(step);
     this.m_checkHitbox();
     this.shieldFollowPlayer();
+    this.timers.update(step);
 };
 
 /**
@@ -120,8 +122,11 @@ game.entity.Character.prototype.m_checkHitbox = function() {
     for (i = 0; i < objects.length; i++) {
         if (objects[i] instanceof game.entity.Melon) {
             if (this.hitTestObject(objects[i])) {
+                console.log(this.shield);
                 if (objects[i].animations.current == null && this.shield == null) {
                     this.application.scenes.load([new game.scene.Menu()]);
+                } else if (this.shield != null){
+                   this.removeShield();
                 }
             }
         }
@@ -140,14 +145,14 @@ game.entity.Character.prototype.shieldFollowPlayer = function() {
         this.shield.y = this.y - 20;
     }
 };
-
-game.entity.Character.prototype.m_checkHitboxShield = function() {
-    var objects = this.stage.getChildren();
-    for (i = 0; i < objects.length; i++) {
-        if (objects[i] instanceof game.entity.Melon) {
-            if (this.shield.hitTestObject(objects[i])) {
-                console.log("HIT SHIELD");
-            }
+game.entity.Character.prototype.removeShield = function() { 
+    this.timers.create({
+        duration: 1000,
+        scope: this,
+        onComplete: function() {
+            this.stage.removeChild(this.shield);
+            this.shield = null;
+            this.gotShield = false;    
         }
-    }
+    }); 
 };
