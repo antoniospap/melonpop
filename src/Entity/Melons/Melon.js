@@ -96,8 +96,10 @@ game.entity.Melon.prototype.m_windowLimit = function(step) {
     }
     if (this.x >= 1230) { //avgränsar så att melonen inte studras utanför x-leden, höger
         this.m_bounceX = true;
+        this.velocity.x = false;
     } else if (this.x <= -20) { //vänster
         this.m_bounceX = false;
+        this.velocity.x = false;
     }
 };
 

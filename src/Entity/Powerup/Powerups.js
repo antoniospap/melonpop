@@ -67,8 +67,8 @@ game.entity.Powerups.prototype.dispose = function() {
 game.entity.Powerups.prototype.catchShield = function() {
     var self = this;
     this.game.player.hitTestObject(this, function() {
-        self.parent.removeChild(self);
         self.gotShield = true;
+        self.parent.removeChild(self);
     });
 };
 game.entity.Powerups.prototype.initShield = function() {

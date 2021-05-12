@@ -69,7 +69,6 @@ game.entity.MelonM.prototype.m_onDie = function() {
             }
             if (i == 1) {
                 smallMelon.x += 50;
-                smallMelon.velocity.x += 2;
             }
         }
         this.hitTest = false;

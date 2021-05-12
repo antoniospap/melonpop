@@ -87,7 +87,7 @@ game.entity.Character.prototype.m_characterMovement = function(step) {
             this.flippedX = false;
         }
     } else if (this.keyboard.pressed("A")) {
-        if (this.x != 0) {
+        if (this.x >= 0) {
             this.x -= 4;
             this.animations.gotoAndPlay("walk");
             this.flippedX = true;
@@ -115,10 +115,7 @@ game.entity.Character.prototype.m_checkHitbox = function() {
     var objects = this.stage.getChildren();
     for (i = 0; i < objects.length; i++) {
         if (objects[i] instanceof game.entity.Melon) {
-            if (this.hitTestObject(objects[i]) && this.currentSprite == "gamespriteshield") {
-                console.log("GOT ARMOR");
-            } else if (this.hitTestObject(objects[i]) && this.currentSprite == "gamesprite2"){
-                console.log("NO ARMOR");
+            if (this.hitTestObject(objects[i])) {
                 if (objects[i].animations.current == null){
                     this.application.scenes.load([new game.scene.Menu()]);
                 }
