@@ -114,7 +114,7 @@ game.entity.Melon.prototype.initHitbox = function() {};
 
 game.entity.Melon.prototype.melonAnimation = function() {
     this.timers.create({
-        duration: 500,
+        duration: 700,
         scope: this,
         onComplete: function() {
             this.m_onDie();

@@ -16,6 +16,7 @@
 game.entity.Character = function() {
     this.bullet = null;
     this.bulletDelay = 0;
+    this.gotShield = false;
 
     //--------------------------------------------------------------------------
     // Super call
@@ -45,6 +46,7 @@ game.entity.Character.prototype.init = function() {
     rune.display.Sprite.prototype.init.call(this);
     this.playerAnimation();
     this.hitbox.set(5, 5, 42, 70);
+
 };
 
 /**
@@ -53,8 +55,10 @@ game.entity.Character.prototype.init = function() {
 game.entity.Character.prototype.update = function(step) {
     rune.display.Sprite.prototype.update.call(this, step);
     this.m_characterMovement();
+    this.m_checkHitboxShield();
     this.characterBullet(step);
     this.m_checkHitbox();
+    this.shieldFollowPlayer();
 };
 
 /**
@@ -102,8 +106,8 @@ game.entity.Character.prototype.characterBullet = function(step) {
     this.bulletDelay += step;
     if (this.keyboard.justPressed("space")) {
         if (this.bulletDelay >= 700) { //skjuter ett skot per 700 uppdateringsfrekvenser.
-           // var sound = this.application.sounds.sound.get("throw")
-           // sound.play()
+            // var sound = this.application.sounds.sound.get("throw")
+            // sound.play()
             var bullet = new game.entity.Bullet(this.x + 20, this.y);
             this.stage.addChild(bullet);
             this.bulletDelay = 0;
@@ -116,9 +120,33 @@ game.entity.Character.prototype.m_checkHitbox = function() {
     for (i = 0; i < objects.length; i++) {
         if (objects[i] instanceof game.entity.Melon) {
             if (this.hitTestObject(objects[i])) {
-                if (objects[i].animations.current == null){
+                if (objects[i].animations.current == null && this.shield == null) {
                     this.application.scenes.load([new game.scene.Menu()]);
                 }
+            }
+        }
+    }
+};
+
+game.entity.Character.prototype.getShield = function() {
+    this.shield = new rune.display.Graphic(this.x, this.y, 100, 100, "#FF00FF", "extrabullet");
+    this.shield.alpha = 0.2;
+    this.stage.addChild(this.shield);
+};
+
+game.entity.Character.prototype.shieldFollowPlayer = function() {
+    if (this.gotShield) {
+        this.shield.x = this.x - 20;
+        this.shield.y = this.y - 20;
+    }
+};
+
+game.entity.Character.prototype.m_checkHitboxShield = function() {
+    var objects = this.stage.getChildren();
+    for (i = 0; i < objects.length; i++) {
+        if (objects[i] instanceof game.entity.Melon) {
+            if (this.shield.hitTestObject(objects[i])) {
+                console.log("HIT SHIELD");
             }
         }
     }

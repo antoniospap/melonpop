@@ -41,7 +41,15 @@ game.entity.Shield.prototype.init = function() {
 };
 
 game.entity.Shield.prototype.update = function(step) {
-    game.entity.Powerups.prototype.update.call(this,step);
+    game.entity.Powerups.prototype.update.call(this, step);
 };
 
 
+game.entity.Shield.prototype.catchShield = function() {
+    var self = this;
+    this.game.player.hitTestObject(this, function() {
+        self.game.player.gotShield = true;
+        self.parent.removeChild(self);
+        self.game.player.getShield();
+    });
+};

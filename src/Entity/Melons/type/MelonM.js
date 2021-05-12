@@ -13,7 +13,7 @@
  *
  *.Bullet state.
  */
- game.entity.MelonM = function(x, y) {
+game.entity.MelonM = function(x, y) {
     this.hitTest = true;
     this.melonSpeedY = 2.2;
     this.melonSpeedX = 0.6;
@@ -31,7 +31,7 @@
     /**
      * ...
      */
-    game.entity.Melon.call(this, x, y, 130, 82, "", "melon");
+    game.entity.Melon.call(this, x, y, 130, 82, "", "melontest");
 };
 
 //------------------------------------------------------------------------------
@@ -47,17 +47,17 @@ game.entity.MelonM.prototype.constructor = game.entity.MelonM;
 
 game.entity.MelonM.prototype.init = function() {
     game.entity.Melon.prototype.init.call(this);
-    this.hitbox.set(35,10,60,65); 
+    this.hitbox.set(35, 10, 60, 65);
     this.score += 1;
- };
+};
 
- game.entity.MelonM.prototype.update = function(step) {
+game.entity.MelonM.prototype.update = function(step) {
     game.entity.Melon.prototype.update.call(this, step);
     this.timers.update(step);
- };
+};
 
 
-game.entity.MelonM.prototype.m_onDie = function() {    
+game.entity.MelonM.prototype.m_onDie = function() {
     if (this.hitTest) {
         for (var i = 0; i < 2; i++) {
             var smallMelon = new game.entity.MelonS(this.x, this.y);
@@ -75,4 +75,3 @@ game.entity.MelonM.prototype.m_onDie = function() {
     }
     game.entity.Melon.prototype.m_onDie.call(this);
 };
-

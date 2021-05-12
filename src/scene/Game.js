@@ -24,6 +24,7 @@ game.scene.Game = function() {
     this.m_cloudThree;
     this.bulletPowerup;
     this.score = 0;
+    this.gotShield = false;
 
     //--------------------------------------------------------------------------
     // Super call
@@ -55,7 +56,7 @@ game.scene.Game.prototype.init = function() {
     this.m_initBackground()
     this.m_initClouds()
 
-    this.player = new game.entity.Character();
+    this.player = new game.entity.Character(this.gotShield);
     this.stage.addChild(this.player);
 
     this.wave = new game.wave.Wave01(this.stage);
@@ -63,7 +64,6 @@ game.scene.Game.prototype.init = function() {
 
     this.powerup = new game.entity.Shield(this);
     this.stage.addChild(this.powerup);
-    console.log(this.stage);
 
     this.cameras.getCamera(0).debug = true;
 
@@ -80,8 +80,9 @@ game.scene.Game.prototype.update = function(step) {
         this.wave = new game.wave.Wave02(this.stage);
         this.waveCounter++;
     }
-
     this.m_cloudMotion()
+
+
 };
 
 /**

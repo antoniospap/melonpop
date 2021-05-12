@@ -53,8 +53,8 @@ game.entity.Powerups.prototype.update = function(step) {
         this.y += 2;
     }
     this.rotation += 2;
+
     this.catchShield();
-    this.initShield();
 };
 
 /**
@@ -62,19 +62,4 @@ game.entity.Powerups.prototype.update = function(step) {
  */
 game.entity.Powerups.prototype.dispose = function() {
     rune.display.Sprite.prototype.dispose.call(this);
-};
-
-game.entity.Powerups.prototype.catchShield = function() {
-    var self = this;
-    this.game.player.hitTestObject(this, function() {
-        self.gotShield = true;
-        self.parent.removeChild(self);
-    });
-};
-game.entity.Powerups.prototype.initShield = function() {
-    if (this.gotShield){
-        this.shield = new rune.display.Graphic(this.game.player.x, this.game.player.y, 100, 30, "#FF00FF", "extrabullet");
-        this.shield.alpha = 0.5;
-        this.game.stage.addChild(this.shield);
-    }
 };
