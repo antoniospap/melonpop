@@ -14,7 +14,7 @@
  * Wave 002.
  */
 game.wave.Wave02 = function(stage) {
-    this.stage = stage;
+    this.game = stage;
     this.melons = [];
     //--------------------------------------------------------------------------
     // Super call
@@ -49,3 +49,4 @@ game.wave.Wave02.prototype.m_constructor = function() {
         this.melons.push(l,m,s);
     }
 };
+

@@ -14,8 +14,12 @@
  * Wave 002.
  */
 game.wave.Wave01 = function(stage) {
-    this.stage = stage;
+    this.game = stage;
     this.melons = [];
+    this.shield;
+    this.powerupsDelay = 1000;
+    this.powerups = [];
+
     //--------------------------------------------------------------------------
     // Super call
     //--------------------------------------------------------------------------
@@ -48,4 +52,18 @@ game.wave.Wave01.prototype.m_constructor = function() {
 
         this.melons.push(m);
     }
+};
+
+game.wave.Wave01.prototype.m_constructorPowerups = function() {
+    var randomX = Math.floor(Math.random() * 1220);
+    var self = this;
+        this.timers.create({
+            duration: 3000,
+            scope: this,
+            onComplete: function() {
+                self.shield = new game.entity.Shield(randomX, self.game);
+                self.powerups.push(self.shield);
+                self.game.stage.addChild(self.shield)    
+            }
+        }); 
 };

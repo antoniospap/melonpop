@@ -50,9 +50,9 @@ game.entity.Powerups.prototype.init = function() {
 game.entity.Powerups.prototype.update = function(step) {
     rune.display.Sprite.prototype.update.call(this, step);
     if (this != null) {
-        this.y += 2;
+        this.y += 1.5;
     }
-    this.rotation += 2;
+    this.rotation += 1;
 
     this.catchShield();
 };

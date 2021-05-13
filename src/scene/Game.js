@@ -25,6 +25,7 @@ game.scene.Game = function() {
     this.bulletPowerup;
     this.score = 0;
     this.gotShield = false;
+    this.waveDesc;
 
     //--------------------------------------------------------------------------
     // Super call
@@ -52,19 +53,18 @@ game.scene.Game.prototype.constructor = game.scene.Game;
  */
 game.scene.Game.prototype.init = function() {
     rune.scene.Scene.prototype.init.call(this);
-
     this.m_initBackground()
     this.m_initClouds()
+    this.m_initTrees();
 
     this.player = new game.entity.Character(this.gotShield);
     this.stage.addChild(this.player);
 
-    this.wave = new game.wave.Wave01(this.stage);
+    this.wave = new game.wave.Wave01(this);
     this.waveCounter = 1;
     this.initWaveDesc(this.waveCounter);
 
-    this.powerup = new game.entity.Shield(this);
-    this.stage.addChild(this.powerup);
+    
 
     this.cameras.getCamera(0).debug = true;
 
@@ -76,12 +76,13 @@ game.scene.Game.prototype.init = function() {
  */
 game.scene.Game.prototype.update = function(step) {
     rune.scene.Scene.prototype.update.call(this, step);
+
     this.wave.update(step);
     if (this.wave.checkWave()) {
-        console.log("CHECKWAVE");
-        this.wave = new game.wave.Wave02(this.stage);
+        console.log(this.stage);
+        this.wave = new game.wave.Wave02(this);
         this.waveCounter++;
-        this.initWaveDesc(this.waveCounter);
+        this.updateWaveDesc(this.waveCounter);
     }
     this.m_cloudMotion();
 };
@@ -96,6 +97,10 @@ game.scene.Game.prototype.dispose = function() {
 game.scene.Game.prototype.m_initBackground = function() {
     this.m_bkgd = new rune.display.Graphic(0, 0, 1280, 720, "#FF00FF", "cleanBkrgd");
     this.stage.addChild(this.m_bkgd);
+};
+game.scene.Game.prototype.m_initTrees = function() {
+    this.m_trees = new rune.display.Graphic(0, 100, 1280, 491, "", "treesnbushes");
+    this.stage.addChild(this.m_trees);
 };
 
 game.scene.Game.prototype.m_initClouds = function() {
@@ -135,10 +140,15 @@ game.scene.Game.prototype.initScore = function() {
 };
 
 game.scene.Game.prototype.initWaveDesc = function(waveCounter) {
-    waveDesc =  new rune.text.BitmapField(`Wave ${waveCounter}`);
-    waveDesc.centerX = this.application.screen.centerX;
-    waveDesc.y = 630;
-    waveDesc.scaleX = 4;
-    waveDesc.scaleY = 4;
-    this.stage.addChild(waveDesc);
+    this.waveDesc =  new rune.text.BitmapField(`Wave ${waveCounter}`);
+    this.waveDesc.centerX = this.application.screen.centerX;
+    this.waveDesc.y = 630;
+    this.waveDesc.scaleX = 4;
+    this.waveDesc.scaleY = 4;
+    this.stage.addChild(this.waveDesc);
+};
+
+game.scene.Game.prototype.updateWaveDesc = function(waveCounter) {
+    this.waveDesc.text = "";
+    this.waveDesc.text = `Wave ${waveCounter}`;
 };

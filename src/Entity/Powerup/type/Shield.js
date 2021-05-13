@@ -13,7 +13,7 @@
  *
  *.Bullet state.
  */
-game.entity.Shield = function(stage) {
+game.entity.Shield = function(randomX, stage) {
     this.game = stage;
     //--------------------------------------------------------------------------
     // Super call
@@ -22,7 +22,7 @@ game.entity.Shield = function(stage) {
     /**
      * ...
      */
-    game.entity.Powerups.call(this, 300, 300, 60, 60, "", "extrabullet", stage);
+    game.entity.Powerups.call(this, randomX, 0, 60, 60, "", "extrabullet", stage);
 };
 
 //------------------------------------------------------------------------------
@@ -48,8 +48,8 @@ game.entity.Shield.prototype.update = function(step) {
 game.entity.Shield.prototype.catchShield = function() {
     var self = this;
     this.game.player.hitTestObject(this, function() {
-        self.game.player.gotShield = true;
         self.parent.removeChild(self);
+        self.game.player.gotShield = true;
         self.game.player.getShield();
     });
 };

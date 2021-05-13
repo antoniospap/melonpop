@@ -65,7 +65,6 @@ game.entity.MelonM.prototype.m_onDie = function() {
             if (i == 0) {
                 smallMelon.x -= 50;
                 smallMelon.velocity.x -= 1;
-                console.log(this.m_bounceX);
             }
             if (i == 1) {
                 smallMelon.x += 50;

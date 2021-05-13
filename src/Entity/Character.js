@@ -134,6 +134,7 @@ game.entity.Character.prototype.m_checkHitbox = function() {
 };
 
 game.entity.Character.prototype.getShield = function() {
+    console.log(this.gotShield);
     this.shield = new rune.display.Graphic(this.x, this.y, 100, 100, "#FF00FF", "extrabullet");
     this.shield.alpha = 0.2;
     this.stage.addChild(this.shield);
