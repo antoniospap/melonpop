@@ -16,6 +16,10 @@
  game.scene.Menu = function() {
      this.playBtn;
      this.howToPlay;
+     this.highScore;
+
+     this.menu = [];
+     this.selectedIndex = 0;
     //--------------------------------------------------------------------------
     // Super call
     //--------------------------------------------------------------------------
@@ -43,30 +47,28 @@ game.scene.Menu.prototype.constructor = game.scene.Menu;
 game.scene.Menu.prototype.init = function() {
     rune.scene.Scene.prototype.init.call(this);
 
-    var description =  new rune.text.BitmapField("Arrows + enter");
-    description.y += 200;
-    description.x += 100;
-    description.scaleX = 2;
-    description.scaleY = 2;
-    this.stage.addChild(description);
-
     this.playBtn =  new rune.text.BitmapField("PLAY")
     this.playBtn.center = this.application.screen.center;
-    this.playBtn.scaleX = 4;
-    this.playBtn.scaleY = 4;
     this.stage.addChild(this.playBtn);
-
 
     this.howToPlay = new rune.text.BitmapField("HOW TO PLAY");
     this.howToPlay.center = this.application.screen.center;
     this.howToPlay.y += 40;
     this.howToPlay.x -= 80;
-
-    this.howToPlay.alpha = 0.2;
-    this.howToPlay.scaleX = 4;
-    this.howToPlay.scaleY = 4;
     this.stage.addChild(this.howToPlay);
 
+    this.highScore = new rune.text.BitmapField("HIGHSCORE");
+    this.highScore.center = this.application.screen.center;
+    this.highScore.y += 80;
+    this.highScore.x -= 60;
+    this.stage.addChild(this.highScore);
+
+    this.menu = [this.playBtn, this.howToPlay, this.highScore];
+    for (var i = 0; i < this.menu.length; i++){
+        this.menu[i].scaleX = 4;
+        this.menu[i].scaleY = 4;
+        this.menu[i].alpha = 0.5;
+    }
 };
 
 /**
@@ -74,25 +76,33 @@ game.scene.Menu.prototype.init = function() {
  */
 game.scene.Menu.prototype.update = function(step) {
     rune.scene.Scene.prototype.update.call(this, step);
-    if (this.keyboard.justPressed("up")){
-        this.playBtn.alpha = 1;
-        this.howToPlay.alpha = 0.2;
-    } else if (this.keyboard.justPressed("down")){
-        this.playBtn.alpha = 0.2;
-        this.howToPlay.alpha = 1;
-    }
-
-    if (this.keyboard.justPressed("enter") && this.playBtn.alpha == 1){
-        this.application.scenes.load([new game.scene.Game()])
-    } else if (this.keyboard.justPressed("enter") && this.howToPlay.alpha == 1){
-        //this.application.scenes.load([new game.scene.Game()])
-        console.log("HOW TO PLAY");
-    }
+    this.getCurrentIndex();
+    this.showSelected();
 };
 
 /**
  * @inheritDoc
  */
-game.scene.Menu.prototype.dispose = function() {
-    rune.scene.Scene.prototype.dispose.call(this);
+game.scene.Menu.prototype.getCurrentIndex = function() {
+    if (this.keyboard.justPressed("down")){
+        this.selectedIndex++;
+        if (this.selectedIndex == this.menu.length){
+            this.selectedIndex = 0;
+        }
+    } else if (this.keyboard.justPressed("up")){
+        this.selectedIndex--;
+        if (this.selectedIndex == -1){
+            this.selectedIndex = this.menu.length - 1;
+        }
+    }   
+};
+
+game.scene.Menu.prototype.showSelected = function() {
+    for (var i = 0; i<this.menu.length; i++){
+        if (this.selectedIndex == i){
+            this.menu[i].alpha = 1;
+        } else {
+            this.menu[i].alpha = 0.5;
+        }
+    }
 };
