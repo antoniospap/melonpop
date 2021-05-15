@@ -13,13 +13,15 @@
  * 
  * Game state.
  */
- game.scene.Menu = function() {
-     this.playBtn;
-     this.howToPlay;
-     this.highScore;
+game.scene.Menu = function() {
+    this.playBtn;
+    this.howToPlay;
+    this.highScore;
 
-     this.menu = [];
-     this.selectedIndex = 0;
+    this.menu = [];
+    this.gameScene = [];
+    this.selectedIndex = 0;
+
     //--------------------------------------------------------------------------
     // Super call
     //--------------------------------------------------------------------------
@@ -47,24 +49,14 @@ game.scene.Menu.prototype.constructor = game.scene.Menu;
 game.scene.Menu.prototype.init = function() {
     rune.scene.Scene.prototype.init.call(this);
 
-    this.playBtn =  new rune.text.BitmapField("PLAY")
-    this.playBtn.center = this.application.screen.center;
-    this.stage.addChild(this.playBtn);
-
-    this.howToPlay = new rune.text.BitmapField("HOW TO PLAY");
-    this.howToPlay.center = this.application.screen.center;
-    this.howToPlay.y += 40;
-    this.howToPlay.x -= 80;
-    this.stage.addChild(this.howToPlay);
-
-    this.highScore = new rune.text.BitmapField("HIGHSCORE");
-    this.highScore.center = this.application.screen.center;
-    this.highScore.y += 80;
-    this.highScore.x -= 60;
-    this.stage.addChild(this.highScore);
+    this.m_initBackground();
+    this.m_initTextMenu();
+    this.m_initSlangbella();
 
     this.menu = [this.playBtn, this.howToPlay, this.highScore];
-    for (var i = 0; i < this.menu.length; i++){
+    this.gameScene = [new game.scene.Game(), new game.scene.Howto(), new game.scene.Highscore()];
+
+    for (var i = 0; i < this.menu.length; i++) {
         this.menu[i].scaleX = 4;
         this.menu[i].scaleY = 4;
         this.menu[i].alpha = 0.5;
@@ -80,29 +72,64 @@ game.scene.Menu.prototype.update = function(step) {
     this.showSelected();
 };
 
-/**
- * @inheritDoc
- */
+game.scene.Menu.prototype.m_initBackground = function() {
+    this.m_bkgd = new rune.display.Graphic(0, 0, 1280, 720, "", "menu");
+    this.stage.addChild(this.m_bkgd);
+    this.m_bkgd.alpha = 0.6;
+};
+
+game.scene.Menu.prototype.m_initTextMenu = function() {
+    this.playBtn = new rune.text.BitmapField("PLAY")
+    this.playBtn.center = this.application.screen.center;
+    this.playBtn.y = this.application.screen.centerY - 100;
+
+    this.stage.addChild(this.playBtn);
+
+    this.howToPlay = new rune.text.BitmapField("HOW TO PLAY");
+    this.howToPlay.center = this.application.screen.center;
+    this.howToPlay.x -= 80;
+    this.howToPlay.y -= 30;
+    this.stage.addChild(this.howToPlay);
+
+    this.highScore = new rune.text.BitmapField("HIGHSCORE");
+    this.highScore.center = this.application.screen.center;
+    this.highScore.y += 30;
+    this.highScore.x -= 60;
+    this.stage.addChild(this.highScore);
+};
+
+game.scene.Menu.prototype.m_initSlangbella = function() {
+    var slangbella1 = new rune.display.Graphic(500, 260, 30, 30, "", "slangbella");
+    var slangbella2 = new rune.display.Graphic(420, 320, 1280, 720, "", "slangbella");
+    var slangbella3 = new rune.display.Graphic(440, 385, 1280, 720, "", "slangbella");
+    this.slangArr = [slangbella1, slangbella2, slangbella3];
+};
+
 game.scene.Menu.prototype.getCurrentIndex = function() {
-    if (this.keyboard.justPressed("down")){
+    if (this.keyboard.justPressed("down")) {
         this.selectedIndex++;
-        if (this.selectedIndex == this.menu.length){
+        if (this.selectedIndex == this.menu.length) {
             this.selectedIndex = 0;
         }
-    } else if (this.keyboard.justPressed("up")){
+    } else if (this.keyboard.justPressed("up")) {
         this.selectedIndex--;
-        if (this.selectedIndex == -1){
+        if (this.selectedIndex == -1) {
             this.selectedIndex = this.menu.length - 1;
         }
-    }   
+    }
 };
 
 game.scene.Menu.prototype.showSelected = function() {
-    for (var i = 0; i<this.menu.length; i++){
-        if (this.selectedIndex == i){
+    for (var i = 0; i < this.menu.length; i++) {
+        if (this.selectedIndex == i) {
             this.menu[i].alpha = 1;
+            this.stage.addChild(this.slangArr[i]);
+            if (this.keyboard.justPressed("enter")) {
+                this.application.scenes.load([this.gameScene[i]]);
+            }
         } else {
             this.menu[i].alpha = 0.5;
+            this.stage.removeChild(this.slangArr[i]);
         }
     }
 };

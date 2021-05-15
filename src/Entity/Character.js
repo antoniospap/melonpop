@@ -122,11 +122,10 @@ game.entity.Character.prototype.m_checkHitbox = function() {
     for (i = 0; i < objects.length; i++) {
         if (objects[i] instanceof game.entity.Melon) {
             if (this.hitTestObject(objects[i])) {
-                console.log(this.shield);
                 if (objects[i].animations.current == null && this.shield == null) {
-                    this.application.scenes.load([new game.scene.Menu()]);
-                } else if (this.shield != null){
-                   this.removeShield();
+                    this.application.scenes.load([new game.scene.Highscore(this.application.scenes.selected.score.value)]);
+                } else if (this.shield != null) {
+                    this.removeShield();
                 }
             }
         }
@@ -146,14 +145,14 @@ game.entity.Character.prototype.shieldFollowPlayer = function() {
         this.shield.y = this.y - 20;
     }
 };
-game.entity.Character.prototype.removeShield = function() { 
+game.entity.Character.prototype.removeShield = function() {
     this.timers.create({
         duration: 1000,
         scope: this,
         onComplete: function() {
             this.stage.removeChild(this.shield);
             this.shield = null;
-            this.gotShield = false;    
+            this.gotShield = false;
         }
-    }); 
+    });
 };
