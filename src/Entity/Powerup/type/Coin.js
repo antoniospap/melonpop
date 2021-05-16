@@ -15,6 +15,8 @@
  */
 game.entity.Coin = function(randomX, stage) {
     this.game = stage;
+    this.delay = 10000;
+    this.coinRemove = true;
     //--------------------------------------------------------------------------
     // Super call
     //--------------------------------------------------------------------------
@@ -41,19 +43,33 @@ game.entity.Coin.prototype.init = function() {
 
     this.animations.add(
         "spin", [0, 1, 2, 3],
-        7,
+        5,
         true
     );
     this.hitbox.set(5, 5, 30, 30);
+
 };
 
 game.entity.Coin.prototype.update = function(step) {
     game.entity.Powerups.prototype.update.call(this, step);
     this.rotation += 2;
-
     if (this.y >= 550) {
         this.y = 550;
+        this.delay -= step;
+        if (this.delay <= 0) {
+            this.coinDisapear();
+        }
     }
+
+};
+game.entity.Coin.prototype.coinDisapear = function() {
+    var self = this;
+    if (this.coinRemove) {
+        this.flicker(3000, 300, function() {
+            self.parent.removeChild(self)
+        }, this);
+    }
+    this.coinRemove = false;
 };
 
 

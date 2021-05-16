@@ -146,8 +146,9 @@ game.entity.Character.prototype.shieldFollowPlayer = function() {
     }
 };
 game.entity.Character.prototype.removeShield = function() {
+    this.flicker(700, 100);
     this.timers.create({
-        duration: 1000,
+        duration: 1200,
         scope: this,
         onComplete: function() {
             this.stage.removeChild(this.shield);

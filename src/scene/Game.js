@@ -66,7 +66,7 @@ game.scene.Game.prototype.init = function() {
 
 
 
-    this.cameras.getCamera(0).debug = true;
+    //this.cameras.getCamera(0).debug = true;
 
     this.initScore();
 };
