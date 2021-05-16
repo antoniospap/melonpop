@@ -54,7 +54,7 @@ game.entity.Powerups.prototype.update = function(step) {
     }
     this.rotation += 1;
 
-    this.catchShield();
+    this.catchPowerup();
 };
 
 /**
@@ -63,3 +63,5 @@ game.entity.Powerups.prototype.update = function(step) {
 game.entity.Powerups.prototype.dispose = function() {
     rune.display.Sprite.prototype.dispose.call(this);
 };
+
+game.entity.Powerups.prototype.catchPowerup = function() {};

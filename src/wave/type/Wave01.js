@@ -55,15 +55,29 @@ game.wave.Wave01.prototype.m_constructor = function() {
 };
 
 game.wave.Wave01.prototype.m_constructorPowerups = function() {
-    var randomX = Math.floor(Math.random() * 1220);
+    var randomX1 = Math.floor(Math.random() * 1220);
+    var randomX2 = Math.floor(Math.random() * 600);
+
     var self = this;
-        this.timers.create({
-            duration: 3000,
-            scope: this,
-            onComplete: function() {
-                self.shield = new game.entity.Shield(randomX, self.game);
-                self.powerups.push(self.shield);
-                self.game.stage.addChild(self.shield)    
-            }
-        }); 
+    this.timers.create({
+        duration: 10000,
+        scope: this,
+        onComplete: function() {
+            self.shield = new game.entity.Shield(randomX1, self.game); //Creates shield-powerup
+            self.powerups.push(self.shield);
+            self.game.stage.addChild(self.shield)
+        }
+    });
+
+    this.timers.create({
+        duration: 3000,
+        scope: this,
+        onComplete: function() {
+            self.coin = new game.entity.Coin(randomX2, self.game); //creates Coins-powerup
+            self.powerups.push(self.coin);
+            self.game.stage.addChild(self.coin)
+        }
+    });
+
+
 };

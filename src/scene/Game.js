@@ -64,7 +64,7 @@ game.scene.Game.prototype.init = function() {
     this.waveCounter = 1;
     this.initWaveDesc(this.waveCounter);
 
-    
+
 
     this.cameras.getCamera(0).debug = true;
 
@@ -140,7 +140,7 @@ game.scene.Game.prototype.initScore = function() {
 };
 
 game.scene.Game.prototype.initWaveDesc = function(waveCounter) {
-    this.waveDesc =  new rune.text.BitmapField(`Wave ${waveCounter}`);
+    this.waveDesc = new rune.text.BitmapField(`Wave ${waveCounter}`);
     this.waveDesc.centerX = this.application.screen.centerX;
     this.waveDesc.y = 630;
     this.waveDesc.scaleX = 4;

@@ -13,7 +13,7 @@
  *
  *.Bullet state.
  */
- game.entity.MelonL = function() {
+game.entity.MelonL = function() {
     this.hitTest = true;
     this.melonSpeedY = 2;
     this.melonSpeedX = 0.7;
@@ -44,8 +44,8 @@ game.entity.MelonL.prototype.constructor = game.entity.MelonL;
 //------------------------------------------------------------------------------
 
 game.entity.MelonL.prototype.init = function() {
-   game.entity.Melon.prototype.init.call(this);
-   this.hitbox.set(60,10,100,100);
+    game.entity.Melon.prototype.init.call(this);
+    this.hitbox.set(60, 10, 100, 100);
 };
 
 game.entity.MelonL.prototype.m_onDie = function() {
@@ -62,7 +62,7 @@ game.entity.MelonL.prototype.m_onDie = function() {
             }
             this.parent.addChild(melonM);
         }
-    this.hitTest = false;
-}
-game.entity.Melon.prototype.m_onDie.call(this);
+        this.hitTest = false;
+    }
+    game.entity.Melon.prototype.m_onDie.call(this);
 };
