@@ -10,10 +10,11 @@
  *
  * @class
  * @classdesc
- * 
- * Game state.
+ *
+ *.Character state.
  */
-game.scene.Howto = function() {
+ game.scene.Sprites = function() {
+
     //--------------------------------------------------------------------------
     // Super call
     //--------------------------------------------------------------------------
@@ -21,15 +22,15 @@ game.scene.Howto = function() {
     /**
      * ...
      */
-    rune.scene.Scene.call(this);
+    rune.display.Sprite.call(this, 100,100, 150,60, "", "backtomenu");
 };
 
 //------------------------------------------------------------------------------
 // Inheritance
 //------------------------------------------------------------------------------
 
-game.scene.Howto.prototype = Object.create(rune.scene.Scene.prototype);
-game.scene.Howto.prototype.constructor = game.scene.Howto;
+game.scene.Sprites.prototype = Object.create(rune.display.Sprite.prototype);
+game.scene.Sprites.prototype.constructor = game.scene.Sprites;
 
 //------------------------------------------------------------------------------
 // Override public prototype methods (ENGINE)
@@ -38,20 +39,23 @@ game.scene.Howto.prototype.constructor = game.scene.Howto;
 /**
  * @inheritDoc
  */
-game.scene.Howto.prototype.init = function() {
-    rune.scene.Scene.prototype.init.call(this);
-
-    var keyboardimg = new rune.display.Graphic(200, 300, 251, 61, "", "keyboard");
-    this.stage.addChild(keyboardimg);
-
-    var coin = new game.scene.Sprites();
-    this.stage.addChild(coin);
+game.scene.Sprites.prototype.init = function() {
+    rune.display.Sprite.prototype.init.call(this);
+    this.animations.add(
+        "change", [0,1],
+        1,
+        true
+    );
 };
 
 /**
  * @inheritDoc
  */
-game.scene.Howto.prototype.update = function(step) {
-    rune.scene.Scene.prototype.update.call(this, step);
-    
+game.scene.Sprites.prototype.update = function(step) {
+    rune.display.Sprite.prototype.update.call(this, step);
+    this.animations.gotoAndPlay("change");
+
+    if (this.keyboard.justPressed("backspace")){
+        this.application.scenes.load(new game.scene.Menu()); 
+    }
 };

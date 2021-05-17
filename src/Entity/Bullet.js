@@ -13,7 +13,7 @@
  *
  *.Bullet state.
  */
-game.entity.Bullet = function(playerX, playerY, melon) {
+game.entity.Bullet = function(playerX, playerY) {
     this.playerX = playerX;
     this.playerY = playerY;
 
