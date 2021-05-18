@@ -18,6 +18,7 @@ game.entity.Character = function() {
     this.bulletDelay = 0;
     this.gotShield = false;
     this.timers;
+    this.sound;
 
 
     //--------------------------------------------------------------------------
@@ -49,6 +50,8 @@ game.entity.Character.prototype.init = function() {
     this.playerAnimation();
     this.hitbox.set(5, 5, 42, 70);
     this.timers = new rune.timer.Timers();
+
+    this.sound = this.application.sounds.sound.get("throw"); 
 };
 
 /**
@@ -108,8 +111,7 @@ game.entity.Character.prototype.characterBullet = function(step) {
     this.bulletDelay += step;
     if (this.keyboard.justPressed("space")) {
         if (this.bulletDelay >= 700) { //skjuter ett skot per 700 uppdateringsfrekvenser.
-            // var sound = this.application.sounds.sound.get("throw")
-            // sound.play()
+            this.sound.play();
             var bullet = new game.entity.Bullet(this.x + 20, this.y);
             this.stage.addChild(bullet);
             this.bulletDelay = 0;
@@ -123,7 +125,7 @@ game.entity.Character.prototype.m_checkHitbox = function() {
         if (objects[i] instanceof game.entity.Melon) {
             if (this.hitTestObject(objects[i])) {
                 if (objects[i].animations.current == null && this.shield == null) {
-                    this.application.scenes.load([new game.scene.Highscore(this.application.scenes.selected.score.value)]);
+                    this.application.scenes.load([new game.scene.Gameover(this.application.scenes.selected.score.value)]);
                 } else if (this.shield != null) {
                     this.removeShield();
                 }

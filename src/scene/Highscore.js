@@ -13,9 +13,10 @@
  * 
  * Game state.
  */
-game.scene.Highscore = function(score) {
+game.scene.Highscore = function(score,name) {
     this.hs;
     this.score = score;
+    this.name = name;
     //--------------------------------------------------------------------------
     // Super call
     //--------------------------------------------------------------------------
@@ -45,10 +46,8 @@ game.scene.Highscore.prototype.init = function() {
 
     var hsArr = [];
     this.hs = new rune.data.Highscores("hs", 0, 5);
-
-    console.log(this.score);
     if (this.score != undefined) {
-        this.hs.send(this.score);
+        this.hs.send(this.score,this.name);
     }
 
     for (var i = 0; i < 5; i++) {
@@ -73,13 +72,13 @@ game.scene.Highscore.prototype.showHighscoreTable = function(highscores) {
     hsDesc.scaleX = 4;
     hsDesc.scaleY = 4;
     this.stage.addChild(hsDesc);
-
+    console.log(highscores);
     for (var i = 0; i < highscores.length; i++) {
-        var text = new rune.text.BitmapField(`${highscores[i].name}           ${highscores[i].score}`)
+        var text = new rune.text.BitmapField(`${highscores[i].name}           ${highscores[i].score}`);
         text.centerX = this.application.screen.centerX - 100;
         text.y = yCords[i];
         text.scaleX = 3;
         text.scaleY = 3;
-        this.stage.addChild(text)
+        this.stage.addChild(text);
     }
 };

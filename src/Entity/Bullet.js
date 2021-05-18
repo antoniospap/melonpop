@@ -16,7 +16,7 @@
 game.entity.Bullet = function(playerX, playerY) {
     this.playerX = playerX;
     this.playerY = playerY;
-
+    this.sound;
     //--------------------------------------------------------------------------
     // Super call
     //--------------------------------------------------------------------------
@@ -43,6 +43,9 @@ game.entity.Bullet.prototype.constructor = game.entity.Bullet;
  */
 game.entity.Bullet.prototype.init = function() {
     rune.display.Sprite.prototype.init.call(this);
+
+    this.sound = this.application.sounds.sound.get("melonstab"); // eller pop
+
 };
 
 /**
@@ -73,8 +76,7 @@ game.entity.Bullet.prototype.m_checkHitbox = function(step) {
     for (var i = 0; i < objects.length; i++) {
         if (objects[i] instanceof game.entity.Melon) {
             if (this.intersects(objects[i])) {
-                //var sound = this.application.sounds.sound.get("pop")
-                //sound.play();
+                this.sound.play();
                 objects[i].melonAnimation();
                 this.stage.removeChild(this, true);
             }
