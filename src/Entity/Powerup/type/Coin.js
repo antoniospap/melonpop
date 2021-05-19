@@ -17,6 +17,7 @@ game.entity.Coin = function(randomX, stage) {
     this.game = stage;
     this.delay = 10000;
     this.coinRemove = true;
+    this.sound;
     //--------------------------------------------------------------------------
     // Super call
     //--------------------------------------------------------------------------
@@ -47,7 +48,9 @@ game.entity.Coin.prototype.init = function() {
         true
     );
     this.hitbox.set(5, 5, 30, 30);
+    console.log(this.sound);
 
+    this.sound = this.application.sounds.sound.get("coins");
 };
 
 game.entity.Coin.prototype.update = function(step) {
@@ -78,6 +81,7 @@ game.entity.Coin.prototype.catchPowerup = function() {
     this.game.player.hitTestObject(this, function() {
         self.parent.removeChild(self);
         self.getCoin();
+        this.sound.play();
     });
 };
 
