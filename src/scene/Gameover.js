@@ -14,13 +14,13 @@
  * Game state.
  * @param {number} score Players received score
  */
- game.scene.Gameover = function(score) {
+game.scene.Gameover = function(score) {
     this.score = score;
     this.letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
     this.selectedIndex = 0;
     this.char = [];
     this.enterIndex = 0;
-    this.xCords = [500,550,600];
+    this.xCords = [500, 550, 600];
     this.name = [];
 
     //--------------------------------------------------------------------------
@@ -63,14 +63,10 @@ game.scene.Gameover.prototype.init = function() {
     gameover.centerY = 200;
     gameover.scaleX = 2;
     gameover.scaleY = 2;
-    this.stage.addChild(gameover)
+    console.log(gameover);
+    this.stage.addChildAt(gameover, 3)
 
-    var score = new rune.text.BitmapField(`${this.score}`);
-    score.centerX = this.application.screen.centerX + 200;
-    score.centerY = this.application.screen.centerY - 15;
-    score.scaleX = 3;
-    score.scaleY = 3;
-    this.stage.addChild(score)
+
 };
 
 /**
@@ -87,7 +83,7 @@ game.scene.Gameover.prototype.initCharFields = function() {
     var char3 = new rune.text.BitmapField("-");
     this.char = [char1, char2, char3];
 
-    for (i = 1; i < 3; i++){
+    for (i = 1; i < 3; i++) {
         this.char[i].centerY = this.application.screen.centerY;
         this.char[i].x = this.xCords[i];
         this.char[i].scaleX = 3;
@@ -108,11 +104,11 @@ game.scene.Gameover.prototype.getCurrentIndex = function() {
             this.selectedIndex = this.letters.length - 1;
         }
     }
-    if (this.keyboard.justPressed("enter")){
+    if (this.keyboard.justPressed("enter")) {
         this.enterIndex++;
     }
-    if (this.keyboard.justPressed("space") && this.enterIndex >= 3){
-        for (i = 0; i < this.char.length; i++){
+    if (this.keyboard.justPressed("space") && this.enterIndex >= 3) {
+        for (i = 0; i < this.char.length; i++) {
             this.name.push(this.char[i].text);
         }
         var name = this.name.join("");
@@ -121,7 +117,7 @@ game.scene.Gameover.prototype.getCurrentIndex = function() {
     this.displayLetter();
 };
 game.scene.Gameover.prototype.displayLetter = function() {
-    if (this.enterIndex <= this.char.length - 1){
+    if (this.enterIndex <= this.char.length - 1) {
         console.log(this.enterIndex);
         this.char[this.enterIndex].text = this.letters[this.selectedIndex];
         this.char[this.enterIndex].centerY = this.application.screen.centerY;
@@ -130,6 +126,5 @@ game.scene.Gameover.prototype.displayLetter = function() {
         this.char[this.enterIndex].scaleY = 3;
         this.stage.addChild(this.char[this.enterIndex]);
     }
-   
-};
 
+};
