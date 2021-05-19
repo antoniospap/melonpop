@@ -18,7 +18,7 @@ game.entity.MelonL = function(spawnX = -20, spawnY = 50) {
     this.melonSpeedY = 2;
     this.melonSpeedX = 0.7;
 
-    this.melonHeightBounce = 20;
+    this.melonHeightBounce = 200;
 
     this.melonBottomBounce = 480;
 
