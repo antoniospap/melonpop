@@ -50,6 +50,8 @@ game.scene.Gameover.prototype.constructor = game.scene.Gameover;
 game.scene.Gameover.prototype.init = function() {
     rune.scene.Scene.prototype.init.call(this);
     this.initCharFields();
+    this.initBackground()
+    this.initCloud()
 
     var gameover = new rune.text.BitmapField("GAME OVER");
     gameover.centerX = this.application.screen.centerX - 120;
@@ -81,6 +83,7 @@ game.scene.Gameover.prototype.init = function() {
 game.scene.Gameover.prototype.update = function(step) {
     rune.scene.Scene.prototype.update.call(this, step);
     this.getCurrentIndex();
+    this.initCloudMotion()
 };
 
 game.scene.Gameover.prototype.initCharFields = function() {
@@ -133,4 +136,23 @@ game.scene.Gameover.prototype.displayLetter = function() {
         this.stage.addChild(this.char[this.enterIndex]);
     }
 
+};
+
+game.scene.Gameover.prototype.initBackground = function() {
+    this.m_bkgd = new rune.display.Graphic(0, 0, 1280, 720, "", "sky");
+    this.stage.addChild(this.m_bkgd);
+    this.m_bkgd.alpha = 0.9;
+};
+
+
+game.scene.Gameover.prototype.initCloud = function() {
+    this.m_cloud = new rune.display.Graphic(50, 700, 440, 200, "", "cloudsprite2");
+    this.stage.addChild(this.m_cloud);
+    // this.m_bkgd.alpha = 0.9;
+};
+
+game.scene.Gameover.prototype.initCloudMotion = function() {
+    if(this.m_cloud.y > 250) {
+    this.m_cloud.y -= 2
+    }
 };
