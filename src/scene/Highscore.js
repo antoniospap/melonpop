@@ -43,7 +43,7 @@ game.scene.Highscore.prototype.constructor = game.scene.Highscore;
  */
 game.scene.Highscore.prototype.init = function() {
     rune.scene.Scene.prototype.init.call(this);
-
+    this.m_initBackground()
     var hsArr = [];
     this.hs = new rune.data.Highscores("hs", 0, 5);
     if (this.score != undefined) {
@@ -74,7 +74,7 @@ game.scene.Highscore.prototype.update = function(step) {
 game.scene.Highscore.prototype.showHighscoreTable = function(highscores) {
     var yCords = [200, 250, 300, 350, 400];
     var hsDesc = new rune.text.BitmapField("Highscores");
-    hsDesc.centerX = this.application.screen.centerX - 100;
+    hsDesc.centerX = this.application.screen.centerX - 50;
     hsDesc.y = 100;
     hsDesc.scaleX = 4;
     hsDesc.scaleY = 4;
@@ -82,10 +82,16 @@ game.scene.Highscore.prototype.showHighscoreTable = function(highscores) {
     console.log(highscores);
     for (var i = 0; i < highscores.length; i++) {
         var text = new rune.text.BitmapField(`${highscores[i].name}           ${highscores[i].score}`);
-        text.centerX = this.application.screen.centerX - 100;
+        text.centerX = this.application.screen.centerX - 70;
         text.y = yCords[i];
         text.scaleX = 3;
         text.scaleY = 3;
         this.stage.addChild(text);
     }
+};
+
+game.scene.Highscore.prototype.m_initBackground = function() {
+    this.m_bkgd = new rune.display.Graphic(0, 0, 1280, 720, "", "highscorebkrd");
+    this.stage.addChild(this.m_bkgd);
+    this.m_bkgd.alpha = 0.6;
 };
