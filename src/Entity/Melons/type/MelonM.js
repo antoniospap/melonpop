@@ -24,6 +24,10 @@ game.entity.MelonM = function(x, y) {
 
     this.timers;
 
+
+    this.melonMaxX = 1180;
+
+
     //--------------------------------------------------------------------------
     // Super call
     //--------------------------------------------------------------------------
@@ -63,11 +67,12 @@ game.entity.MelonM.prototype.m_onDie = function() {
             var smallMelon = new game.entity.MelonS(this.x, this.y);
             this.parent.addChild(smallMelon);
             if (i == 0) {
-                smallMelon.x -= 50;
+                //smallMelon.x -= 50;
                 smallMelon.velocity.x -= 1;
             }
             if (i == 1) {
-                smallMelon.x += 50;
+                //smallMelon.x += 50;
+
             }
         }
         this.hitTest = false;

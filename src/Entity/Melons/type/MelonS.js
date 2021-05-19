@@ -21,6 +21,7 @@ game.entity.MelonS = function(x, y) {
 
     this.melonBottomBounce = 530;
 
+    this.melonMaxX = 1230;
 
 
     //--------------------------------------------------------------------------

@@ -26,6 +26,7 @@ game.scene.Game = function() {
     this.score = 0;
     this.gotShield = false;
     this.waveDesc;
+    this.waveArray = [];
 
     //--------------------------------------------------------------------------
     // Super call
@@ -64,11 +65,12 @@ game.scene.Game.prototype.init = function() {
     this.waveCounter = 1;
     this.initWaveDesc(this.waveCounter);
 
-
-
-    //this.cameras.getCamera(0).debug = true;
+    this.cameras.getCamera(0).debug = true;
 
     this.initScore();
+
+    this.waveArray = [new game.wave.Wave02(this), new game.wave.Wave03(this), new game.wave.Wave04(this), new game.wave.Wave05(this), new game.wave.Wave06(this)];
+
 };
 
 /**
@@ -76,11 +78,9 @@ game.scene.Game.prototype.init = function() {
  */
 game.scene.Game.prototype.update = function(step) {
     rune.scene.Scene.prototype.update.call(this, step);
-
     this.wave.update(step);
     if (this.wave.checkWave()) {
-        console.log(this.stage);
-        this.wave = new game.wave.Wave02(this);
+        this.wave = this.waveArray[this.waveCounter - 1];
         this.waveCounter++;
         this.updateWaveDesc(this.waveCounter);
     }

@@ -22,7 +22,7 @@ game.entity.Shield = function(randomX, stage) {
     /**
      * ...
      */
-    game.entity.Powerups.call(this, randomX, 0, 60, 60, "", "extrabullet", stage);
+    game.entity.Powerups.call(this, randomX, 0, 60, 60, "", "fallingshield", stage);
 };
 
 //------------------------------------------------------------------------------

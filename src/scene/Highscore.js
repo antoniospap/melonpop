@@ -55,6 +55,9 @@ game.scene.Highscore.prototype.init = function() {
         hsArr.push(l);
     }
     this.showHighscoreTable(hsArr);
+
+    var backtomenu = new game.scene.Sprites();
+    this.stage.addChild(backtomenu);
 };
 
 /**
@@ -62,6 +65,10 @@ game.scene.Highscore.prototype.init = function() {
  */
 game.scene.Highscore.prototype.update = function(step) {
     rune.scene.Scene.prototype.update.call(this, step);
+
+    if (this.keyboard.justPressed("backspace")){
+        this.application.scenes.load([new game.scene.Menu()]);
+    }
 };
 
 game.scene.Highscore.prototype.showHighscoreTable = function(highscores) {

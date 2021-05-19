@@ -66,6 +66,12 @@ game.scene.Gameover.prototype.init = function() {
     console.log(gameover);
     this.stage.addChildAt(gameover, 3)
 
+    var score = new rune.text.BitmapField(`${this.score}`);
+    score.centerX = this.application.screen.centerX + 120;
+    score.centerY = 350;
+    score.scaleX = 4;
+    score.scaleY = 4;
+    this.stage.addChild(score)
 
 };
 

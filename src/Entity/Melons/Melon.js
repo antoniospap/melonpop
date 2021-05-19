@@ -22,6 +22,8 @@ game.entity.Melon = function(x, y, width, height, color, texture) {
     this.melonHeightBounce;
     this.melonBottomBounce;
 
+    this.melonMaxX;
+
     this.score = 0;
     this.timers;
 
@@ -93,7 +95,8 @@ game.entity.Melon.prototype.m_windowLimit = function(step) {
     } else if (this.y <= this.melonHeightBounce) { //om den når toppen av skärmen
         this.m_bounceY = false
     }
-    if (this.x >= 1230) { //avgränsar så att melonen inte studras utanför x-leden, höger
+    console.log(this.x);
+    if (this.x >= this.melonMaxX) { //avgränsar så att melonen inte studras utanför x-leden, höger
         this.m_bounceX = true;
         this.velocity.x = false;
     } else if (this.x <= -20) { //vänster

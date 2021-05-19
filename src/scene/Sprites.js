@@ -54,8 +54,4 @@ game.scene.Sprites.prototype.init = function() {
 game.scene.Sprites.prototype.update = function(step) {
     rune.display.Sprite.prototype.update.call(this, step);
     this.animations.gotoAndPlay("change");
-
-    if (this.keyboard.justPressed("backspace")){
-        this.application.scenes.load(new game.scene.Menu()); 
-    }
 };

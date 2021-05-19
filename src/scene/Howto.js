@@ -41,11 +41,13 @@ game.scene.Howto.prototype.constructor = game.scene.Howto;
 game.scene.Howto.prototype.init = function() {
     rune.scene.Scene.prototype.init.call(this);
 
+    this.m_initBackground();
+
     var keyboardimg = new rune.display.Graphic(200, 300, 251, 61, "", "keyboard");
     this.stage.addChild(keyboardimg);
 
-    var coin = new game.scene.Sprites();
-    this.stage.addChild(coin);
+    var backtomenu = new game.scene.Sprites();
+    this.stage.addChild(backtomenu);
 };
 
 /**
@@ -53,5 +55,16 @@ game.scene.Howto.prototype.init = function() {
  */
 game.scene.Howto.prototype.update = function(step) {
     rune.scene.Scene.prototype.update.call(this, step);
+
+    if (this.keyboard.justPressed("backspace")){
+        this.application.scenes.load([new game.scene.Menu()]);
+    }
     
 };
+
+game.scene.Howto.prototype.m_initBackground = function() {
+    this.m_bkgd = new rune.display.Graphic(0, 0, 1280, 720, "", "howtoplaybkrd");
+    this.stage.addChild(this.m_bkgd);
+    this.m_bkgd.alpha = 0.6;
+};
+
