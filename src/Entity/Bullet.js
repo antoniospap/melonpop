@@ -24,7 +24,7 @@ game.entity.Bullet = function(playerX, playerY) {
     /**
      * ...
      */
-    rune.display.Sprite.call(this, this.playerX, this.playerY, 10, 10, "", "testbull");
+    rune.display.Sprite.call(this, this.playerX, this.playerY, 10, 10, "", "bullet");
 };
 
 //------------------------------------------------------------------------------
