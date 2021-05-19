@@ -31,7 +31,7 @@ game.entity.MelonS = function(x, y) {
     /**
      * ...
      */
-    game.entity.Melon.call(this, x, y, 40, 40, "", "MelonSidle");
+    game.entity.Melon.call(this, x, y, 40, 40, "", "spritesheetS");
 };
 
 //------------------------------------------------------------------------------
