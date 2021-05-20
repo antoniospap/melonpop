@@ -14,6 +14,8 @@
  * Game state.
  */
 game.scene.Howto = function() {
+    this.m_character = null
+    this.m_moveRight = true
     //--------------------------------------------------------------------------
     // Super call
     //--------------------------------------------------------------------------
@@ -46,6 +48,9 @@ game.scene.Howto.prototype.init = function() {
     
     this.m_outputText()
 
+    this.m_initDemo()
+
+
     
 };
 
@@ -54,7 +59,7 @@ game.scene.Howto.prototype.init = function() {
  */
 game.scene.Howto.prototype.update = function(step) {
     rune.scene.Scene.prototype.update.call(this, step);
-
+    this.m_playDemo()
     if (this.keyboard.justPressed("enter")){
         this.application.scenes.load([new game.scene.Menu()]);
     }
@@ -114,6 +119,29 @@ game.scene.Howto.prototype.m_outputText = function() {
 
     this.stage.addChild(slingShot)
 
-
 };
 
+game.scene.Howto.prototype.m_initDemo = function() {
+    this.m_character = new rune.display.Sprite(400, 520, 54,78, "", "player");
+    this.m_character.alpha = 0.8;
+    this.m_character.animations.add("idle", [0], 1, true);
+    this.m_character.animations.add("walk", [1, 2, 3, 4, 5, 6], 8, true);
+    this.stage.addChild(this.m_character);
+};
+
+game.scene.Howto.prototype.m_playDemo = function() {
+    // console.log('dasd')
+    // console.log('dsa', this.m_character)
+    if(this.m_moveRight == true && this.m_character.x < 700) {
+        this.m_character.x += 2
+    } else if (this.m_moveRight == false) {
+        this.m_character.x -= 2
+    }
+
+    // if (this.m_character.x == 700) {
+    //     console.log('eh')
+    //     this.m_moveRight = false
+    //     this.m_character.x -= 2
+    // }
+    
+};
