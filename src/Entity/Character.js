@@ -139,17 +139,20 @@
       this.y,
       100,
       100,
-      "#FF00FF",
+      "",
       "fallingshield"
     );
-    this.shield.alpha = 0.2;
+    this.shield.alpha = 0.5;
+    this.shield.scaleX = 1.6;
+    this.shield.scaleY = 1.6;
+
     this.stage.addChild(this.shield);
   };
   
   game.entity.Character.prototype.shieldFollowPlayer = function () {
     if (this.gotShield) {
       this.shield.x = this.x - 20;
-      this.shield.y = this.y - 20;
+      this.shield.y = this.y;
     }
   };
   game.entity.Character.prototype.removeShield = function () {

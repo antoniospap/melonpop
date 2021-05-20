@@ -139,18 +139,18 @@ game.scene.Menu.prototype.showSelected = function() {
 game.scene.Menu.prototype.m_initTitle = function() {
     var title = new rune.text.BitmapField("Melon  Pop");
     // title.width = 600
-    title.centerX = this.application.screen.centerX - 140;
+    title.centerX = this.application.screen.centerX - 110;
     title.centerY = 50;
     title.scaleX = 6;
     title.scaleY = 6;
     console.log(title);
     this.stage.addChild(title)
 
-    var slingShot = new rune.display.Graphic(615, 40, 30, 30, "", "slangbella");
+
+    var slingShot = new rune.display.Graphic(640, 40, 30, 30, "", "slangbella");
     slingShot.scaleX = 2
     slingShot.scaleY = 2
     this.stage.addChild(slingShot)
-
 };
 
 game.scene.Menu.prototype.m_initCredits = function() {
@@ -163,9 +163,6 @@ game.scene.Menu.prototype.m_initCredits = function() {
     console.log(title);
     this.stage.addChild(title)
 
-    var slingShot = new rune.display.Graphic(615, 40, 30, 30, "", "slangbella");
-    slingShot.scaleX = 2
-    slingShot.scaleY = 2
-    this.stage.addChild(slingShot)
+    
 
 };

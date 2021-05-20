@@ -46,12 +46,10 @@ game.scene.Howto.prototype.init = function() {
     this.m_initBackground();
 
     
-    this.m_outputText()
+    this.m_outputText();
 
-    this.m_initDemo()
-
-
-    
+    this.m_initDemo();
+    this.m_character.alpha = 1;
 };
 
 /**
@@ -130,18 +128,18 @@ game.scene.Howto.prototype.m_initDemo = function() {
 };
 
 game.scene.Howto.prototype.m_playDemo = function() {
-    // console.log('dasd')
-    // console.log('dsa', this.m_character)
-    if(this.m_moveRight == true && this.m_character.x < 700) {
+    if(this.m_moveRight == true && this.m_character.x < 900) {
         this.m_character.x += 2
+        this.m_character.animations.gotoAndPlay("walk");
     } else if (this.m_moveRight == false) {
         this.m_character.x -= 2
+        this.m_character.flippedX = true;
     }
-
-    // if (this.m_character.x == 700) {
-    //     console.log('eh')
-    //     this.m_moveRight = false
-    //     this.m_character.x -= 2
-    // }
+    if (this.m_character.x == 900) {
+        this.m_moveRight = false;
+    } else if (this.m_character.x == 300) {
+        this.m_moveRight = true;
+        this.m_character.flippedX = false;
+    }
     
 };

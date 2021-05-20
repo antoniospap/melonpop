@@ -65,7 +65,7 @@ game.scene.Game.prototype.init = function() {
     this.waveCounter = 1;
     this.initWaveDesc(this.waveCounter);
 
-    this.cameras.getCamera(0).debug = true;
+    //this.cameras.getCamera(0).debug = true;
 
     this.initScore();
 

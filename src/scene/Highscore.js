@@ -74,7 +74,7 @@ game.scene.Highscore.prototype.update = function(step) {
 game.scene.Highscore.prototype.showHighscoreTable = function(highscores) {
     var yCords = [200, 250, 300, 350, 400];
     var hsDesc = new rune.text.BitmapField("Highscores");
-    hsDesc.centerX = this.application.screen.centerX - 50;
+    hsDesc.centerX = this.application.screen.centerX - 20;
     hsDesc.y = 100;
     hsDesc.scaleX = 4;
     hsDesc.scaleY = 4;
@@ -82,7 +82,7 @@ game.scene.Highscore.prototype.showHighscoreTable = function(highscores) {
     console.log(highscores);
     for (var i = 0; i < highscores.length; i++) {
         var text = new rune.text.BitmapField(`${highscores[i].name}           ${highscores[i].score}`);
-        text.centerX = this.application.screen.centerX - 70;
+        text.centerX = this.application.screen.centerX - 50;
         text.y = yCords[i];
         text.scaleX = 3;
         text.scaleY = 3;
