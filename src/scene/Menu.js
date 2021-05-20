@@ -52,6 +52,8 @@ game.scene.Menu.prototype.init = function() {
     this.m_initBackground();
     this.m_initTextMenu();
     this.m_initSlangbella();
+    this.m_initTitle();
+    this.m_initCredits();
 
     this.menu = [this.playBtn, this.howToPlay, this.highScore];
     this.gameScene = [new game.scene.Game(), new game.scene.Howto(), new game.scene.Highscore()];
@@ -132,4 +134,38 @@ game.scene.Menu.prototype.showSelected = function() {
             this.stage.removeChild(this.slangArr[i]);
         }
     }
+};
+
+game.scene.Menu.prototype.m_initTitle = function() {
+    var title = new rune.text.BitmapField("Melon  Pop");
+    // title.width = 600
+    title.centerX = this.application.screen.centerX - 140;
+    title.centerY = 50;
+    title.scaleX = 6;
+    title.scaleY = 6;
+    console.log(title);
+    this.stage.addChild(title)
+
+    var slingShot = new rune.display.Graphic(615, 40, 30, 30, "", "slangbella");
+    slingShot.scaleX = 2
+    slingShot.scaleY = 2
+    this.stage.addChild(slingShot)
+
+};
+
+game.scene.Menu.prototype.m_initCredits = function() {
+    var title = new rune.text.BitmapField("Created by: Antonios Papathanassiadis & Martin Kassar");
+    title.width = 600
+    title.centerX = this.application.screen.centerX ;
+    title.y = 650;
+    title.scaleX = 2;
+    title.scaleY = 2;
+    console.log(title);
+    this.stage.addChild(title)
+
+    var slingShot = new rune.display.Graphic(615, 40, 30, 30, "", "slangbella");
+    slingShot.scaleX = 2
+    slingShot.scaleY = 2
+    this.stage.addChild(slingShot)
+
 };
