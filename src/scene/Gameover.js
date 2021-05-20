@@ -117,12 +117,15 @@ game.scene.Gameover.prototype.getCurrentIndex = function() {
     if (this.keyboard.justPressed("enter")) {
         this.enterIndex++;
     }
-    if (this.keyboard.justPressed("space") && this.enterIndex >= 3) {
+    if (this.enterIndex >= 3) {
         for (i = 0; i < this.char.length; i++) {
             this.name.push(this.char[i].text);
         }
         var name = this.name.join("");
-        this.application.scenes.load([new game.scene.Highscore(this.score, name)]);
+        
+        if(this.keyboard.justPressed("enter")) {
+            this.application.scenes.load([new game.scene.Highscore(this.score, name)]);
+        }
     }
     this.displayLetter();
 };
