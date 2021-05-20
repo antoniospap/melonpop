@@ -25,7 +25,7 @@ game.entity.Coin = function(randomX, stage) {
     /**
      * ...
      */
-    game.entity.Powerups.call(this, randomX, 0, 40, 44.5, "", "coin", stage);
+    game.entity.Powerups.call(this, randomX, 0, 40, 40, "", "coinup", stage);
 };
 
 //------------------------------------------------------------------------------
