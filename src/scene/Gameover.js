@@ -60,7 +60,8 @@ game.scene.Gameover.prototype.init = function() {
     gameover.scaleY = 7;
     this.stage.addChild(gameover)
 
-    var gameover = new rune.text.BitmapField("Write your name by moving the arrows upp and down to find your desired letter, press enter to move to next letter.");
+    var gameover = new rune.text.BitmapField("Use arrows to format initials, press enter when finished.");
+    gameover.width = 600
     gameover.centerX = this.application.screen.centerX - 100;
     gameover.centerY = 200;
     gameover.scaleX = 2;
