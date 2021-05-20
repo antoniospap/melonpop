@@ -1,8 +1,8 @@
 #!/bin/bash
 
 npx google-closure-compiler \
---language_in ECMASCRIPT5_STRICT \
---language_out ECMASCRIPT5_STRICT \
+--language_in ECMASCRIPT6 \
+--language_out ECMASCRIPT6 \
 --warning_level DEFAULT \
 --compilation_level WHITESPACE_ONLY \
 --isolation_mode IIFE \
@@ -18,8 +18,20 @@ npx google-closure-compiler \
 --js "./../../src/wave/Wave.js" \
 --js "./../../src/wave/type/Wave01.js" \
 --js "./../../src/wave/type/Wave02.js" \
---js "./../../src/scene/Game.js" \
+--js "./../../src/wave/type/Wave03.js" \
+--js "./../../src/wave/type/Wave04.js" \
+--js "./../../src/wave/type/Wave05.js" \
+--js "./../../src/wave/type/Wave06.js" \
+--js "./../../src/wave/type/Wave07.js" \
+--js "./../../src/Entity/Powerup/Powerups.js" \
+--js "./../../src/Entity/Powerup/type/Shield.js" \
+--js "./../../src/Entity/Powerup/type/Coin.js" \
 --js "./../../src/scene/Menu.js" \
+--js "./../../src/scene/Game.js" \
+--js "./../../src/scene/HowTo.js" \
+--js "./../../src/scene/Highscore.js" \
+--js "./../../src/scene/Gameover.js" \
+--js "./../../src/scene/Sprites.js" \
 --js "./../../src/system/Main.js" \
 --js "./../../src/scope/Alias.js" \
 --js_output_file "./../../dist/game.js";

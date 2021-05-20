@@ -93,7 +93,7 @@ game.scene.Gameover.prototype.initCharFields = function() {
     var char3 = new rune.text.BitmapField("-");
     this.char = [char1, char2, char3];
 
-    for (i = 1; i < 3; i++) {
+    for (var i = 1; i < 3; i++) {
         this.char[i].centerY = this.application.screen.centerY;
         this.char[i].x = this.xCords[i];
         this.char[i].scaleX = 3;
@@ -118,7 +118,7 @@ game.scene.Gameover.prototype.getCurrentIndex = function() {
         this.enterIndex++;
     }
     if (this.enterIndex >= 3) {
-        for (i = 0; i < this.char.length; i++) {
+        for (var i = 0; i < this.char.length; i++) {
             this.name.push(this.char[i].text);
         }
         var name = this.name.join("");

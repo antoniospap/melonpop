@@ -116,7 +116,7 @@
   
   game.entity.Character.prototype.m_checkHitbox = function () {
     var objects = this.stage.getChildren();
-    for (i = 0; i < objects.length; i++) {
+    for (var i = 0; i < objects.length; i++) {
       if (objects[i] instanceof game.entity.Melon) {
         if (this.hitTestObject(objects[i])) {
           if (objects[i].animations.current == null && this.shield == null) {

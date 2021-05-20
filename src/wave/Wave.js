@@ -58,7 +58,7 @@ game.wave.Wave.prototype.m_constructorPowerups = function() {};
 
 game.wave.Wave.prototype.checkWave = function() {
     var numLeft = 0;
-    for (i = 0; i < this.game.stage.numChildren; i++) {
+    for (var i = 0; i < this.game.stage.numChildren; i++) {
         if (this.game.stage.getChildAt(i) instanceof game.entity.Melon) {
             numLeft++;
         }
