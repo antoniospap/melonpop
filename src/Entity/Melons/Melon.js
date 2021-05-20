@@ -95,7 +95,6 @@ game.entity.Melon.prototype.m_windowLimit = function(step) {
     } else if (this.y <= this.melonHeightBounce) { //om den når toppen av skärmen
         this.m_bounceY = false
     }
-    console.log(this.x);
     if (this.x >= this.melonMaxX) { //avgränsar så att melonen inte studras utanför x-leden, höger
         this.m_bounceX = true;
         this.velocity.x = false;

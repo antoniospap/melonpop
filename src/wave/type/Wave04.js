@@ -55,8 +55,9 @@ game.wave.Wave04.prototype.m_constructor = function() {
     }
 };
 
-game.wave.Wave01.prototype.m_constructorPowerups = function() {
+game.wave.Wave04.prototype.m_constructorPowerups = function() {
     var randomX2 = Math.floor(Math.random() * 600);
+    var self = this;
 
     this.timers.create({
         duration: 16000,

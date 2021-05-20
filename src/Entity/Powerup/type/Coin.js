@@ -25,7 +25,7 @@ game.entity.Coin = function(randomX, stage) {
     /**
      * ...
      */
-    game.entity.Powerups.call(this, randomX, 0, 40, 40, "", "coinup", stage);
+    game.entity.Powerups.call(this, randomX, 0, 40, 40, "", "coinshine", stage);
 };
 
 //------------------------------------------------------------------------------
@@ -41,14 +41,6 @@ game.entity.Coin.prototype.constructor = game.entity.Coin;
 
 game.entity.Coin.prototype.init = function() {
     game.entity.Powerups.prototype.init.call(this);
-
-    this.animations.add(
-        "spin", [0, 1, 2, 3],
-        5,
-        true
-    );
-    this.hitbox.set(5, 5, 30, 30);
-    console.log(this.sound);
 
     this.sound = this.application.sounds.sound.get("coins");
 };

@@ -53,7 +53,7 @@ game.wave.Wave03.prototype.m_constructor = function() {
     }
 };
 
-game.wave.Wave01.prototype.m_constructorPowerups = function() {
+game.wave.Wave03.prototype.m_constructorPowerups = function() {
     var randomX1 = Math.floor(Math.random() * 1220);
     var randomX2 = Math.floor(Math.random() * 600);
     

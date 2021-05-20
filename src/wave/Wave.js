@@ -16,10 +16,11 @@
 game.wave.Wave = function(stage) {
     this.game = stage;
     this.delay = 2000; //spawn melons delay
-    this.powerupsDelay; //spawn delay for powerups, changed in inherited objects
     this.melons = [];
     this.timers;
     this.timers = new rune.timer.Timers();
+    this.powerups = [];
+
 
 
     //--------------------------------------------------------------------------

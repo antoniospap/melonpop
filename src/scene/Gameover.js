@@ -131,7 +131,6 @@ game.scene.Gameover.prototype.getCurrentIndex = function() {
 };
 game.scene.Gameover.prototype.displayLetter = function() {
     if (this.enterIndex <= this.char.length - 1) {
-        console.log(this.enterIndex);
         this.char[this.enterIndex].text = this.letters[this.selectedIndex];
         this.char[this.enterIndex].centerY = this.application.screen.centerY;
         this.char[this.enterIndex].x = this.xCords[this.enterIndex];
