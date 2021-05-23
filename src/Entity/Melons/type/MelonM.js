@@ -52,7 +52,7 @@ game.entity.MelonM.prototype.constructor = game.entity.MelonM;
 game.entity.MelonM.prototype.init = function() {
     game.entity.Melon.prototype.init.call(this);
     this.hitbox.set(35, 10, 60, 65);
-    this.score += 1;
+    this.score += 2;
 };
 
 game.entity.MelonM.prototype.update = function(step) {

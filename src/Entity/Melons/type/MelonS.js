@@ -19,7 +19,7 @@ game.entity.MelonS = function(x, y) {
 
     this.melonHeightBounce = 450;
 
-    this.melonBottomBounce = 530;
+    this.melonBottomBounce = 560;
 
     this.melonMaxX = 1230;
 
@@ -47,9 +47,9 @@ game.entity.MelonS.prototype.constructor = game.entity.MelonS;
 
 game.entity.MelonS.prototype.init = function() {
     game.entity.Melon.prototype.init.call(this);
-    this.hitbox.set(5,5,30,30);
+    this.hitbox.set(5, 5, 30, 30);
     this.score += 1;
- };
+};
 
 
 game.entity.MelonS.prototype.m_onDie = function() {
@@ -57,6 +57,5 @@ game.entity.MelonS.prototype.m_onDie = function() {
 };
 
 game.entity.MelonS.prototype.initHitbox = function() {
-    this.hitbox.set(50,50,50,50);
+    this.hitbox.set(50, 50, 50, 50);
 };
-

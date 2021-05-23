@@ -50,7 +50,7 @@ game.entity.MelonL.prototype.init = function() {
     game.entity.Melon.prototype.init.call(this);
     this.hitbox.set(60, 10, 100, 100);
 
-    this.score += 1;
+    this.score += 3;
 
 };
 

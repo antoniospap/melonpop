@@ -78,5 +78,5 @@ game.entity.Coin.prototype.catchPowerup = function() {
 };
 
 game.entity.Coin.prototype.getCoin = function() {
-    this.application.scenes.selected.score.value += 100;
+    this.application.scenes.selected.score.value += 30;
 };

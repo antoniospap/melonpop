@@ -14,7 +14,7 @@
  * Game state.
  * @param {number} score Players received score
  */
-game.scene.Gameover = function(score) {
+game.scene.Gameover = function(score = "N/A") {
     this.score = score;
     this.letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
     this.selectedIndex = 0;
@@ -122,8 +122,8 @@ game.scene.Gameover.prototype.getCurrentIndex = function() {
             this.name.push(this.char[i].text);
         }
         var name = this.name.join("");
-        
-        if(this.keyboard.justPressed("enter")) {
+
+        if (this.keyboard.justPressed("enter")) {
             this.application.scenes.load([new game.scene.Highscore(this.score, name)]);
         }
     }
@@ -155,7 +155,7 @@ game.scene.Gameover.prototype.initCloud = function() {
 };
 
 game.scene.Gameover.prototype.initCloudMotion = function() {
-    if(this.m_cloud.y > 250) {
-    this.m_cloud.y -= 2
+    if (this.m_cloud.y > 250) {
+        this.m_cloud.y -= 2
     }
 };
