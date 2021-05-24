@@ -21,6 +21,7 @@ game.scene.Menu = function() {
     this.menu = [];
     this.gameScene = [];
     this.selectedIndex = 0;
+    this.musicON = true;
 
     //--------------------------------------------------------------------------
     // Super call
@@ -54,6 +55,7 @@ game.scene.Menu.prototype.init = function() {
     this.m_initSlangbella();
     this.m_initTitle();
     this.m_initCredits();
+    this.m_initMuteSounds();
 
     this.menu = [this.playBtn, this.howToPlay, this.highScore];
     this.gameScene = [new game.scene.Game(), new game.scene.Howto(), new game.scene.Highscore()];
@@ -72,6 +74,8 @@ game.scene.Menu.prototype.update = function(step) {
     rune.scene.Scene.prototype.update.call(this, step);
     this.getCurrentIndex();
     this.showSelected();
+
+    this.m_muteSounds();
 };
 
 game.scene.Menu.prototype.m_initBackground = function() {
@@ -143,9 +147,7 @@ game.scene.Menu.prototype.m_initTitle = function() {
     title.centerY = 50;
     title.scaleX = 6;
     title.scaleY = 6;
-    console.log(title);
     this.stage.addChild(title)
-
 
     var slingShot = new rune.display.Graphic(640, 40, 30, 30, "", "slangbella");
     slingShot.scaleX = 2
@@ -160,9 +162,22 @@ game.scene.Menu.prototype.m_initCredits = function() {
     title.y = 650;
     title.scaleX = 2;
     title.scaleY = 2;
-    console.log(title);
     this.stage.addChild(title)
+};
 
-    
+game.scene.Menu.prototype.m_initMuteSounds = function() {
+    var title = new rune.text.BitmapField("MUTE");
+    this.sound = this.application.sounds.sound.get("wave1");
+    this.sound.play();
+ 
+};
 
+game.scene.Menu.prototype.m_muteSounds = function() {
+    if (this.keyboard.justPressed("M") && this.musicON == true){
+        this.application.sounds.sound.volume = 0;
+        this.musicON = false;
+    } else if (this.keyboard.justPressed("M") && this.musicON == false){
+        this.application.sounds.sound.volume = 1;
+        this.musicON = true;
+    }
 };

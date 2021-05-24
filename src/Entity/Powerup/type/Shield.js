@@ -15,6 +15,8 @@
  */
 game.entity.Shield = function(randomX, stage) {
     this.game = stage;
+    this.delay = 10000;
+    this.shieldRemove = true;
     //--------------------------------------------------------------------------
     // Super call
     //--------------------------------------------------------------------------
@@ -42,6 +44,23 @@ game.entity.Shield.prototype.init = function() {
 
 game.entity.Shield.prototype.update = function(step) {
     game.entity.Powerups.prototype.update.call(this, step);
+
+    if (this.y >= 550) {
+        this.y = 550;
+        this.delay -= step;
+        if (this.delay <= 0) {
+            this.shieldDisapear();
+        }
+    }
+};
+game.entity.Shield.prototype.shieldDisapear = function() {
+    var self = this;
+    if (this.shieldRemove) {
+        this.flicker(3000, 300, function() {
+            self.parent.removeChild(self)
+        }, this);
+    }
+    this.shieldRemove = false;
 };
 
 

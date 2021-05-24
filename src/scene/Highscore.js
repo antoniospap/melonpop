@@ -79,7 +79,6 @@ game.scene.Highscore.prototype.showHighscoreTable = function(highscores) {
     hsDesc.scaleX = 4;
     hsDesc.scaleY = 4;
     this.stage.addChild(hsDesc);
-    console.log(highscores);
     for (var i = 0; i < highscores.length; i++) {
         var text = new rune.text.BitmapField(`${highscores[i].name}           ${highscores[i].score}`);
         text.centerX = this.application.screen.centerX - 50;
@@ -87,6 +86,25 @@ game.scene.Highscore.prototype.showHighscoreTable = function(highscores) {
         text.scaleX = 3;
         text.scaleY = 3;
         this.stage.addChild(text);
+
+        /*
+        if (i == 0){
+            text.scaleX = 5;
+            text.scaleY = 5;
+            text.fillColor = "#FFD700";
+        } else if (i == 1){
+            text.scaleX = 4;
+            text.scaleY = 4;
+            text.fillColor = "#c0c0c0";
+        } else if (i == 2) {
+            text.scaleX = 3;
+            text.scaleY = 3;
+            text.fillColor = "#774f2e";
+        } else {
+            text.scaleX = 2;
+            text.scaleY = 2;
+        }
+        */
     }
 };
 

@@ -28,6 +28,7 @@ game.scene.Game = function() {
     this.waveDesc;
     this.waveArray = [];
 
+    this.sound;
     //--------------------------------------------------------------------------
     // Super call
     //--------------------------------------------------------------------------
@@ -57,6 +58,7 @@ game.scene.Game.prototype.init = function() {
     this.m_initBackground()
     this.m_initClouds()
     this.m_initTrees();
+    this.sound = this.application.sounds.sound.get("wave1");
 
     this.player = new game.entity.Character(this.gotShield);
     this.stage.addChild(this.player);
@@ -85,6 +87,7 @@ game.scene.Game.prototype.update = function(step) {
         this.waveCounter++;
         this.updateWaveDesc(this.waveCounter);
         this.application.scenes.selected.score.value += (this.waveCounter - 1) * 10;
+        this.sound.play();
     }
 
     this.m_cloudMotion();

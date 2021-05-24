@@ -48,25 +48,7 @@ game.entity.Coin.prototype.init = function() {
 game.entity.Coin.prototype.update = function(step) {
     game.entity.Powerups.prototype.update.call(this, step);
     this.rotation += 2;
-    if (this.y >= 550) {
-        this.y = 550;
-        this.delay -= step;
-        if (this.delay <= 0) {
-            this.coinDisapear();
-        }
-    }
-
 };
-game.entity.Coin.prototype.coinDisapear = function() {
-    var self = this;
-    if (this.coinRemove) {
-        this.flicker(3000, 300, function() {
-            self.parent.removeChild(self)
-        }, this);
-    }
-    this.coinRemove = false;
-};
-
 
 game.entity.Coin.prototype.catchPowerup = function() {
     var self = this;
