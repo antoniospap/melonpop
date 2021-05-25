@@ -13,7 +13,7 @@
  * 
  * Game state.
  */
-game.scene.Game = function() {
+game.scene.Game = function(sound) {
     this.melonL = null;
     this.player;
     this.playerShield;
@@ -29,6 +29,9 @@ game.scene.Game = function() {
     this.waveArray = [];
 
     this.sound;
+    this.soundStatus = sound;
+    this.soundON;
+    this.soundOFF;
     //--------------------------------------------------------------------------
     // Super call
     //--------------------------------------------------------------------------
@@ -70,9 +73,10 @@ game.scene.Game.prototype.init = function() {
     //this.cameras.getCamera(0).debug = true;
 
     this.initScore();
+    this.m_initMuteSounds();
 
     this.waveArray = [new game.wave.Wave02(this), new game.wave.Wave03(this), new game.wave.Wave04(this), new game.wave.Wave05(this), new game.wave.Wave06(this)];
-
+    console.log(this.soundStatus);
 };
 
 /**
@@ -91,6 +95,7 @@ game.scene.Game.prototype.update = function(step) {
     }
 
     this.m_cloudMotion();
+    this.m_muteSounds();
 };
 
 /**
@@ -157,4 +162,29 @@ game.scene.Game.prototype.initWaveDesc = function(waveCounter) {
 game.scene.Game.prototype.updateWaveDesc = function(waveCounter) {
     this.waveDesc.text = "";
     this.waveDesc.text = `Wave ${waveCounter}`;
+};
+
+game.scene.Game.prototype.m_initMuteSounds = function() {
+    this.soundON = new rune.display.Graphic(1100, 640, 30, 30, "#FF00FF", "slangbella");
+    this.soundOFF = new rune.display.Graphic(1100, 640, 30, 30, "", "slangbella");
+
+    if (this.soundStatus){
+        this.stage.addChild(this.soundON);
+    } else {
+        this.stage.addChild(this.soundOFF);
+    }
+};
+
+game.scene.Game.prototype.m_muteSounds = function() {
+    if (this.keyboard.justPressed("M") && this.soundStatus == true){
+        this.application.sounds.sound.volume = 0;
+        this.soundStatus = false;
+        this.stage.removeChild(this.soundON);
+        this.stage.addChild(this.soundOFF)
+    } else if (this.keyboard.justPressed("M") && this.soundStatus == false){
+        this.application.sounds.sound.volume = 1;
+        this.soundStatus = true;
+        this.stage.removeChild(this.soundOFF);
+        this.stage.addChild(this.soundON);
+    }
 };

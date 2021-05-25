@@ -53,9 +53,9 @@ game.entity.Coin.prototype.update = function(step) {
 game.entity.Coin.prototype.catchPowerup = function() {
     var self = this;
     this.game.player.hitTestObject(this, function() {
+        self.sound.play();
         self.parent.removeChild(self);
         self.getCoin();
-        this.sound.play();
     });
 };
 

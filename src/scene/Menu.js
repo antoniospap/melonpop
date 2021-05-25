@@ -19,9 +19,10 @@ game.scene.Menu = function() {
     this.highScore;
 
     this.menu = [];
-    this.gameScene = [];
     this.selectedIndex = 0;
     this.musicON = true;
+    this.soundOFF;
+    this.soundON;
 
     //--------------------------------------------------------------------------
     // Super call
@@ -58,7 +59,6 @@ game.scene.Menu.prototype.init = function() {
     this.m_initMuteSounds();
 
     this.menu = [this.playBtn, this.howToPlay, this.highScore];
-    this.gameScene = [new game.scene.Game(), new game.scene.Howto(), new game.scene.Highscore()];
 
     for (var i = 0; i < this.menu.length; i++) {
         this.menu[i].scaleX = 4;
@@ -131,7 +131,9 @@ game.scene.Menu.prototype.showSelected = function() {
             this.menu[i].alpha = 1;
             this.stage.addChild(this.slangArr[i]);
             if (this.keyboard.justPressed("enter")) {
-                this.application.scenes.load([this.gameScene[i]]);
+                var scenesS = [new game.scene.Game(this.musicON), new game.scene.Howto(), new game.scene.Highscore()];
+
+                this.application.scenes.load([scenesS[i]]);
             }
         } else {
             this.menu[i].alpha = 0.5;
@@ -166,18 +168,30 @@ game.scene.Menu.prototype.m_initCredits = function() {
 };
 
 game.scene.Menu.prototype.m_initMuteSounds = function() {
-    var title = new rune.text.BitmapField("MUTE");
+    var pressM = new rune.text.BitmapField("Press M");
+    pressM.y = 610;
+    pressM.x = 1070;
+    pressM.scaleX = 2;
+    pressM.scaleY = 2;
+    this.stage.addChild(pressM)
+
+    this.soundON = new rune.display.Graphic(1100, 640, 30, 30, "#FF00FF", "slangbella");
+    this.soundOFF = new rune.display.Graphic(1100, 640, 30, 30, "", "slangbella");
+    this.stage.addChild(this.soundON);
     this.sound = this.application.sounds.sound.get("wave1");
     this.sound.play();
- 
 };
 
 game.scene.Menu.prototype.m_muteSounds = function() {
     if (this.keyboard.justPressed("M") && this.musicON == true){
         this.application.sounds.sound.volume = 0;
         this.musicON = false;
+        this.stage.removeChild(this.soundON);
+        this.stage.addChild(this.soundOFF)
     } else if (this.keyboard.justPressed("M") && this.musicON == false){
         this.application.sounds.sound.volume = 1;
         this.musicON = true;
+        this.stage.removeChild(this.soundOFF);
+        this.stage.addChild(this.soundON);
     }
 };

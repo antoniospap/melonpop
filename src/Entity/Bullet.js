@@ -75,12 +75,12 @@ game.entity.Bullet.prototype.m_checkHitbox = function(step) {
     var self = this;
     for (var i = 0; i < objects.length; i++) {
         if (objects[i] instanceof game.entity.Melon) {
-            if (this.intersects(objects[i])) {
+            if (objects[i] != null && this.hitTestObject(objects[i])) {
                 this.sound.play();
                 objects[i].melonAnimation();
                 if (this.stage != null) {
-                    console.log(this)
-                this.stage.removeChild(this, true);
+                    this.stage.removeChild(this, true);
+                    break;
                 }
             }
         }
