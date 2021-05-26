@@ -87,6 +87,7 @@ game.entity.Character.prototype.playerAnimation = function () {
 
 game.entity.Character.prototype.m_characterMovement = function (step) {
   //character movement when key pressed
+  if(!this.motion) {
   if (this.keyboard.pressed("D")) {
     if (this.x <= 1230) {
       this.x += 4;
@@ -103,12 +104,13 @@ game.entity.Character.prototype.m_characterMovement = function (step) {
   else {
     this.animations.gotoAndPlay("idle");
   }
+  }
 };
 
 game.entity.Character.prototype.characterBullet = function (step) {
   //initiates Bullets object
   this.bulletDelay += step;
-  if (this.keyboard.justPressed("space")) {
+  if (this.keyboard.justPressed("space") && !this.motion) {
     if (this.bulletDelay >= 700) {
       //skjuter ett skot per 700 uppdateringsfrekvenser.
       this.sound.play();
@@ -213,6 +215,7 @@ game.entity.Character.prototype.cloudMotion = function cloud() {
   if (this.cloud.y <= 550) {
     this.y -= 5
     this.rotation = -90
+    this.animations.gotoAndPlay("idle");
   }
 
   if (this.cloud.y <= 0) {
