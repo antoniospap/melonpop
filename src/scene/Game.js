@@ -70,13 +70,13 @@ game.scene.Game.prototype.init = function() {
     this.waveCounter = 1;
     this.initWaveDesc(this.waveCounter);
 
-    //this.cameras.getCamera(0).debug = true;
+    this.cameras.getCamera(0).debug = true;
 
     this.initScore();
     this.m_initMuteSounds();
 
     this.waveArray = [new game.wave.Wave02(this), new game.wave.Wave03(this), new game.wave.Wave04(this), new game.wave.Wave05(this), new game.wave.Wave06(this)];
-    console.log(this.soundStatus);
+   
 };
 
 /**
@@ -165,8 +165,8 @@ game.scene.Game.prototype.updateWaveDesc = function(waveCounter) {
 };
 
 game.scene.Game.prototype.m_initMuteSounds = function() {
-    this.soundON = new rune.display.Graphic(1100, 640, 30, 30, "#FF00FF", "slangbella");
-    this.soundOFF = new rune.display.Graphic(1100, 640, 30, 30, "", "slangbella");
+    this.soundON = new rune.display.Graphic(1100, 640, 50, 50, "", "soundon");
+    this.soundOFF = new rune.display.Graphic(1100, 640, 50, 50, "", "soundoff");
 
     if (this.soundStatus){
         this.stage.addChild(this.soundON);

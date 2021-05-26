@@ -23,6 +23,7 @@ game.scene.Menu = function() {
     this.musicON = true;
     this.soundOFF;
     this.soundON;
+    this.menuSound;
 
     //--------------------------------------------------------------------------
     // Super call
@@ -65,6 +66,8 @@ game.scene.Menu.prototype.init = function() {
         this.menu[i].scaleY = 4;
         this.menu[i].alpha = 0.5;
     }
+
+    
 };
 
 /**
@@ -170,13 +173,13 @@ game.scene.Menu.prototype.m_initCredits = function() {
 game.scene.Menu.prototype.m_initMuteSounds = function() {
     var pressM = new rune.text.BitmapField("Press M");
     pressM.y = 610;
-    pressM.x = 1070;
+    pressM.x = 1080;
     pressM.scaleX = 2;
     pressM.scaleY = 2;
     this.stage.addChild(pressM)
 
-    this.soundON = new rune.display.Graphic(1100, 640, 30, 30, "#FF00FF", "slangbella");
-    this.soundOFF = new rune.display.Graphic(1100, 640, 30, 30, "", "slangbella");
+    this.soundON = new rune.display.Graphic(1100, 640, 50, 50, "", "soundon");
+    this.soundOFF = new rune.display.Graphic(1100, 640, 50, 50, "", "soundoff");
     this.stage.addChild(this.soundON);
     this.sound = this.application.sounds.sound.get("wave1");
     this.sound.play();

@@ -58,6 +58,8 @@ game.entity.MelonL.prototype.m_onDie = function() {
     if (this.hitTest) {
         for (var i = 0; i < 2; i++) {
             var melonM = new game.entity.MelonM(this.x, this.y);
+            melonM.y -= 100;
+            melonM.velocity.y -= 5;
 
             if (i == 0) {
                 melonM.x -= 50;

@@ -49,7 +49,7 @@ game.entity.Character.prototype.constructor = game.entity.Character;
  */
 game.entity.Character.prototype.init = function () {
   rune.display.Sprite.prototype.init.call(this);
-  this.hitbox.set(5, 5, 42, 70);
+  this.hitbox.set(5, 10, 42, 60);
   this.timers = new rune.timer.Timers();
   this.playerAnimation();
   this.sound = this.application.sounds.sound.get("throw");
@@ -83,18 +83,19 @@ game.entity.Character.prototype.dispose = function () {
 game.entity.Character.prototype.playerAnimation = function () {
   this.animations.add("idle", [0], 1, true);
   this.animations.add("walk", [1, 2, 3, 4, 5, 6], 8, true);
+
 };
 
 game.entity.Character.prototype.m_characterMovement = function (step) {
   //character movement when key pressed
   if(!this.motion) {
-  if (this.keyboard.pressed("D")) {
+  if (this.keyboard.pressed("D")|| this.keyboard.pressed("right") ) {
     if (this.x <= 1230) {
       this.x += 4;
       this.animations.gotoAndPlay("walk");
       this.flippedX = false;
     }
-  } else if (this.keyboard.pressed("A")) {
+  } else if (this.keyboard.pressed("A") || this.keyboard.pressed("left")) {
     if (this.x >= 0) {
       this.x -= 4;
       this.animations.gotoAndPlay("walk");
@@ -136,7 +137,7 @@ game.entity.Character.prototype.m_checkHitbox = function () {
           //   ),
           // ]);
           this.characterDead()
-        } else if (this.shield != null) {
+        } else if (objects[i].animations.current == null && this.shield != null) {
           this.removeShield();
         }
       }

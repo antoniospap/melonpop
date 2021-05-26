@@ -66,12 +66,15 @@ game.entity.MelonM.prototype.m_onDie = function() {
         for (var i = 0; i < 2; i++) {
             var smallMelon = new game.entity.MelonS(this.x, this.y);
             this.parent.addChild(smallMelon);
+            smallMelon.y -= 50;
+            smallMelon.velocity.y -= 5;
+
             if (i == 0) {
-                //smallMelon.x -= 50;
+                smallMelon.x -= 50;
                 smallMelon.velocity.x -= 1;
             }
             if (i == 1) {
-                //smallMelon.x += 50;
+                smallMelon.x += 50;
 
             }
         }
