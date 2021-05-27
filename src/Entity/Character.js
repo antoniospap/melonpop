@@ -22,10 +22,13 @@ game.entity.Character = function () {
   this.cloud = null
   this.motion = false
   this.playerHit;
+
   this.playerHitBool = true;
   this.gameoverBool = true;
+  this.shieldbreakBool = true;
 
   this.gameover;
+  this.shieldBreak;
 
   //--------------------------------------------------------------------------
   // Super call
@@ -61,6 +64,8 @@ game.entity.Character.prototype.init = function () {
   this.initCloud()
   this.playerHit = this.application.sounds.sound.get("hit");
   this.gameover = this.application.sounds.sound.get("gameover");
+  this.shieldBreak = this.application.sounds.sound.get("shieldbrake");
+  this.shieldBreak.volume = 0.1;
 
 };
 
@@ -184,8 +189,10 @@ game.entity.Character.prototype.removeShield = function () {
       this.stage.removeChild(this.shield);
       this.shield = null;
       this.gotShield = false;
+      this.shieldBreak.play();
     },
   });
+  
 };
 
 game.entity.Character.prototype.characterDead = function () {
@@ -197,7 +204,6 @@ game.entity.Character.prototype.characterDead = function () {
     }
   }
   if (this.playerHitBool){
-    console.log("DEWAD");
     this.playerHit.play();
     this.playerHit.volume = 0.1;
     this.playerHitBool = false;
@@ -218,7 +224,6 @@ game.entity.Character.prototype.cloudMotion = function cloud() {
     this.cloud.y -= 5;
   }
   if (this.gameoverBool && this.motion){
-    console.log("DEWAD");
     this.gameover.play();
     this.gameoverBool = false;
   }
