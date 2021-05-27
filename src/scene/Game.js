@@ -62,7 +62,7 @@ game.scene.Game.prototype.init = function() {
     this.m_initClouds()
     this.m_initTrees();
     this.sound = this.application.sounds.sound.get("wave1");
-
+    this.sound.play();
     this.player = new game.entity.Character(this.gotShield);
     this.stage.addChild(this.player);
 
@@ -77,11 +77,8 @@ game.scene.Game.prototype.init = function() {
 
     this.waveArray = [new game.wave.Wave02(this), new game.wave.Wave03(this), new game.wave.Wave04(this), new game.wave.Wave05(this), new game.wave.Wave06(this)];
     
-    this.gamesound = this.application.sounds.sound.get("gamemusic");
-    this.gamesound.play(true);
-    
-    console.log(this.gamesound);
-};
+  
+    };
 
 /**
  * @inheritDoc
@@ -90,9 +87,7 @@ game.scene.Game.prototype.update = function(step) {
     rune.scene.Scene.prototype.update.call(this, step);
     this.wave.update(step);
 
-    if (this.gamesound.paused){
-        this.gamesound.play(true);
-    }
+    
 
     if (this.wave.checkWave()) {
         this.wave = this.waveArray[this.waveCounter - 1];

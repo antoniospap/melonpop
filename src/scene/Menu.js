@@ -23,7 +23,7 @@ game.scene.Menu = function() {
     this.musicON = true;
     this.soundOFF;
     this.soundON;
-    this.menuSound;
+    this.menuMusic;
 
     //--------------------------------------------------------------------------
     // Super call
@@ -67,7 +67,8 @@ game.scene.Menu.prototype.init = function() {
         this.menu[i].alpha = 0.5;
     }
 
-    
+    this.menuMusic = this.application.sounds.sound.get("gamemusic");
+    this.menuMusic.play(true);
 };
 
 /**
@@ -75,6 +76,10 @@ game.scene.Menu.prototype.init = function() {
  */
 game.scene.Menu.prototype.update = function(step) {
     rune.scene.Scene.prototype.update.call(this, step);
+
+    if (this.menuMusic.paused){
+        this.menuMusic.play(true);
+    }
     this.getCurrentIndex();
     this.showSelected();
 
@@ -135,8 +140,9 @@ game.scene.Menu.prototype.showSelected = function() {
             this.stage.addChild(this.slangArr[i]);
             if (this.keyboard.justPressed("enter")) {
                 var scenesS = [new game.scene.Game(this.musicON), new game.scene.Howto(), new game.scene.Highscore()];
-
                 this.application.scenes.load([scenesS[i]]);
+                this.menuMusic.stop();
+                this.menuMusic.dispose();
             }
         } else {
             this.menu[i].alpha = 0.5;
@@ -181,8 +187,6 @@ game.scene.Menu.prototype.m_initMuteSounds = function() {
     this.soundON = new rune.display.Graphic(1100, 640, 50, 50, "", "soundon");
     this.soundOFF = new rune.display.Graphic(1100, 640, 50, 50, "", "soundoff");
     this.stage.addChild(this.soundON);
-    this.sound = this.application.sounds.sound.get("wave1");
-    this.sound.play();
 };
 
 game.scene.Menu.prototype.m_muteSounds = function() {

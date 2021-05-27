@@ -21,6 +21,11 @@ game.entity.Character = function () {
   this.sound;
   this.cloud = null
   this.motion = false
+  this.playerHit;
+  this.playerHitBool = true;
+  this.gameoverBool = true;
+
+  this.gameover;
 
   //--------------------------------------------------------------------------
   // Super call
@@ -54,6 +59,9 @@ game.entity.Character.prototype.init = function () {
   this.playerAnimation();
   this.sound = this.application.sounds.sound.get("throw");
   this.initCloud()
+  this.playerHit = this.application.sounds.sound.get("hit");
+  this.gameover = this.application.sounds.sound.get("gameover");
+
 };
 
 /**
@@ -67,8 +75,6 @@ game.entity.Character.prototype.update = function (step) {
   this.shieldFollowPlayer();
 
   this.cloudMotion()
-  this.test()
-
 
   this.timers.update(step);
 };
@@ -136,7 +142,7 @@ game.entity.Character.prototype.m_checkHitbox = function () {
           //     this.application.scenes.selected.score.value
           //   ),
           // ]);
-          this.characterDead()
+          this.characterDead();
         } else if (objects[i].animations.current == null && this.shield != null) {
           this.removeShield();
         }
@@ -146,19 +152,21 @@ game.entity.Character.prototype.m_checkHitbox = function () {
 };
 
 game.entity.Character.prototype.getShield = function () {
-  this.shield = new rune.display.Graphic(
-    this.x,
-    this.y,
-    100,
-    100,
-    "",
-    "fallingshield"
-  );
-  this.shield.alpha = 0.5;
-  this.shield.scaleX = 1.6;
-  this.shield.scaleY = 1.6;
+  if (this.shield == undefined || this.shield == null){
+      this.shield = new rune.display.Graphic(
+      this.x,
+      this.y,
+      100,
+      100,
+      "",
+      "fallingshield"
+    );
+    this.shield.alpha = 0.5;
+    this.shield.scaleX = 1.6;
+    this.shield.scaleY = 1.6;
 
-  this.stage.addChild(this.shield);
+    this.stage.addChild(this.shield);
+  }
 };
 
 game.entity.Character.prototype.shieldFollowPlayer = function () {
@@ -182,20 +190,17 @@ game.entity.Character.prototype.removeShield = function () {
 
 game.entity.Character.prototype.characterDead = function () {
   var objects = this.stage.getChildren();
-  // console.log(objects)
   for (var i = 0; i < objects.length; i++) {
     if (objects[i] instanceof game.entity.Melon) {
-
       objects[i].active = false
-      // console.log(this)
-      // this.motion()
-      // this.y = 100
-      // this.cloudMotion()
       this.motion = true
     }
-    // if (objects[i] instanceof game.entity.Character) {
-    //   // objects[i].active = false
-    // }
+  }
+  if (this.playerHitBool){
+    console.log("DEWAD");
+    this.playerHit.play();
+    this.playerHit.volume = 0.1;
+    this.playerHitBool = false;
   }
 };
 
@@ -203,14 +208,19 @@ game.entity.Character.prototype.initCloud = function () {
   var x = this.x
   this.cloud = new rune.display.Graphic(this.x, 720, 300, 115, "", "cloud2");
   this.stage.addChild(this.cloud);
+
 };
 
 game.entity.Character.prototype.cloudMotion = function cloud() {
 
   if (this.motion) {
     this.cloud.x = this.x - 60
-    this.cloud.y -= 5
-    
+    this.cloud.y -= 5;
+  }
+  if (this.gameoverBool && this.motion){
+    console.log("DEWAD");
+    this.gameover.play();
+    this.gameoverBool = false;
   }
 
   if (this.cloud.y <= 550) {
@@ -226,12 +236,5 @@ game.entity.Character.prototype.cloudMotion = function cloud() {
       ),
     ]);
   }
-
-};
-
-game.entity.Character.prototype.test = function cloud() {
-
-
-  // console.log('BLÄÄÄÄ')
 
 };

@@ -23,6 +23,8 @@ game.entity.MelonL = function(spawnX = -20, spawnY = 50) {
     this.melonBottomBounce = 480;
 
     this.melonMaxX = 1100;
+    this.melonMaxLeftX = -20;
+
 
 
     //--------------------------------------------------------------------------

@@ -26,6 +26,8 @@ game.entity.MelonM = function(x, y) {
 
 
     this.melonMaxX = 1180;
+    this.melonMaxLeftX = -20;
+
 
 
     //--------------------------------------------------------------------------
