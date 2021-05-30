@@ -13,7 +13,7 @@
  *
  *.Bullet state.
  */
-game.entity.Coin = function(randomX, stage) {
+game.entity.Coin = function(stage) {
     this.game = stage;
     this.delay = 10000;
     this.coinRemove = true;
@@ -25,7 +25,7 @@ game.entity.Coin = function(randomX, stage) {
     /**
      * ...
      */
-    game.entity.Powerups.call(this, randomX, 0, 40, 40, "", "coinshine", stage);
+    game.entity.Powerups.call(this, Math.floor(Math.random() * 1200), 0, 40, 40, "", "coinshine", stage);
 };
 
 //------------------------------------------------------------------------------

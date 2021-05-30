@@ -13,7 +13,7 @@
  * 
  * Wave 002.
  */
- game.wave.Wave04 = function(stage) {
+game.wave.Wave04 = function(stage) {
     this.game = stage;
     this.melons = [];
     //--------------------------------------------------------------------------
@@ -51,21 +51,33 @@ game.wave.Wave04.prototype.m_constructor = function() {
         var m = new game.entity.MelonM(randomX1, -30);
         var s = new game.entity.MelonS(randomX2, -10);
 
-        this.melons.push(l,m,s);
+        this.melons.push(l, m, s);
     }
 };
 
 game.wave.Wave04.prototype.m_constructorPowerups = function() {
-    var randomX2 = Math.floor(Math.random() * 600);
     var self = this;
+    var coinTime = [3000, 10000, 25000, 36000, 40000, 55000, 70000];
+
+    for (var i = 0; i < coinTime.length; i++) {
+        this.timers.create({
+            duration: coinTime[i],
+            scope: this,
+            onComplete: function() {
+                self.coin = new game.entity.Coin(self.game); //creates Coins-powerup
+                self.powerups.push(self.coin);
+                self.game.stage.addChild(self.coin)
+            }
+        });
+    }
 
     this.timers.create({
-        duration: 16000,
+        duration: 17000,
         scope: this,
         onComplete: function() {
-            self.coin = new game.entity.Coin(randomX2, self.game); //creates Coins-powerup
-            self.powerups.push(self.coin);
-            self.game.stage.addChild(self.coin)
+            self.shield = new game.entity.Shield(self.game); //Creates shield-powerup
+            self.powerups.push(self.shield);
+            self.game.stage.addChild(self.shield)
         }
     });
 };

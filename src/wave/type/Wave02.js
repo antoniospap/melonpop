@@ -45,21 +45,32 @@ game.wave.Wave02.prototype.m_constructor = function() {
         var m = new game.entity.MelonM();
         var s = new game.entity.MelonS();
 
-        this.melons.push(m,s);
+        this.melons.push(m, s);
     }
 };
 
 game.wave.Wave02.prototype.m_constructorPowerups = function() {
-    var randomX2 = Math.floor(Math.random() * 600);
     var self = this;
+    var coinTime = [3000, 9000];
 
+    for (var i = 0; i < coinTime.length; i++) {
+        this.timers.create({
+            duration: coinTime[i],
+            scope: this,
+            onComplete: function() {
+                self.coin = new game.entity.Coin(self.game); //creates Coins-powerup
+                self.powerups.push(self.coin);
+                self.game.stage.addChild(self.coin)
+            }
+        });
+    }
     this.timers.create({
-        duration: 8000,
+        duration: 2000,
         scope: this,
         onComplete: function() {
-            self.coin = new game.entity.Coin(randomX2, self.game); //creates Coins-powerup
-            self.powerups.push(self.coin);
-            self.game.stage.addChild(self.coin)
+            self.shield = new game.entity.Shield(self.game); //Creates shield-powerup
+            self.powerups.push(self.shield);
+            self.game.stage.addChild(self.shield)
         }
     });
 };

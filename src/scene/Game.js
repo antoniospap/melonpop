@@ -19,9 +19,6 @@ game.scene.Game = function(sound) {
     this.playerShield;
     this.wave;
     this.waveCounter = 0;
-    this.m_cloudOne;
-    this.m_cloudTwo;
-    this.m_cloudThree;
     this.bulletPowerup;
     this.score = 0;
     this.gotShield = false;
@@ -59,8 +56,9 @@ game.scene.Game.prototype.constructor = game.scene.Game;
 game.scene.Game.prototype.init = function() {
     rune.scene.Scene.prototype.init.call(this);
     this.m_initBackground()
-    this.m_initClouds()
+    this.m_spawnClouds();
     this.m_initTrees();
+
     this.sound = this.application.sounds.sound.get("wave1");
     this.sound.play();
     this.player = new game.entity.Character(this.gotShield);
@@ -70,15 +68,15 @@ game.scene.Game.prototype.init = function() {
     this.waveCounter = 1;
     this.initWaveDesc(this.waveCounter);
 
-    this.cameras.getCamera(0).debug = true;
+    //this.cameras.getCamera(0).debug = true;
 
     this.initScore();
     this.m_initMuteSounds();
 
     this.waveArray = [new game.wave.Wave02(this), new game.wave.Wave03(this), new game.wave.Wave04(this), new game.wave.Wave05(this), new game.wave.Wave06(this)];
-    
-  
-    };
+
+
+};
 
 /**
  * @inheritDoc
@@ -87,7 +85,7 @@ game.scene.Game.prototype.update = function(step) {
     rune.scene.Scene.prototype.update.call(this, step);
     this.wave.update(step);
 
-    
+
 
     if (this.wave.checkWave()) {
         this.wave = this.waveArray[this.waveCounter - 1];
@@ -97,7 +95,6 @@ game.scene.Game.prototype.update = function(step) {
         this.sound.play();
     }
 
-    this.m_cloudMotion();
     this.m_muteSounds();
 };
 
@@ -109,39 +106,20 @@ game.scene.Game.prototype.dispose = function() {
 };
 
 game.scene.Game.prototype.m_initBackground = function() {
-    this.m_bkgd = new rune.display.Graphic(0, 0, 1280, 720, "#FF00FF", "cleanBkrgd");
+    this.m_bkgd = new rune.display.Graphic(0, 0, 1280, 720, "", "cleanBkrgd");
     this.stage.addChild(this.m_bkgd);
+};
+game.scene.Game.prototype.m_spawnClouds = function() {
+    var c1 = new game.entity.Clouds(20, 80, "cloud1", 0.15);
+    var c2 = new game.entity.Clouds(900, 200, "cloud2", 0.12);
+    var c3 = new game.entity.Clouds(500, 300, "cloud3", 0.2);
+    this.stage.addChild(c1);
+    this.stage.addChild(c2);
+    this.stage.addChild(c3);
 };
 game.scene.Game.prototype.m_initTrees = function() {
     this.m_trees = new rune.display.Graphic(0, 100, 1280, 491, "", "treesnbushes");
     this.stage.addChild(this.m_trees);
-};
-
-game.scene.Game.prototype.m_initClouds = function() {
-    this.m_cloudOne = new rune.display.Graphic(20, 80, 300, 115, "", "cloud1");
-    this.stage.addChild(this.m_cloudOne);
-
-    this.m_cloudTwo = new rune.display.Graphic(500, 250, 300, 115, "", "cloud2");
-    this.stage.addChild(this.m_cloudTwo);
-
-    this.m_cloudThree = new rune.display.Graphic(830, 130, 300, 115, "", "cloud3");
-    this.stage.addChild(this.m_cloudThree);
-};
-
-game.scene.Game.prototype.m_cloudMotion = function() {
-    this.m_cloudOne.x -= 0.13
-    this.m_cloudTwo.x -= 0.07
-    this.m_cloudThree.x -= 0.10
-
-    if (this.m_cloudOne.x <= -290) {
-        this.m_cloudOne.x = 1300
-    }
-    if (this.m_cloudTwo.x <= -290) {
-        this.m_cloudTwo.x = 1300
-    }
-    if (this.m_cloudThree.x <= -290) {
-        this.m_cloudThree.x = 1300
-    }
 };
 
 game.scene.Game.prototype.initScore = function() {
@@ -171,7 +149,7 @@ game.scene.Game.prototype.m_initMuteSounds = function() {
     this.soundON = new rune.display.Graphic(1100, 640, 50, 50, "", "soundon");
     this.soundOFF = new rune.display.Graphic(1100, 640, 50, 50, "", "soundoff");
 
-    if (this.soundStatus){
+    if (this.soundStatus) {
         this.stage.addChild(this.soundON);
     } else {
         this.stage.addChild(this.soundOFF);
@@ -179,12 +157,12 @@ game.scene.Game.prototype.m_initMuteSounds = function() {
 };
 
 game.scene.Game.prototype.m_muteSounds = function() {
-    if (this.keyboard.justPressed("M") && this.soundStatus == true){
+    if (this.keyboard.justPressed("M") && this.soundStatus == true) {
         this.application.sounds.sound.volume = 0;
         this.soundStatus = false;
         this.stage.removeChild(this.soundON);
         this.stage.addChild(this.soundOFF)
-    } else if (this.keyboard.justPressed("M") && this.soundStatus == false){
+    } else if (this.keyboard.justPressed("M") && this.soundStatus == false) {
         this.application.sounds.sound.volume = 1;
         this.soundStatus = true;
         this.stage.removeChild(this.soundOFF);

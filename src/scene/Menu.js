@@ -53,6 +53,7 @@ game.scene.Menu.prototype.init = function() {
     rune.scene.Scene.prototype.init.call(this);
 
     this.m_initBackground();
+    this.m_spawnClouds();
     this.m_initTextMenu();
     this.m_initSlangbella();
     this.m_initTitle();
@@ -77,7 +78,7 @@ game.scene.Menu.prototype.init = function() {
 game.scene.Menu.prototype.update = function(step) {
     rune.scene.Scene.prototype.update.call(this, step);
 
-    if (this.menuMusic.paused){
+    if (this.menuMusic.paused) {
         this.menuMusic.play(true);
     }
     this.getCurrentIndex();
@@ -86,11 +87,25 @@ game.scene.Menu.prototype.update = function(step) {
     this.m_muteSounds();
 };
 
+
 game.scene.Menu.prototype.m_initBackground = function() {
-    this.m_bkgd = new rune.display.Graphic(0, 0, 1280, 720, "", "menu");
-    this.stage.addChild(this.m_bkgd);
-    this.m_bkgd.alpha = 0.6;
+    var m_bkgd = new rune.display.Graphic(0, 0, 1280, 720, "", "menu");
+    this.stage.addChild(m_bkgd);
+    m_bkgd.alpha = 0.6;
 };
+
+game.scene.Menu.prototype.m_spawnClouds = function() {
+    var c1 = new game.entity.Clouds(300, 80, "cloud1", 0.5);
+    var c2 = new game.entity.Clouds(100, 400, "cloud2", 0.6);
+    var c3 = new game.entity.Clouds(900, 300, "cloud3", 0.7);
+    var c4 = new game.entity.Clouds(1200, 200, "cloud3", 0.6);
+    var clouds = [c1, c2, c3, c4];
+    for (var i = 0; i < clouds.length; i++) {
+        this.stage.addChild(clouds[i]);
+        clouds[i].alpha = 0.5;
+    }
+};
+
 
 game.scene.Menu.prototype.m_initTextMenu = function() {
     this.playBtn = new rune.text.BitmapField("PLAY")
@@ -169,7 +184,7 @@ game.scene.Menu.prototype.m_initTitle = function() {
 game.scene.Menu.prototype.m_initCredits = function() {
     var title = new rune.text.BitmapField("Created by: Antonios Papathanassiadis & Martin Kassar");
     title.width = 600
-    title.centerX = this.application.screen.centerX ;
+    title.centerX = this.application.screen.centerX;
     title.y = 650;
     title.scaleX = 2;
     title.scaleY = 2;
@@ -190,12 +205,12 @@ game.scene.Menu.prototype.m_initMuteSounds = function() {
 };
 
 game.scene.Menu.prototype.m_muteSounds = function() {
-    if (this.keyboard.justPressed("M") && this.musicON == true){
+    if (this.keyboard.justPressed("M") && this.musicON == true) {
         this.application.sounds.sound.volume = 0;
         this.musicON = false;
         this.stage.removeChild(this.soundON);
         this.stage.addChild(this.soundOFF)
-    } else if (this.keyboard.justPressed("M") && this.musicON == false){
+    } else if (this.keyboard.justPressed("M") && this.musicON == false) {
         this.application.sounds.sound.volume = 1;
         this.musicON = true;
         this.stage.removeChild(this.soundOFF);
