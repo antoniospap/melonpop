@@ -154,7 +154,6 @@ game.scene.Menu.prototype.showSelected = function() {
             this.menu[i].alpha = 1;
             this.stage.addChild(this.slangArr[i]);
             if (this.keyboard.justPressed("enter")) {
-                console.log(this.menuMusic);
                 var scenesS = [new game.scene.Game(this.musicON), new game.scene.Howto(this.menuMusic), new game.scene.Highscore()];
                 this.application.scenes.load([scenesS[i]]);
                 this.menuMusic.stop();
@@ -200,8 +199,8 @@ game.scene.Menu.prototype.m_initMuteSounds = function() {
     pressM.scaleY = 2;
     this.stage.addChild(pressM)
 
-    this.soundON = new rune.display.Graphic(1100, 640, 50, 50, "", "soundon");
-    this.soundOFF = new rune.display.Graphic(1100, 640, 50, 50, "", "soundoff");
+    this.soundON = new rune.display.Graphic(1100, 640, 50, 50, "", "unmutesound");
+    this.soundOFF = new rune.display.Graphic(1100, 640, 50, 50, "", "mutesound");
     this.stage.addChild(this.soundON);
 };
 

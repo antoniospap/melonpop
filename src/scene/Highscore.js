@@ -18,6 +18,7 @@ game.scene.Highscore = function(score, name) {
     this.score = score;
     this.name = name;
     this.menuMusic;
+    this.soundStatus = true;
     //--------------------------------------------------------------------------
     // Super call
     //--------------------------------------------------------------------------
@@ -46,6 +47,7 @@ game.scene.Highscore.prototype.init = function() {
     rune.scene.Scene.prototype.init.call(this);
     this.m_initBackground()
     this.m_backToMenu()
+    this.m_initMuteSounds();
     var hsArr = [];
     this.hs = new rune.data.Highscores("hs", 0, 5);
     if (this.score != undefined) {
@@ -68,7 +70,7 @@ game.scene.Highscore.prototype.init = function() {
  */
 game.scene.Highscore.prototype.update = function(step) {
     rune.scene.Scene.prototype.update.call(this, step);
-
+    this.m_muteSounds();
     if (this.menuMusic.paused) {
         this.menuMusic.play(true);
     }
@@ -87,8 +89,15 @@ game.scene.Highscore.prototype.showHighscoreTable = function(highscores) {
     hsDesc.y = 100;
     hsDesc.scaleX = 4;
     hsDesc.scaleY = 4;
-    console.log(hsDesc);
     this.stage.addChild(hsDesc);
+
+    var gold = new rune.display.Graphic(470, 195, 30, 30, "", "goldtrophy");
+    var silver = new rune.display.Graphic(470, 245, 30, 30, "", "silvertrophy");
+    var bronz = new rune.display.Graphic(470, 295, 30, 30, "", "bronzetrophy");
+    this.stage.addChild(gold);
+    this.stage.addChild(silver);
+    this.stage.addChild(bronz);
+
     for (var i = 0; i < highscores.length; i++) {
         var text = new rune.text.BitmapField(`${highscores[i].name}           ${highscores[i].score}`);
         text.centerX = this.application.screen.centerX - 50;
@@ -117,4 +126,29 @@ game.scene.Highscore.prototype.m_backToMenu = function() {
     var slingShot = new rune.display.Graphic(470, 460, 30, 30, "", "slangbella");
 
     this.stage.addChild(slingShot)
+};
+
+game.scene.Highscore.prototype.m_initMuteSounds = function() {
+    this.soundON = new rune.display.Graphic(1100, 640, 50, 50, "", "unmutesound");
+    this.soundOFF = new rune.display.Graphic(1100, 640, 50, 50, "", "mutesound");
+
+    if (this.soundStatus) {
+        this.stage.addChild(this.soundON);
+    } else {
+        this.stage.addChild(this.soundOFF);
+    }
+};
+
+game.scene.Highscore.prototype.m_muteSounds = function() {
+    if (this.keyboard.justPressed("M") && this.soundStatus == true) {
+        this.application.sounds.sound.volume = 0;
+        this.soundStatus = false;
+        this.stage.removeChild(this.soundON);
+        this.stage.addChild(this.soundOFF)
+    } else if (this.keyboard.justPressed("M") && this.soundStatus == false) {
+        this.application.sounds.sound.volume = 1;
+        this.soundStatus = true;
+        this.stage.removeChild(this.soundOFF);
+        this.stage.addChild(this.soundON);
+    }
 };

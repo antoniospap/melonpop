@@ -17,6 +17,8 @@ game.scene.Howto = function() {
     this.m_character = null
     this.m_moveRight = true
     this.menuMusic;
+
+    this.soundStatus = true;
     //--------------------------------------------------------------------------
     // Super call
     //--------------------------------------------------------------------------
@@ -51,6 +53,7 @@ game.scene.Howto.prototype.init = function() {
     this.m_outputText();
     this.outputPowerupText();
     this.m_initDemo();
+    this.m_initMuteSounds();
 
     this.menuMusic = this.application.sounds.sound.get("gamemusic");
     this.menuMusic.resume();
@@ -62,6 +65,7 @@ game.scene.Howto.prototype.init = function() {
 game.scene.Howto.prototype.update = function(step) {
     rune.scene.Scene.prototype.update.call(this, step);
     this.m_playDemo();
+    this.m_muteSounds();
 
     if (this.menuMusic.paused) {
         this.menuMusic.play(true);
@@ -194,4 +198,29 @@ game.scene.Howto.prototype.m_playDemo = function() {
         this.m_character.flippedX = false;
     }
 
+};
+
+game.scene.Howto.prototype.m_initMuteSounds = function() {
+    this.soundON = new rune.display.Graphic(1100, 640, 50, 50, "", "unmutesound");
+    this.soundOFF = new rune.display.Graphic(1100, 640, 50, 50, "", "mutesound");
+
+    if (this.soundStatus) {
+        this.stage.addChild(this.soundON);
+    } else {
+        this.stage.addChild(this.soundOFF);
+    }
+};
+
+game.scene.Howto.prototype.m_muteSounds = function() {
+    if (this.keyboard.justPressed("M") && this.soundStatus == true) {
+        this.application.sounds.sound.volume = 0;
+        this.soundStatus = false;
+        this.stage.removeChild(this.soundON);
+        this.stage.addChild(this.soundOFF)
+    } else if (this.keyboard.justPressed("M") && this.soundStatus == false) {
+        this.application.sounds.sound.volume = 1;
+        this.soundStatus = true;
+        this.stage.removeChild(this.soundOFF);
+        this.stage.addChild(this.soundON);
+    }
 };

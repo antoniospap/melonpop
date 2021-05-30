@@ -146,8 +146,8 @@ game.scene.Game.prototype.updateWaveDesc = function(waveCounter) {
 };
 
 game.scene.Game.prototype.m_initMuteSounds = function() {
-    this.soundON = new rune.display.Graphic(1100, 640, 50, 50, "", "soundon");
-    this.soundOFF = new rune.display.Graphic(1100, 640, 50, 50, "", "soundoff");
+    this.soundON = new rune.display.Graphic(1100, 640, 50, 50, "", "unmutesound");
+    this.soundOFF = new rune.display.Graphic(1100, 640, 50, 50, "", "mutesound");
 
     if (this.soundStatus) {
         this.stage.addChild(this.soundON);

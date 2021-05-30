@@ -20,7 +20,7 @@ game.scene.Gameover = function(gameoverSound, score = "N/A") {
     this.selectedIndex = 0;
     this.char = [];
     this.enterIndex = 0;
-    this.xCords = [500, 550, 600];
+    this.xCords = [500, 550, 600, 650, 700];
     this.name = [];
     this.gameoverSound = gameoverSound;
 
@@ -71,7 +71,7 @@ game.scene.Gameover.prototype.init = function() {
     this.stage.addChildAt(gameover, 3)
 
     var score = new rune.text.BitmapField(`${this.score}`);
-    score.centerX = this.application.screen.centerX + 120;
+    score.centerX = this.application.screen.centerX + 200;
     score.centerY = 350;
     score.scaleX = 4;
     score.scaleY = 4;
@@ -92,9 +92,12 @@ game.scene.Gameover.prototype.initCharFields = function() {
     var char1 = new rune.text.BitmapField("-");
     var char2 = new rune.text.BitmapField("-");
     var char3 = new rune.text.BitmapField("-");
-    this.char = [char1, char2, char3];
+    var char4 = new rune.text.BitmapField("-");
+    var char5 = new rune.text.BitmapField("-");
 
-    for (var i = 1; i < 3; i++) {
+    this.char = [char1, char2, char3, char4, char5];
+
+    for (var i = 1; i < 5; i++) {
         this.char[i].centerY = this.application.screen.centerY;
         this.char[i].x = this.xCords[i];
         this.char[i].scaleX = 3;
@@ -118,7 +121,7 @@ game.scene.Gameover.prototype.getCurrentIndex = function() {
     if (this.keyboard.justPressed("enter")) {
         this.enterIndex++;
     }
-    if (this.enterIndex >= 3) {
+    if (this.enterIndex >= 5) {
         for (var i = 0; i < this.char.length; i++) {
             this.name.push(this.char[i].text);
         }
