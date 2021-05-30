@@ -123,7 +123,7 @@ game.scene.Game.prototype.m_initTrees = function() {
 };
 
 game.scene.Game.prototype.initScore = function() {
-    this.score = new rune.ui.Counter(5, 10, 10, "", 3);
+    this.score = new rune.ui.Counter(5, 10, 10, "testtexture", 3);
     this.score.y = 630;
     this.score.x = 50;
     this.score.scaleX = 3;

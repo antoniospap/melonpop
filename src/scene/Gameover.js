@@ -14,7 +14,7 @@
  * Game state.
  * @param {number} score Players received score
  */
-game.scene.Gameover = function(score = "N/A") {
+game.scene.Gameover = function(gameoverSound, score = "N/A") {
     this.score = score;
     this.letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
     this.selectedIndex = 0;
@@ -22,6 +22,7 @@ game.scene.Gameover = function(score = "N/A") {
     this.enterIndex = 0;
     this.xCords = [500, 550, 600];
     this.name = [];
+    this.gameoverSound = gameoverSound;
 
     //--------------------------------------------------------------------------
     // Super call
@@ -125,6 +126,8 @@ game.scene.Gameover.prototype.getCurrentIndex = function() {
 
         if (this.keyboard.justPressed("enter")) {
             this.application.scenes.load([new game.scene.Highscore(this.score, name)]);
+            this.gameoverSound.stop();
+            this.gameoverSound.dispose();
         }
     }
     this.displayLetter();

@@ -103,7 +103,8 @@ game.scene.Howto.prototype.m_outputText = function() {
     this.stage.addChild(text);
 
     var text = new rune.text.BitmapField("Controls:")
-        // text.width = 600
+    text.fillColor = "#ba9545";
+    text.width = 50;
     text.centerX = this.application.screen.centerX - 290;
     text.scaleX = 3;
     text.scaleY = 3;
@@ -130,38 +131,40 @@ game.scene.Howto.prototype.m_outputText = function() {
 
     var text = new rune.text.BitmapField("Back to menu")
         // text.width = 600
-    text.centerX = this.application.screen.centerX - 50;
+    text.centerX = this.application.screen.centerX - 100;
     text.scaleX = 4;
     text.scaleY = 4;
-    text.y = 550;
+    text.y = 400;
     this.stage.addChild(text);
 
-    var slingShot = new rune.display.Graphic(470, 550, 30, 30, "", "slangbella");
+    var slingShot = new rune.display.Graphic(430, 400, 30, 30, "", "slangbella");
 
     this.stage.addChild(slingShot)
 };
 
 game.scene.Howto.prototype.outputPowerupText = function() {
     var text = new rune.text.BitmapField("Powerups:");
-    text.centerX = this.application.screen.centerX + 250;
+    text.centerX = this.application.screen.centerX + 200;
+    text.fillColor = "#ba9545";
+    text.width = 50;
     text.scaleX = 3;
     text.scaleY = 3;
     text.y = 200;
     this.stage.addChild(text);
 
-    this.coin = new rune.display.Graphic(810, 240, 40, 40, "", "coinshine");
+    this.coin = new rune.display.Graphic(760, 240, 40, 40, "", "coinshine");
     this.stage.addChild(this.coin);
     var text = new rune.text.BitmapField("30 points");
-    text.centerX = this.application.screen.centerX + 300;
+    text.centerX = this.application.screen.centerX + 250;
     text.scaleX = 3;
     text.scaleY = 3;
     text.y = 250;
     this.stage.addChild(text);
 
-    var shield = new rune.display.Graphic(800, 300, 60, 60, "", "fallingshield");
+    var shield = new rune.display.Graphic(750, 300, 60, 60, "", "fallingshield");
     this.stage.addChild(shield)
     var text = new rune.text.BitmapField("shield")
-    text.centerX = this.application.screen.centerX + 300;
+    text.centerX = this.application.screen.centerX + 250;
     text.scaleX = 3;
     text.scaleY = 3;
     text.y = 320;

@@ -17,6 +17,7 @@ game.entity.Shield = function(stage) {
     this.game = stage;
     this.delay = 10000;
     this.shieldRemove = true;
+    this.sound;
     //--------------------------------------------------------------------------
     // Super call
     //--------------------------------------------------------------------------
@@ -40,6 +41,8 @@ game.entity.Shield.prototype.constructor = game.entity.Shield;
 
 game.entity.Shield.prototype.init = function() {
     game.entity.Powerups.prototype.init.call(this);
+
+    this.sound = this.application.sounds.sound.get("pickupshield");
 };
 
 game.entity.Shield.prototype.update = function(step) {
@@ -67,6 +70,7 @@ game.entity.Shield.prototype.shieldDisapear = function() {
 game.entity.Shield.prototype.catchPowerup = function() {
     var self = this;
     this.game.player.hitTestObject(this, function() {
+        self.sound.play();
         self.parent.removeChild(self);
         self.game.player.gotShield = true;
         self.game.player.getShield();

@@ -154,7 +154,8 @@ game.scene.Menu.prototype.showSelected = function() {
             this.menu[i].alpha = 1;
             this.stage.addChild(this.slangArr[i]);
             if (this.keyboard.justPressed("enter")) {
-                var scenesS = [new game.scene.Game(this.musicON), new game.scene.Howto(), new game.scene.Highscore()];
+                console.log(this.menuMusic);
+                var scenesS = [new game.scene.Game(this.musicON), new game.scene.Howto(this.menuMusic), new game.scene.Highscore()];
                 this.application.scenes.load([scenesS[i]]);
                 this.menuMusic.stop();
                 this.menuMusic.dispose();
