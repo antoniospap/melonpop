@@ -50,6 +50,7 @@ game.scene.Highscore.prototype.init = function() {
     this.m_initMuteSounds();
     var hsArr = [];
     this.hs = new rune.data.Highscores("hs", 0, 5);
+
     if (this.score != undefined) {
         this.hs.send(this.score, this.name);
     }
@@ -59,7 +60,6 @@ game.scene.Highscore.prototype.init = function() {
         hsArr.push(l);
     }
     this.showHighscoreTable(hsArr);
-
     this.menuMusic = this.application.sounds.sound.get("gamemusic");
     this.menuMusic.resume();
 

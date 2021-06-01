@@ -41,7 +41,7 @@ game.wave.Wave06.prototype.constructor = game.wave.Wave06;
  * @inheritDoc
  */
 game.wave.Wave06.prototype.m_constructor = function() {
-    for (var i = 0; i < 9; i++) {
+    for (var i = 0; i < 15; i++) {
         var randomX1 = Math.floor(Math.random() * 1200);
         var randomX2 = Math.floor(Math.random() * 1200);
 
@@ -55,7 +55,7 @@ game.wave.Wave06.prototype.m_constructor = function() {
 
 game.wave.Wave06.prototype.m_constructorPowerups = function() {
     var self = this;
-    var coinTime = [5000, 7000, 20000, 30000, 40000, 55000, 80000, 100000, 125000];
+    var coinTime = [5000, 7000, 20000, 30000, 40000, 55000, 80000, 100000, 125000, 140000,160000,200000,240000];
 
     for (var i = 0; i < coinTime.length; i++) {
         this.timers.create({

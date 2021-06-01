@@ -11,6 +11,7 @@ npx google-closure-compiler \
 --js "./../../src/data/manifest/Resources.js" \
 --js "./../../src/Entity/Bullet.js" \
 --js "./../../src/Entity/Character.js" \
+--js "./../../src/Entity/Clouds.js" \
 --js "./../../src/Entity/Melons/Melon.js" \
 --js "./../../src/Entity/Melons/type/MelonL.js" \
 --js "./../../src/Entity/Melons/type/MelonM.js" \
@@ -22,7 +23,6 @@ npx google-closure-compiler \
 --js "./../../src/wave/type/Wave04.js" \
 --js "./../../src/wave/type/Wave05.js" \
 --js "./../../src/wave/type/Wave06.js" \
---js "./../../src/wave/type/Wave07.js" \
 --js "./../../src/Entity/Powerup/Powerups.js" \
 --js "./../../src/Entity/Powerup/type/Shield.js" \
 --js "./../../src/Entity/Powerup/type/Coin.js" \
@@ -31,7 +31,6 @@ npx google-closure-compiler \
 --js "./../../src/scene/HowTo.js" \
 --js "./../../src/scene/Highscore.js" \
 --js "./../../src/scene/Gameover.js" \
---js "./../../src/scene/Sprites.js" \
 --js "./../../src/system/Main.js" \
 --js "./../../src/scope/Alias.js" \
 --js_output_file "./../../dist/game.js";
